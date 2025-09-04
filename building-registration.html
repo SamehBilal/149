@@ -123,7 +123,7 @@
                     </div>
 
                     <!-- Owner/Tenant Information -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="form-control">
                             <label class="label">
                                 <span class="label-text font-semibold">اسم المالك/المستأجر *</span>
@@ -137,6 +137,13 @@
                             </label>
                             <input type="text" name="title" class="input input-bordered" 
                                required placeholder="مثال: دكتور، مهندس، أستاذ">
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text font-semibold">رقم الانتركم</span>
+                            </label>
+                            <input type="text" name="intercome" class="input input-bordered" 
+                               required placeholder="101, 102, ...">
                         </div>
                     </div>
 
@@ -565,6 +572,7 @@
                 floor: floor,
                 apartment_number: apartment,
                 resident_name: formData.get('resident_name'),
+                intercome: formData.get('intercome'),
                 title: formData.get('title'),
                 residence_type: formData.get('residence_type'),
                 primary_phone: formData.get('primary_phone'),
@@ -661,6 +669,7 @@
                                                 <span class="badge ${apartment.residence_type === 'مالك' ? 'badge-success' : 'badge-info'}">${apartment.residence_type}</span>
                                             </p>
                                             <p class="text-sm"><strong>الهاتف:</strong> ${apartment.primary_phone}</p>
+                                            <p class="text-sm"><strong>الانتركم:</strong> ${apartment.intercome}</p>
                                             ${apartment.email ? `<p class="text-sm"><strong>البريد:</strong> ${apartment.email}</p>` : ''}
                                         </div>
                                         <div>
@@ -704,6 +713,7 @@
             floor TEXT NOT NULL,
             apartment_number TEXT NOT NULL,
             resident_name TEXT NOT NULL,
+            intercome TEXT NOT NULL,
             title TEXT,
             residence_type TEXT NOT NULL,
             primary_phone TEXT NOT NULL,
