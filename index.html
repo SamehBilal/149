@@ -132,6 +132,7 @@
                 <div class="stat-title text-primary-content/70">الرصيد الحالي</div>
                 <div class="stat-value text-base sm:text-lg" id="current-balance">0 جنيه</div>
             </div>
+             <button onclick="window.print()" class="btn btn-ghost text-white">🖨️ طباعة</button>
         </div>
     </div>
 
@@ -503,8 +504,8 @@
                             <td class="text-xs sm:text-sm">${aptConfig.active ? (aptConfig.name || 'غير محدد') : 'شقة فارغة'}</td>
                             <td class="text-xs sm:text-sm">${aptConfig.active ? numberFormat(aptConfig.monthly_payment) + ' جنيه' : '-'}</td>
                             <td>
-                                <div class="badge badge-xs sm:badge-sm ${!aptConfig.active ? 'badge-neutral' : (isPaid ? 'badge-success' : 'badge-error')}">
-                                    ${!aptConfig.active ? 'غير نشط' : (isPaid ? '✅ تم الدفع' : '❌ لم يتم الدفع')}
+                                <div class="badge badge-sm sm:badge-md ${!aptConfig.active ? 'badge-neutral' : (isPaid ? 'badge-success' : 'badge-error')}">
+                                    ${!aptConfig.active ? 'غير نشط' : (isPaid ? ' تم الدفع' : ' لم يتم الدفع')}
                                 </div>
                             </td>
                             <td class="text-xs sm:text-sm">${isPaid ? payment.date : '-'}</td>
