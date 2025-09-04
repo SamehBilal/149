@@ -1,0 +1,99 @@
+{
+    "balance": 0,
+    "payments": {},
+    "expenses": {},
+    "history": [],
+    "apartments": {
+        "0-1": {
+            "name": "",
+            "monthly_payment": 100,
+            "active": true
+        },
+        "0-2": {
+            "name": "",
+            "monthly_payment": 0,
+            "active": false
+        },
+        "0-3": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "1-1": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "1-2": {
+            "name": "سامح بلال",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "1-3": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "2-1": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "2-2": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "2-3": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "3-1": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "3-2": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "3-3": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "4-1": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "4-2": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "4-3": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "5-1": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "5-2": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        },
+        "5-3": {
+            "name": "",
+            "monthly_payment": 200,
+            "active": true
+        }
+    },
+    "apartment_accounts": {}
+}
