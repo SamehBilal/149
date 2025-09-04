@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقرير مالية العمارة - عرض فقط</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        @media print {
+            .no-print { display: none !important; }
+            .card { box-shadow: none !important; border: 1px solid #ddd; }
+        }
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+    </style>
+</head>
+<body class="bg-base-200">
+    <!-- Header -->
+    <div class="navbar bg-primary text-primary-content no-print">
+        <div class="flex-1">
+            <h1 class="btn btn-ghost text-xl">📊 تقرير مالية العمارة</h1>
+        </div>
+        <div class="flex-none gap-2">
+            <div class="stat">
+                <div class="stat-title text-primary-content/70">الرصيد الحالي</div>
+                <div class="stat-value text-lg" id="current-balance">0 جنيه</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto p-4 max-w-7xl">
+        <!-- Loading indicator -->
+        <div id="loading" class="loading">
+            <span class="loading loading-spinner loading-lg"></span>
+        </div>
+
+        <!-- Main content (hidden initially) -->
+        <div id="main-content" style="display: none;">
+            <!-- Date and Navigation -->
+            <div class="card bg-base-100 shadow-xl mb-6 no-print">
+                <div class="card-body">
+                    <div class="flex flex-wrap items-center justify-between gap-4">
+                        <div class="flex items-center gap-4">
+                            <select class="select select-md select-bordered" id="year-select" onchange="changeDate()">
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025" selected>2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                            </select>
+                            <select class="select select-bordered" id="month-select" onchange="changeDate()">
+                                <option value="01">يناير</option>
+                                <option value="02">فبراير</option>
+                                <option value="03">مارس</option>
+                                <option value="04">إبريل</option>
+                                <option value="05">مايو</option>
+                                <option value="06">يونيو</option>
+                                <option value="07">يوليو</option>
+                                <option value="08">أغسطس</option>
+                                <option value="09" selected>سبتمبر</option>
+                                <option value="10">أكتوبر</option>
+                                <option value="11">نوفمبر</option>
+                                <option value="12">ديسمبر</option>
+                            </select>
+                        </div>
+                        <div class="text-lg font-bold" id="current-report-title">
+                            تقرير سبتمبر 2025
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overall Summary -->
+            <div class="stats shadow w-full mb-6">
+                <div class="stat">
+                    <div class="stat-figure text-success">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-title">إجمالي الإيرادات</div>
+                    <div class="stat-value text-success" id="total-income">0</div>
+                    <div class="stat-desc">جنيه مصري</div>
+                </div>
+                
+                <div class="stat">
+                    <div class="stat-figure text-error">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-title">إجمالي المصاريف</div>
+                    <div class="stat-value text-error" id="total-expenses">0</div>
+                    <div class="stat-desc">جنيه مصري</div>
+                </div>
+                
+                <div class="stat">
+                    <div class="stat-figure text-primary">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+                        </svg>
+                    </div>
+                    <div class="stat-title">الرصيد الإجمالي</div>
+                    <div class="stat-value text-primary" id="final-balance">0</div>
+                    <div class="stat-desc">جنيه مصري</div>
+                </div>
+            </div>
+
+            <!-- Monthly Payments Report -->
+            <div class="card bg-base-100 shadow-xl mb-6">
+                <div class="card-body">
+                    <h2 class="card-title" id="payments-title">💰 تقرير مدفوعات سبتمبر 2025</h2>
+                    
+                    <!-- Monthly Summary -->
+                    <div class="stats shadow mb-4">
+                        <div class="stat">
+                            <div class="stat-title">المطلوب</div>
+                            <div class="stat-value text-info" id="monthly-required">0</div>
+                            <div class="stat-desc">جنيه</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-title">المحصل</div>
+                            <div class="stat-value text-success" id="monthly-collected">0</div>
+                            <div class="stat-desc">جنيه</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-title">المتبقي</div>
+                            <div class="stat-value text-warning" id="monthly-remaining">0</div>
+                            <div class="stat-desc">جنيه</div>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="table table-zebra">
+                            <thead>
+                                <tr>
+                                    <th>الدور</th>
+                                    <th>رقم الشقة</th>
+                                    <th>اسم المالك</th>
+                                    <th>المبلغ المطلوب</th>
+                                    <th>حالة الدفع</th>
+                                    <th>تاريخ الدفع</th>
+                                    <th>رصيد الحساب</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payments-table">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Expenses Report -->
+            <div class="card bg-base-100 shadow-xl mb-6">
+                <div class="card-body">
+                    <h2 class="card-title" id="expenses-title">📋 مصاريف سبتمبر 2025</h2>
+                    
+                    <div id="expenses-content">
+                        <!-- Expenses table will be populated here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Apartment Accounts Summary -->
+            <div class="card bg-base-100 shadow-xl mb-6">
+                <div class="card-body">
+                    <h2 class="card-title">💳 ملخص حسابات الشقق</h2>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="table table-zebra">
+                            <thead>
+                                <tr>
+                                    <th>الشقة</th>
+                                    <th>اسم المالك</th>
+                                    <th>المبلغ الشهري</th>
+                                    <th>رصيد الحساب</th>
+                                    <th>الحالة</th>
+                                </tr>
+                            </thead>
+                            <tbody id="accounts-table">
+                            </tbody>
+                            <tfoot>
+                                <tr class="bg-base-200">
+                                    <th colspan="2">الإجمالي:</th>
+                                    <th>-</th>
+                                    <th id="accounts-total">
+                                        <span class="text-success">+0</span> / 
+                                        <span class="text-error">-0</span>
+                                    </th>
+                                    <th>جنيه</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Transaction History -->
+            <div class="card bg-base-100 shadow-xl mb-6">
+                <div class="card-body">
+                    <h2 class="card-title">📅 آخر العمليات المالية</h2>
+                    
+                    <div id="history-content">
+                        <!-- History table will be populated here -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="text-center text-base-content/60 py-4">
+                <p id="generation-time">تم إنشاء التقرير في: </p>
+                <p>نظام إدارة مالية العمارة</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const floors = ['أرضي', 'أول', 'ثاني', 'ثالث', 'رابع', 'خامس'];
+        const apartments = [1, 2, 3];
+        const months = {
+            '01': 'يناير', '02': 'فبراير', '03': 'مارس',
+            '04': 'إبريل', '05': 'مايو', '06': 'يونيو',
+            '07': 'يوليو', '08': 'أغسطس', '09': 'سبتمبر',
+            '10': 'أكتوبر', '11': 'نوفمبر', '12': 'ديسمبر'
+        };
+
+        let buildingData = {
+            balance: 0,
+            payments: {},
+            expenses: {},
+            history: [],
+            apartments: {},
+            apartment_accounts: {}
+        };
+
+        let currentYear = new Date().getFullYear().toString();
+        let currentMonth = String(new Date().getMonth() + 1).padStart(2, '0');
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current date in selectors
+            document.getElementById('year-select').value = currentYear;
+            document.getElementById('month-select').value = currentMonth;
+            
+            // Set generation time
+            document.getElementById('generation-time').textContent = 
+                'تم إنشاء التقرير في: ' + new Date().toLocaleString('ar-EG');
+            
+            loadData();
+        });
+
+        // Load data from JSON file
+        async function loadData() {
+            try {
+                const response = await fetch('building_data.json');
+                if (response.ok) {
+                    buildingData = await response.json();
+                } else {
+                    console.log('No data file found, using default data');
+                    // Create some sample data for demonstration
+                    createSampleData();
+                }
+            } catch (error) {
+                console.log('Error loading data:', error);
+                // Create some sample data for demonstration
+                createSampleData();
+            }
+            
+            updateDisplay();
+        }
+
+        // Create sample data for demonstration
+        function createSampleData() {
+            buildingData = {
+                balance: 5000,
+                payments: {
+                    '2025-09': {
+                        '0-1': { paid: true, amount: 200, date: '2025-09-01' },
+                        '0-2': { paid: false, amount: 200, date: '' },
+                        '1-1': { paid: true, amount: 200, date: '2025-09-03' },
+                        '1-2': { paid: true, amount: 200, date: '2025-09-02' }
+                    }
+                },
+                expenses: {
+                    '2025-09': [
+                        { date: '2025-09-05', description: 'فاتورة كهرباء', type: 'electricity', amount: 150 },
+                        { date: '2025-09-10', description: 'صيانة المصعد', type: 'elevator', amount: 300 }
+                    ]
+                },
+                history: [
+                    { date: '2025-09-01', description: 'دفعة من الدور الأرضي - شقة 1', type: 'income', amount: 200 },
+                    { date: '2025-09-05', description: 'فاتورة كهرباء', type: 'expense', amount: 150 }
+                ],
+                apartments: {
+                    '0-1': { name: 'أحمد محمد', monthly_payment: 200, active: true },
+                    '0-2': { name: 'فاطمة علي', monthly_payment: 200, active: true },
+                    '0-3': { name: '', monthly_payment: 200, active: false },
+                    '1-1': { name: 'محمد حسن', monthly_payment: 200, active: true },
+                    '1-2': { name: 'سارة أحمد', monthly_payment: 200, active: true },
+                    '1-3': { name: '', monthly_payment: 200, active: false }
+                },
+                apartment_accounts: {
+                    '0-1': 100,
+                    '0-2': -200,
+                    '1-1': 0,
+                    '1-2': 50,
+                    '1-3': 0
+                }
+            };
+        }
+
+        // Update display with current data
+        function updateDisplay() {
+            calculateTotals();
+            updatePaymentsTable();
+            updateExpensesTable();
+            updateAccountsTable();
+            updateHistoryTable();
+            updateTitles();
+            
+            // Show main content and hide loading
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        }
+
+        // Calculate totals
+        function calculateTotals() {
+            let totalIncome = 0;
+            let totalExpensesAll = 0;
+
+            // Calculate total income from all months
+            for (let monthData of Object.values(buildingData.payments)) {
+                for (let payment of Object.values(monthData)) {
+                    if (payment.paid) totalIncome += payment.amount;
+                }
+            }
+
+            // Calculate total expenses from all months
+            for (let monthExpenses of Object.values(buildingData.expenses)) {
+                for (let expense of monthExpenses) {
+                    totalExpensesAll += expense.amount;
+                }
+            }
+
+            const finalBalance = totalIncome - totalExpensesAll;
+
+            // Update display
+            document.getElementById('current-balance').textContent = numberFormat(buildingData.balance) + ' جنيه';
+            document.getElementById('total-income').textContent = numberFormat(totalIncome);
+            document.getElementById('total-expenses').textContent = numberFormat(totalExpensesAll);
+            document.getElementById('final-balance').textContent = numberFormat(finalBalance);
+        }
+
+        // Update payments table
+        function updatePaymentsTable() {
+            const currentMonthKey = currentYear + '-' + currentMonth;
+            const monthPayments = buildingData.payments[currentMonthKey] || {};
+            
+            let totalRequired = 0;
+            let totalCollected = 0;
+            let tableHTML = '';
+
+            floors.forEach((floor, floorIndex) => {
+                apartments.forEach(apt => {
+                    const apartmentId = `${floorIndex}-${apt}`;
+                    const payment = monthPayments[apartmentId];
+                    const isPaid = payment && payment.paid;
+                    
+                    const aptConfig = buildingData.apartments[apartmentId] || {
+                        name: '', 
+                        monthly_payment: 200, 
+                        active: true
+                    };
+                    
+                    const accountBalance = buildingData.apartment_accounts[apartmentId] || 0;
+                    
+                    if (aptConfig.active) {
+                        totalRequired += aptConfig.monthly_payment;
+                    }
+                    
+                    if (isPaid) {
+                        totalCollected += payment.amount;
+                    }
+                    
+                    let rowClass = '';
+                    if (!aptConfig.active) {
+                        rowClass = 'opacity-50';
+                    }
+                    
+                    tableHTML += `
+                        <tr class="${rowClass}">
+                            <td>${floor}</td>
+                            <td>${apt}</td>
+                            <td>${aptConfig.active ? (aptConfig.name || 'غير محدد') : 'شقة فارغة'}</td>
+                            <td>${aptConfig.active ? numberFormat(aptConfig.monthly_payment) + ' جنيه' : '-'}</td>
+                            <td>
+                                <div class="badge ${!aptConfig.active ? 'badge-neutral' : (isPaid ? 'badge-success' : 'badge-error')}">
+                                    ${!aptConfig.active ? 'غير نشط' : (isPaid ? '✅ تم الدفع' : '❌ لم يتم الدفع')}
+                                </div>
+                            </td>
+                            <td>${isPaid ? payment.date : '-'}</td>
+                            <td>
+                                <span class="font-bold ${accountBalance > 0 ? 'text-success' : (accountBalance < 0 ? 'text-error' : '')}">
+                                    ${numberFormat(accountBalance)} جنيه
+                                </span>
+                            </td>
+                        </tr>
+                    `;
+                });
+            });
+
+            const totalRemaining = totalRequired - totalCollected;
+            
+            document.getElementById('payments-table').innerHTML = tableHTML;
+            document.getElementById('monthly-required').textContent = numberFormat(totalRequired);
+            document.getElementById('monthly-collected').textContent = numberFormat(totalCollected);
+            document.getElementById('monthly-remaining').textContent = numberFormat(totalRemaining);
+        }
+
+        // Update expenses table
+        function updateExpensesTable() {
+            const currentMonthKey = currentYear + '-' + currentMonth;
+            const monthExpenses = buildingData.expenses[currentMonthKey] || [];
+            
+            let totalExpenses = 0;
+            let contentHTML = '';
+            
+            if (monthExpenses.length === 0) {
+                contentHTML = `
+                    <div class="alert alert-info">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        <span>لا توجد مصاريف مسجلة لهذا الشهر</span>
+                    </div>
+                `;
+            } else {
+                const types = {
+                    'water': '💧 مياه',
+                    'electricity': '⚡ كهرباء',
+                    'garage': '🚗 جراج',
+                    'stairs': '🧹 سلالم',
+                    'elevator': '🛗 أسانسير',
+                    'other': '📝 أخرى'
+                };
+                
+                let tableRows = '';
+                monthExpenses.forEach(expense => {
+                    totalExpenses += expense.amount;
+                    tableRows += `
+                        <tr>
+                            <td>${expense.date}</td>
+                            <td>${expense.description}</td>
+                            <td>${types[expense.type] || '📝 أخرى'}</td>
+                            <td class="font-bold text-error">${numberFormat(expense.amount)} جنيه</td>
+                        </tr>
+                    `;
+                });
+                
+                contentHTML = `
+                    <div class="overflow-x-auto">
+                        <table class="table table-zebra">
+                            <thead>
+                                <tr>
+                                    <th>التاريخ</th>
+                                    <th>الوصف</th>
+                                    <th>النوع</th>
+                                    <th>المبلغ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${tableRows}
+                            </tbody>
+                            <tfoot>
+                                <tr class="bg-base-200">
+                                    <th colspan="3">إجمالي المصاريف:</th>
+                                    <th class="text-error font-bold text-lg">${numberFormat(totalExpenses)} جنيه</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('expenses-content').innerHTML = contentHTML;
+        }
+
+        // Update accounts table
+        function updateAccountsTable() {
+            let totalPositiveBalance = 0;
+            let totalNegativeBalance = 0;
+            let tableHTML = '';
+
+            floors.forEach((floor, floorIndex) => {
+                apartments.forEach(apt => {
+                    const apartmentId = `${floorIndex}-${apt}`;
+                    const aptConfig = buildingData.apartments[apartmentId] || {
+                        name: '', 
+                        monthly_payment: 200, 
+                        active: true
+                    };
+                    const accountBalance = buildingData.apartment_accounts[apartmentId] || 0;
+                    
+                    if (accountBalance > 0) totalPositiveBalance += accountBalance;
+                    if (accountBalance < 0) totalNegativeBalance += Math.abs(accountBalance);
+                    
+                    let statusBadge = '';
+                    let rowClass = '';
+                    
+                    if (!aptConfig.active) {
+                        statusBadge = '<div class="badge badge-neutral">غير نشط</div>';
+                        rowClass = 'opacity-50';
+                    } else if (accountBalance > 0) {
+                        statusBadge = '<div class="badge badge-success">رصيد إضافي</div>';
+                    } else if (accountBalance < 0) {
+                        statusBadge = '<div class="badge badge-error">عليه مستحقات</div>';
+                    } else {
+                        statusBadge = '<div class="badge badge-ghost">متوازن</div>';
+                    }
+                    
+                    tableHTML += `
+                        <tr class="${rowClass}">
+                            <td>${floor} - ${apt}</td>
+                            <td>${aptConfig.name || 'غير محدد'}</td>
+                            <td>${aptConfig.active ? numberFormat(aptConfig.monthly_payment) + ' جنيه' : 'غير نشط'}</td>
+                            <td>
+                                <span class="font-bold ${accountBalance > 0 ? 'text-success' : (accountBalance < 0 ? 'text-error' : '')}">
+                                    ${numberFormat(accountBalance)} جنيه
+                                </span>
+                            </td>
+                            <td>${statusBadge}</td>
+                        </tr>
+                    `;
+                });
+            });
+
+            document.getElementById('accounts-table').innerHTML = tableHTML;
+            document.getElementById('accounts-total').innerHTML = `
+                <span class="text-success">+${numberFormat(totalPositiveBalance)}</span> / 
+                <span class="text-error">-${numberFormat(totalNegativeBalance)}</span>
+            `;
+        }
+
+        // Update history table
+        function updateHistoryTable() {
+            const recentHistory = buildingData.history.slice(-20).reverse();
+            
+            let contentHTML = '';
+            
+            if (recentHistory.length === 0) {
+                contentHTML = `
+                    <div class="alert alert-info">
+                        <span>لا توجد عمليات مسجلة</span>
+                    </div>
+                `;
+            } else {
+                let tableRows = '';
+                recentHistory.forEach(item => {
+                    tableRows += `
+                        <tr>
+                            <td>${item.date}</td>
+                            <td>${item.description}</td>
+                            <td>
+                                <div class="badge ${item.type === 'income' ? 'badge-success' : 'badge-error'}">
+                                    ${item.type === 'income' ? '📈 إيراد' : '📉 مصروف'}
+                                </div>
+                            </td>
+                            <td class="font-bold ${item.type === 'income' ? 'text-success' : 'text-error'}">
+                                ${item.type === 'income' ? '+' : '-'}${numberFormat(item.amount)} جنيه
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                contentHTML = `
+                    <div class="overflow-x-auto">
+                        <table class="table table-zebra">
+                            <thead>
+                                <tr>
+                                    <th>التاريخ</th>
+                                    <th>الوصف</th>
+                                    <th>النوع</th>
+                                    <th>المبلغ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${tableRows}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            }
+            
+            document.getElementById('history-content').innerHTML = contentHTML;
+        }
+
+        // Update titles based on selected date
+        function updateTitles() {
+            const monthName = months[currentMonth];
+            document.getElementById('current-report-title').textContent = `تقرير ${monthName} ${currentYear}`;
+            document.getElementById('payments-title').textContent = `💰 تقرير مدفوعات ${monthName} ${currentYear}`;
+            document.getElementById('expenses-title').textContent = `📋 مصاريف ${monthName} ${currentYear}`;
+        }
+
+        // Date change handler
+        function changeDate() {
+            currentYear = document.getElementById('year-select').value;
+            currentMonth = document.getElementById('month-select').value;
+            updateDisplay();
+        }
+
+        // Number formatting helper
+        function numberFormat(num) {
+            return new Intl.NumberFormat('ar-EG').format(num);
+        }
+    </script>
+</body>
+</html>
