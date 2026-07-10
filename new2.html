@@ -149,6 +149,13 @@
       <div class="stat"><div class="t">المحصّل</div><div class="v ok" id="p-collected">0</div><div class="d">جنيه</div></div>
       <div class="stat"><div class="t">المتبقي</div><div class="v acc" id="p-remaining">0</div><div class="d">جنيه</div></div>
     </div>
+    <div class="card"><h2 id="py-title">🗓️ نظرة سنوية على المدفوعات</h2>
+      <div class="table-wrap"><table>
+        <thead><tr id="py-head"></tr></thead>
+        <tbody id="py-body"></tbody>
+        <tfoot><tr id="py-foot"></tr></tfoot>
+      </table></div>
+    </div>
     <div class="card"><h2 id="p-title">💰 مدفوعات الشهر</h2>
       <div class="table-wrap"><table>
         <thead><tr><th>الدور</th><th>الشقة</th><th>المالك</th><th>المبلغ</th><th>الحالة</th><th>تاريخ الدفع</th><th>رصيد الحساب</th><th class="no-print">إجراء</th></tr></thead>
@@ -372,12 +379,44 @@ function addExpenseType(){ const label=(document.getElementById('new-type-label'
 function removeExpenseType(key){ if(['water','electricity','garage','elevator','other'].includes(key)){ toast('لا يمكن حذف الأنواع الأساسية','warn'); return; } if(!confirm('حذف هذا النوع؟'))return; delete buildingData.expense_type_defs[key]; saveData(); renderExpenseTypes(); toast('تم حذف النوع','warn'); }
 function renderExpenseTypes(){ const sel=document.getElementById('expense-type-select'); sel.innerHTML=Object.entries(buildingData.expense_type_defs).map(([k,v])=>`<option value="${k}">${v}</option>`).join(''); document.getElementById('type-chips').innerHTML=Object.entries(buildingData.expense_type_defs).map(([k,v])=>{ const core=['water','electricity','garage','elevator','other'].includes(k); return `<span class="chip">${v}${core?'':`<button onclick="removeExpenseType('${k}')" title="حذف">×</button>`}</span>`; }).join(''); }
 
-function render(){ document.getElementById('hdr-balance').textContent=nf(buildingData.balance)+' ج'; document.getElementById('period-title').textContent=`${months[currentMonth]} ${currentYear}`; renderExpenseTypes(); renderDashboard(); renderPayments(); renderExpenses(); renderAccounts(); renderSettings(); renderYearly(); }
+function render(){ document.getElementById('hdr-balance').textContent=nf(buildingData.balance)+' ج'; document.getElementById('period-title').textContent=`${months[currentMonth]} ${currentYear}`; renderExpenseTypes(); renderDashboard(); renderPayments(); renderPaymentsYear(); renderExpenses(); renderAccounts(); renderSettings(); renderYearly(); }
 function renderDashboard(){ let inc=0,exp=0; Object.values(buildingData.payments).forEach(md=>Object.values(md).forEach(p=>{if(p.paid)inc+=p.amount;})); Object.values(buildingData.expenses).forEach(l=>l.forEach(e=>exp+=e.amount)); document.getElementById('d-income').textContent=nf(inc); document.getElementById('d-expenses').textContent=nf(exp); document.getElementById('d-net').textContent=nf(inc-exp); const h=buildingData.history.slice(-20).reverse(); document.getElementById('d-history').innerHTML=h.length?`<table><thead><tr><th>التاريخ</th><th>الوصف</th><th>النوع</th><th>المبلغ</th></tr></thead><tbody>${h.map(x=>`<tr><td>${x.date}</td><td>${x.description}</td><td><span class="badge ${x.type==='income'?'ok':'err'}">${x.type==='income'?'إيراد':'مصروف'}</span></td><td class="${x.type==='income'?'txt-ok':'txt-err'}">${x.type==='income'?'+':'-'}${nf(x.amount)}</td></tr>`).join('')}</tbody></table>`:`<div class="alert info">لا توجد عمليات</div>`; }
 function renderPayments(){ const m=monthKey(),mp=buildingData.payments[m]||{}; let req=0,col=0,rows=''; floors.forEach((fl,fi)=>apartments.forEach(apt=>{ const id=`${fi}-${apt}`,cfg=buildingData.apartments[id]||{name:'',monthly_payment:200,active:true},pay=mp[id],paid=pay&&pay.paid,bal=buildingData.apartment_accounts[id]||0; if(cfg.active)req+=cfg.monthly_payment; if(paid)col+=pay.amount; if(!cfg.active){rows+=`<tr class="inactive"><td>${fl}</td><td>${apt}</td><td>فارغة</td><td>-</td><td><span class="badge neutral">غير نشط</span></td><td>-</td><td>-</td><td class="no-print">-</td></tr>`;return;} rows+=`<tr><td>${fl}</td><td>${apt}</td><td>${ownerName(id)||'غير محدد'}</td><td>${nf(cfg.monthly_payment)} ج</td><td><span class="badge ${paid?'ok':'err'}">${paid?'تم الدفع':'لم يتم'}</span></td><td>${paid?pay.date:'-'}</td><td><span class="${bal>0?'txt-ok':(bal<0?'txt-err':'')}">${nf(bal)} ج</span></td><td class="no-print">${paid?`<button class="err sm" onclick="markUnpaid('${id}')">إلغاء</button>`:`<button class="ok sm" onclick="markPaid('${id}')">تم الدفع</button>`}</td></tr>`; })); document.getElementById('p-body').innerHTML=rows; document.getElementById('p-required').textContent=nf(req); document.getElementById('p-collected').textContent=nf(col); document.getElementById('p-remaining').textContent=nf(req-col); document.getElementById('p-title').textContent=`💰 مدفوعات ${months[currentMonth]} ${currentYear}`; }
 function renderExpenses(){ const m=monthKey(),list=buildingData.expenses[m]||[]; document.getElementById('e-title').textContent=`📋 مصاريف ${months[currentMonth]} ${currentYear}`; if(!list.length){document.getElementById('e-body').innerHTML=`<div class="alert info">لا توجد مصاريف لهذا الشهر</div>`;return;} let total=0; const rows=list.map(e=>{total+=e.amount;return `<tr><td>${e.date}</td><td>${e.description}</td><td>${buildingData.expense_type_defs[e.type]||'📝 أخرى'}</td><td class="txt-err">${nf(e.amount)} ج</td><td class="no-print"><button class="err sm" onclick="removeExpense('${e.id}')">حذف</button></td></tr>`;}).join(''); document.getElementById('e-body').innerHTML=`<div class="table-wrap"><table><thead><tr><th>التاريخ</th><th>الوصف</th><th>النوع</th><th>المبلغ</th><th class="no-print"></th></tr></thead><tbody>${rows}</tbody><tfoot><tr><th colspan="3">الإجمالي</th><th>${nf(total)} ج</th><th class="no-print"></th></tr></tfoot></table></div>`; }
 function renderAccounts(){ let pos=0,neg=0,rows=''; floors.forEach((fl,fi)=>apartments.forEach(apt=>{ const id=`${fi}-${apt}`,cfg=buildingData.apartments[id]||{name:'',active:true},bal=buildingData.apartment_accounts[id]||0; if(bal>0)pos+=bal; if(bal<0)neg+=Math.abs(bal); rows+=`<tr class="${!cfg.active?'inactive':''}"><td>${fl} - ${apt}</td><td>${ownerName(id)||'غير محدد'}</td><td><span class="${bal>0?'txt-ok':(bal<0?'txt-err':'')}">${nf(bal)} ج</span></td><td class="no-print"><div style="display:flex;gap:4px"><input id="amt-${id}" type="number" style="width:80px" placeholder="مبلغ"><input id="desc-${id}" type="text" style="width:110px" placeholder="وصف"></div></td><td class="no-print"><div style="display:flex;gap:4px"><button class="ok sm" onclick="updateAccount('${id}','add')">+</button><button class="err sm" onclick="updateAccount('${id}','deduct')">−</button></div></td></tr>`; })); document.getElementById('a-body').innerHTML=rows; document.getElementById('a-total').innerHTML=`<span class="txt-ok">+${nf(pos)}</span> / <span class="txt-err">-${nf(neg)}</span>`; }
 function renderSettings(){ let rows=''; floors.forEach((fl,fi)=>apartments.forEach(apt=>{ const id=`${fi}-${apt}`,cfg=buildingData.apartments[id]||{name:'',monthly_payment:200,active:true}; rows+=`<tr><td>${fl}</td><td>${apt}</td><td><input id="name-${id}" value="${(cfg.name||'').replace(/"/g,'&quot;')}"></td><td><input id="pay-${id}" type="number" style="width:90px" value="${cfg.monthly_payment}"></td><td style="text-align:center"><input id="act-${id}" type="checkbox" style="width:auto" ${cfg.active?'checked':''}></td><td><button class="sm" onclick="saveApartment('${id}')">حفظ</button></td></tr>`; })); document.getElementById('s-body').innerHTML=rows; }
+function renderPaymentsYear(){
+  const mk=Object.keys(months); // '01'..'12'
+  // header: apartment + 12 months + total
+  document.getElementById('py-head').innerHTML =
+    `<th>الشقة</th>${mk.map(mm=>`<th>${months[mm].slice(0,3)}</th>`).join('')}<th>الإجمالي</th>`;
+  document.getElementById('py-title').textContent=`🗓️ نظرة سنوية على المدفوعات — ${currentYear}`;
+
+  const colTotals=new Array(12).fill(0);
+  let rowsHtml='';
+  floors.forEach((fl,fi)=>apartments.forEach(apt=>{
+    const id=`${fi}-${apt}`; const cfg=buildingData.apartments[id]||{name:'',monthly_payment:200,active:true};
+    if(!cfg.active){
+      rowsHtml+=`<tr class="inactive"><td>${fl.slice(0,3)} ${apt}</td>${mk.map(()=>`<td style="text-align:center">-</td>`).join('')}<td style="text-align:center">-</td></tr>`;
+      return;
+    }
+    let rowTotal=0;
+    const cells=mk.map((mm,idx)=>{
+      const key=currentYear+'-'+mm;
+      const pay=(buildingData.payments[key]||{})[id];
+      const paid=pay&&pay.paid;
+      if(paid){ rowTotal+=pay.amount; colTotals[idx]+=pay.amount;
+        return `<td style="text-align:center;color:var(--ok);font-weight:700" title="${pay.date} — ${nf(pay.amount)} ج">✓</td>`; }
+      return `<td style="text-align:center;color:var(--err)">✗</td>`;
+    }).join('');
+    rowsHtml+=`<tr><td>${ownerName(id)||(fl.slice(0,3)+' '+apt)}</td>${cells}<td style="text-align:center;font-weight:700">${nf(rowTotal)}</td></tr>`;
+  }));
+  document.getElementById('py-body').innerHTML=rowsHtml;
+
+  const grand=colTotals.reduce((a,b)=>a+b,0);
+  document.getElementById('py-foot').innerHTML=
+    `<th>الإجمالي</th>${colTotals.map(t=>`<th style="text-align:center">${nf(t)}</th>`).join('')}<th style="text-align:center">${nf(grand)}</th>`;
+}
 
 function renderYearly(){
   const monthly=[]; let yInc=0,yExp=0;
