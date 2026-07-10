@@ -306,11 +306,11 @@
     </div>
 
     <script>
-        // Supabase configuration - REPLACE WITH YOUR OWN VALUES
-        const SUPABASE_URL = 'https://apgddutljuzwwddivcrn.supabase.co'; // Replace with your Supabase URL
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwZ2RkdXRsanV6d3dkZGl2Y3JuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NjQ0ODAsImV4cCI6MjA5OTI0MDQ4MH0.WH4px5Y2T6ozGjJEXVJ1V0nuf2Lv6CXszk4iigVjyDs'; // Replace with your anon key
+        // ===== Supabase configuration — UPDATE THE ANON KEY BELOW =====
+        const SUPABASE_URL = 'https://apgddutljuzwwddivcrn.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwZ2RkdXRsanV6d3dkZGl2Y3JuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NjQ0ODAsImV4cCI6MjA5OTI0MDQ4MH0.WH4px5Y2T6ozGjJEXVJ1V0nuf2Lv6CXszk4iigVjyDs';
         
-        let supabase;
+        let supabaseClient;
         let apartmentsData = [];
 
         // Floor mapping for apartment ID generation
@@ -322,12 +322,12 @@
         // Initialize Supabase client
         function initSupabase() {
             try {
-                if (SUPABASE_URL === 'YOUR_SUPABASE_URL' || SUPABASE_ANON_KEY === 'YOUR_SUPABASE_ANON_KEY') {
+                if (!SUPABASE_URL || !SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwZ2RkdXRsanV6d3dkZGl2Y3JuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NjQ0ODAsImV4cCI6MjA5OTI0MDQ4MH0.WH4px5Y2T6ozGjJEXVJ1V0nuf2Lv6CXszk4iigVjyDs') {
                     showDbStatus('يرجى إعداد بيانات الاتصال بقاعدة البيانات', 'warning');
                     return false;
                 }
                 
-                supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
                 //showDbStatus('تم الاتصال بقاعدة البيانات', 'success');
                 return true;
             } catch (error) {
@@ -403,11 +403,11 @@
 
         // Load apartments from Supabase
         async function loadApartments() {
-            if (!supabase) return;
+            if (!supabaseClient) return;
             
             showLoading(true);
             try {
-                const { data, error } = await supabase
+                const { data, error } = await supabaseClient
                     .from('apartments')
                     .select('*')
                     .order('apartment_id');
@@ -426,12 +426,12 @@
 
         // Save apartment to Supabase
         async function saveApartment(apartmentData) {
-            if (!supabase) return false;
+            if (!supabaseClient) return false;
             
             showLoading(true);
             try {
                 // Check if apartment exists
-                const { data: existing } = await supabase
+                const { data: existing } = await supabaseClient
                     .from('apartments')
                     .select('id')
                     .eq('apartment_id', apartmentData.apartment_id)
@@ -440,13 +440,13 @@
                 let result;
                 if (existing) {
                     // Update existing apartment
-                    result = await supabase
+                    result = await supabaseClient
                         .from('apartments')
                         .update(apartmentData)
                         .eq('apartment_id', apartmentData.apartment_id);
                 } else {
                     // Insert new apartment
-                    result = await supabase
+                    result = await supabaseClient
                         .from('apartments')
                         .insert([apartmentData]);
                 }
@@ -465,13 +465,13 @@
 
         // Delete apartment from Supabase
         async function deleteApartment(apartmentId) {
-            if (!supabase) return;
+            if (!supabaseClient) return;
             
             if (!confirm('هل أنت متأكد من حذف بيانات هذه الشقة؟')) return;
             
             showLoading(true);
             try {
-                const { error } = await supabase
+                const { error } = await supabaseClient
                     .from('apartments')
                     .delete()
                     .eq('apartment_id', apartmentId);
@@ -549,7 +549,7 @@
         document.getElementById('apartment-form').addEventListener('submit', async function(event) {
             event.preventDefault();
             
-            if (!supabase) {
+            if (!supabaseClient) {
                 showStatus('غير متصل بقاعدة البيانات', 'error');
                 return;
             }
@@ -700,46 +700,6 @@
         function filterApartments() {
             displayApartments();
         }
-    </script>
-
-    <!-- Supabase Table Creation SQL -->
-    <script type="text/plain" id="sql-schema">
-        -- SQL to create the apartments table in Supabase
-        -- Run this in your Supabase SQL editor
-        
-        CREATE TABLE apartments (
-            id SERIAL PRIMARY KEY,
-            apartment_id TEXT UNIQUE NOT NULL,
-            floor TEXT NOT NULL,
-            apartment_number TEXT NOT NULL,
-            resident_name TEXT NOT NULL,
-            intercome TEXT NOT NULL,
-            title TEXT,
-            residence_type TEXT NOT NULL,
-            primary_phone TEXT NOT NULL,
-            secondary_phone TEXT,
-            email TEXT,
-            family_members INTEGER,
-            children_count INTEGER,
-            move_in_date DATE,
-            emergency_contact_name TEXT,
-            emergency_contact_phone TEXT,
-            notes TEXT,
-            registration_date DATE DEFAULT CURRENT_DATE,
-            last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
-
-        -- Create RLS policies (optional, for security)
-        ALTER TABLE apartments ENABLE ROW LEVEL SECURITY;
-        
-        -- Allow public read access
-        CREATE POLICY "Allow public read" ON apartments FOR SELECT USING (true);
-        
-        -- Allow public insert/update (you might want to restrict this)
-        CREATE POLICY "Allow public insert" ON apartments FOR INSERT WITH CHECK (true);
-        CREATE POLICY "Allow public update" ON apartments FOR UPDATE USING (true);
-        CREATE POLICY "Allow public delete" ON apartments FOR DELETE USING (true);
     </script>
 </body>
 </html>
