@@ -336,13 +336,24 @@
             }
         }
 
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            if (initSupabase()) {
-                loadApartments();
-                document.getElementById('setup-instructions').style.display = 'none';
-            }
-        });
+        function startApp() {
+    if (!window.supabase || !window.supabase.createClient) {
+        console.log('Waiting for Supabase library...');
+        setTimeout(startApp, 100);
+        return;
+    }
+    if (initSupabase()) {
+        loadApartments();
+        const setup = document.getElementById('setup-instructions');
+        if (setup) setup.style.display = 'none';
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startApp);
+} else {
+    startApp();
+}
 
         // Show database status
         function showDbStatus(message, type = 'info') {
