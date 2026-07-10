@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="light">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,36 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.4.19/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .loading {
-            display: none;
-        }
-
-        .loading.show {
-            display: inline-block;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .loading { display: none; }
+        .loading.show { display: inline-block; }
     </style>
 </head>
-
 <body class="bg-base-200">
     <!-- Header -->
     <div class="navbar bg-primary text-primary-content">
@@ -72,11 +48,7 @@
 
         <!-- Setup Instructions (shown if database not configured) -->
         <div id="setup-instructions" class="alert alert-info mb-6">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                class="stroke-current shrink-0 w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             <div>
                 <h3 class="font-bold">إعداد قاعدة البيانات:</h3>
                 <p>1. إنشاء حساب مجاني في Supabase</p>
@@ -93,8 +65,7 @@
                 <div class="py-4">
                     <div class="form-control mb-4">
                         <label class="label">Supabase URL:</label>
-                        <input type="text" id="supabase-url" class="input input-bordered"
-                            placeholder="https://your-project.supabase.co">
+                        <input type="text" id="supabase-url" class="input input-bordered" placeholder="https://your-project.supabase.co">
                     </div>
                     <div class="form-control mb-4">
                         <label class="label">Supabase Anon Key:</label>
@@ -136,8 +107,7 @@
                             <label class="label">
                                 <span class="label-text font-semibold">رقم الشقة *</span>
                             </label>
-                            <select name="apartment" class="select select-bordered" required
-                                onchange="updateApartmentId()">
+                            <select name="apartment" class="select select-bordered" required onchange="updateApartmentId()">
                                 <option value="">اختر رقم الشقة</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -149,8 +119,7 @@
                     <!-- Apartment ID Display -->
                     <div class="alert alert-info">
                         <span>معرف الشقة: <strong id="apartment-id">سيتم تحديده تلقائياً</strong></span>
-                        <span id="existing-indicator" style="display: none;" class="badge badge-warning">مسجلة
-                            مسبقاً</span>
+                        <span id="existing-indicator" style="display: none;" class="badge badge-warning">مسجلة مسبقاً</span>
                     </div>
 
                     <!-- Owner/Tenant Information -->
@@ -159,22 +128,22 @@
                             <label class="label">
                                 <span class="label-text font-semibold">اسم المالك/المستأجر *</span>
                             </label>
-                            <input type="text" name="resident_name" class="input input-bordered" required
-                                placeholder="الاسم الكامل">
+                            <input type="text" name="resident_name" class="input input-bordered" required 
+                                   placeholder="الاسم الكامل">
                         </div>
                         <div class="form-control">
                             <label class="label">
                                 <span class="label-text font-semibold">اللقب/المهنة *</span>
                             </label>
-                            <input type="text" name="title" class="input input-bordered" required
-                                placeholder="مثال: دكتور، مهندس، أستاذ">
+                            <input type="text" name="title" class="input input-bordered" 
+                               required placeholder="مثال: دكتور، مهندس، أستاذ">
                         </div>
                         <div class="form-control">
                             <label class="label">
                                 <span class="label-text font-semibold">رقم الانتركم *</span>
                             </label>
-                            <input type="text" name="intercome" class="input input-bordered" required
-                                placeholder="101, 102, ...">
+                            <input type="text" name="intercome" class="input input-bordered" 
+                               required placeholder="101, 102, ...">
                         </div>
                     </div>
 
@@ -196,15 +165,15 @@
                             <label class="label">
                                 <span class="label-text font-semibold">رقم الهاتف الأساسي *</span>
                             </label>
-                            <input type="tel" name="primary_phone" class="input input-bordered" required
-                                placeholder="01xxxxxxxxx">
+                            <input type="tel" name="primary_phone" class="input input-bordered" required 
+                                   placeholder="01xxxxxxxxx">
                         </div>
                         <div class="form-control">
                             <label class="label">
                                 <span class="label-text font-semibold">رقم هاتف احتياطي</span>
                             </label>
-                            <input type="tel" name="secondary_phone" class="input input-bordered"
-                                placeholder="01xxxxxxxxx">
+                            <input type="tel" name="secondary_phone" class="input input-bordered" 
+                                   placeholder="01xxxxxxxxx">
                         </div>
                     </div>
 
@@ -213,7 +182,8 @@
                         <label class="label">
                             <span class="label-text font-semibold">البريد الإلكتروني</span>
                         </label>
-                        <input type="email" name="email" class="input input-bordered" placeholder="example@email.com">
+                        <input type="email" name="email" class="input input-bordered" 
+                               placeholder="example@email.com">
                     </div>
 
                     <!-- Family Information -->
@@ -222,15 +192,15 @@
                             <label class="label">
                                 <span class="label-text font-semibold">عدد أفراد الأسرة</span>
                             </label>
-                            <input type="number" name="family_members" class="input input-bordered" min="1" max="20"
-                                placeholder="عدد الأفراد">
+                            <input type="number" name="family_members" class="input input-bordered" 
+                                   min="1" max="20" placeholder="عدد الأفراد">
                         </div>
                         <div class="form-control">
                             <label class="label">
                                 <span class="label-text font-semibold">عدد الأطفال</span>
                             </label>
-                            <input type="number" name="children_count" class="input input-bordered" min="0" max="15"
-                                placeholder="عدد الأطفال">
+                            <input type="number" name="children_count" class="input input-bordered" 
+                                   min="0" max="15" placeholder="عدد الأطفال">
                         </div>
                         <div class="form-control">
                             <label class="label">
@@ -247,15 +217,15 @@
                             <label class="label">
                                 <span class="label-text font-semibold">اسم شخص للاتصال به</span>
                             </label>
-                            <input type="text" name="emergency_contact_name" class="input input-bordered"
-                                placeholder="اسم الشخص">
+                            <input type="text" name="emergency_contact_name" class="input input-bordered" 
+                                   placeholder="اسم الشخص">
                         </div>
                         <div class="form-control">
                             <label class="label">
                                 <span class="label-text font-semibold">رقم هاتف الطوارئ</span>
                             </label>
-                            <input type="tel" name="emergency_contact_phone" class="input input-bordered"
-                                placeholder="01xxxxxxxxx">
+                            <input type="tel" name="emergency_contact_phone" class="input input-bordered" 
+                                   placeholder="01xxxxxxxxx">
                         </div>
                     </div>
 
@@ -264,8 +234,8 @@
                         <label class="label">
                             <span class="label-text font-semibold">ملاحظات إضافية</span>
                         </label>
-                        <textarea name="notes" class="textarea textarea-bordered" rows="3"
-                            placeholder="أي معلومات إضافية مهمة..."></textarea>
+                        <textarea name="notes" class="textarea textarea-bordered" rows="3" 
+                                  placeholder="أي معلومات إضافية مهمة..."></textarea>
                     </div>
 
                     <!-- Submit Button -->
@@ -288,7 +258,7 @@
                         <button class="btn btn-outline" onclick="showRegistrationForm()">➕ تسجيل شقة جديدة</button>
                     </div>
                 </div>
-
+                
                 <!-- Stats -->
                 <div class="stats shadow mb-4">
                     <div class="stat">
@@ -304,7 +274,7 @@
                         <div class="stat-value text-warning" id="unregistered-apartments">18</div>
                     </div>
                 </div>
-
+                
                 <!-- Filter Controls -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div class="form-control">
@@ -327,7 +297,7 @@
                         </select>
                     </div>
                 </div>
-
+                
                 <div id="apartments-container">
                     <!-- Apartments will be loaded here -->
                 </div>
@@ -336,29 +306,27 @@
     </div>
 
     <script>
-        // ===== Supabase configuration — UPDATE THE ANON KEY BELOW =====
+        // ===== Supabase configuration =====
         const SUPABASE_URL = 'https://apgddutljuzwwddivcrn.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwZ2RkdXRsanV6d3dkZGl2Y3JuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NjQ0ODAsImV4cCI6MjA5OTI0MDQ4MH0.WH4px5Y2T6ozGjJEXVJ1V0nuf2Lv6CXszk4iigVjyDs';
-
+        
         let supabaseClient;
         let apartmentsData = [];
 
         // Floor mapping for apartment ID generation
         const floorMapping = {
-            'أرضي': 0, 'أول': 1, 'ثاني': 2,
+            'أرضي': 0, 'أول': 1, 'ثاني': 2, 
             'ثالث': 3, 'رابع': 4, 'خامس': 5
         };
 
         // Initialize Supabase client
         function initSupabase() {
             try {
-                if (!SUPABASE_URL || !SUPABASE_ANON_KEY || SUPABASE_ANON_KEY === 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFwZ2RkdXRsanV6d3dkZGl2Y3JuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM2NjQ0ODAsImV4cCI6MjA5OTI0MDQ4MH0.WH4px5Y2T6ozGjJEXVJ1V0nuf2Lv6CXszk4iigVjyDs') {
+                if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
                     showDbStatus('يرجى إعداد بيانات الاتصال بقاعدة البيانات', 'warning');
                     return false;
                 }
-
                 supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-                //showDbStatus('تم الاتصال بقاعدة البيانات', 'success');
                 return true;
             } catch (error) {
                 showDbStatus('خطأ في الاتصال بقاعدة البيانات: ' + error.message, 'error');
@@ -366,30 +334,10 @@
             }
         }
 
-        function startApp() {
-            if (!window.supabase || !window.supabase.createClient) {
-                console.log('Waiting for Supabase library...');
-                setTimeout(startApp, 100);
-                return;
-            }
-            if (initSupabase()) {
-                loadApartments();
-                const setup = document.getElementById('setup-instructions');
-                if (setup) setup.style.display = 'none';
-            }
-        }
-
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', startApp);
-        } else {
-            startApp();
-        }
-
         // Show database status
         function showDbStatus(message, type = 'info') {
             const alert = document.getElementById('db-status');
             const messageEl = document.getElementById('db-status-message');
-
             alert.className = `alert alert-${type} mb-4`;
             messageEl.textContent = message;
             alert.style.display = 'block';
@@ -399,14 +347,10 @@
         function showStatus(message, type = 'info') {
             const alert = document.getElementById('status-alert');
             const messageEl = document.getElementById('status-message');
-
             alert.className = `alert alert-${type} mb-4`;
             messageEl.textContent = message;
             alert.style.display = 'block';
-
-            setTimeout(() => {
-                alert.style.display = 'none';
-            }, 5000);
+            setTimeout(() => { alert.style.display = 'none'; }, 5000);
         }
 
         // Show loading indicator
@@ -427,12 +371,10 @@
         function testConnection() {
             const url = document.getElementById('supabase-url').value;
             const key = document.getElementById('supabase-key').value;
-
             if (!url || !key) {
                 showStatus('يرجى إدخال جميع البيانات', 'error');
                 return;
             }
-
             try {
                 const testClient = window.supabase.createClient(url, key);
                 showStatus('تم اختبار الاتصال بنجاح! يرجى تحديث الكود بهذه البيانات', 'success');
@@ -445,19 +387,15 @@
         // Load apartments from Supabase
         async function loadApartments() {
             if (!supabaseClient) return;
-
             showLoading(true);
             try {
                 const { data, error } = await supabaseClient
                     .from('apartments')
                     .select('*')
                     .order('apartment_id');
-
                 if (error) throw error;
-
                 apartmentsData = data || [];
                 updateStats();
-                //showStatus('تم تحميل البيانات بنجاح', 'success');
             } catch (error) {
                 showStatus('خطأ في تحميل البيانات: ' + error.message, 'error');
             } finally {
@@ -468,10 +406,8 @@
         // Save apartment to Supabase
         async function saveApartment(apartmentData) {
             if (!supabaseClient) return false;
-
             showLoading(true);
             try {
-                // Check if apartment exists
                 const { data: existing } = await supabaseClient
                     .from('apartments')
                     .select('id')
@@ -480,21 +416,17 @@
 
                 let result;
                 if (existing) {
-                    // Update existing apartment
                     result = await supabaseClient
                         .from('apartments')
                         .update(apartmentData)
                         .eq('apartment_id', apartmentData.apartment_id);
                 } else {
-                    // Insert new apartment
                     result = await supabaseClient
                         .from('apartments')
                         .insert([apartmentData]);
                 }
-
                 if (result.error) throw result.error;
-
-                await loadApartments(); // Reload data
+                await loadApartments();
                 return true;
             } catch (error) {
                 showStatus('خطأ في حفظ البيانات: ' + error.message, 'error');
@@ -507,19 +439,15 @@
         // Delete apartment from Supabase
         async function deleteApartment(apartmentId) {
             if (!supabaseClient) return;
-
             if (!confirm('هل أنت متأكد من حذف بيانات هذه الشقة؟')) return;
-
             showLoading(true);
             try {
                 const { error } = await supabaseClient
                     .from('apartments')
                     .delete()
                     .eq('apartment_id', apartmentId);
-
                 if (error) throw error;
-
-                await loadApartments(); // Reload data
+                await loadApartments();
                 showStatus('تم حذف بيانات الشقة', 'success');
             } catch (error) {
                 showStatus('خطأ في حذف البيانات: ' + error.message, 'error');
@@ -542,13 +470,10 @@
             const apartment = document.querySelector('select[name="apartment"]').value;
             const display = document.getElementById('apartment-id');
             const existingIndicator = document.getElementById('existing-indicator');
-
             if (floor && apartment) {
                 const floorIndex = floorMapping[floor];
                 const apartmentId = `${floorIndex}-${apartment}`;
                 display.textContent = apartmentId;
-
-                // Check if apartment exists in loaded data
                 const existing = apartmentsData.find(apt => apt.apartment_id === apartmentId);
                 if (existing) {
                     existingIndicator.style.display = 'inline';
@@ -587,27 +512,21 @@
         }
 
         // Handle form submission
-        document.getElementById('apartment-form').addEventListener('submit', async function (event) {
+        document.getElementById('apartment-form').addEventListener('submit', async function(event) {
             event.preventDefault();
-
             if (!supabaseClient) {
                 showStatus('غير متصل بقاعدة البيانات', 'error');
                 return;
             }
-
             const formData = new FormData(event.target);
             const floor = formData.get('floor');
             const apartment = formData.get('apartment');
-
             if (!floor || !apartment) {
                 showStatus('يرجى تحديد الطابق ورقم الشقة', 'error');
                 return;
             }
-
             const floorIndex = floorMapping[floor];
             const apartmentId = `${floorIndex}-${apartment}`;
-
-            // Create apartment data object
             const apartmentData = {
                 apartment_id: apartmentId,
                 floor: floor,
@@ -628,14 +547,10 @@
                 registration_date: new Date().toISOString().split('T')[0],
                 last_updated: new Date().toISOString()
             };
-
             const success = await saveApartment(apartmentData);
-
             if (success) {
                 const isUpdate = document.getElementById('existing-indicator').style.display === 'inline';
                 showStatus(isUpdate ? 'تم تحديث بيانات الشقة بنجاح' : 'تم تسجيل الشقة بنجاح', 'success');
-
-                // Reset form
                 event.target.reset();
                 document.getElementById('apartment-id').textContent = 'سيتم تحديده تلقائياً';
                 document.getElementById('existing-indicator').style.display = 'none';
@@ -644,10 +559,9 @@
 
         // Update statistics
         function updateStats() {
-            const totalApartments = 18; // 6 floors × 3 apartments
+            const totalApartments = 18;
             const registeredCount = apartmentsData.length;
             const unregisteredCount = totalApartments - registeredCount;
-
             document.getElementById('total-apartments').textContent = totalApartments;
             document.getElementById('registered-apartments').textContent = registeredCount;
             document.getElementById('unregistered-apartments').textContent = unregisteredCount;
@@ -670,24 +584,17 @@
             const container = document.getElementById('apartments-container');
             const floorFilter = document.getElementById('floor-filter').value;
             const typeFilter = document.getElementById('type-filter').value;
-
             let html = '';
-
-            // Generate all possible apartments
             const floors = ['أرضي', 'أول', 'ثاني', 'ثالث', 'رابع', 'خامس'];
             const apartments = [1, 2, 3];
-
             floors.forEach((floor, floorIndex) => {
                 apartments.forEach(aptNum => {
                     const apartmentId = `${floorIndex}-${aptNum}`;
                     const apartment = apartmentsData.find(apt => apt.apartment_id === apartmentId);
                     const isEmpty = !apartment;
-
-                    // Apply filters
                     if (floorFilter && floor !== floorFilter) return;
                     if (typeFilter === 'empty' && !isEmpty) return;
                     if (typeFilter && typeFilter !== 'empty' && (isEmpty || apartment.residence_type !== typeFilter)) return;
-
                     if (isEmpty) {
                         html += `
                             <div class="card bg-base-200 shadow-md mb-4 opacity-60">
@@ -721,7 +628,6 @@
                                             ${apartment.notes ? `<p class="text-sm"><strong>ملاحظات:</strong> ${apartment.notes}</p>` : ''}
                                         </div>
                                     </div>
-                                    
                                     <div class="card-actions justify-end mt-4">
                                         <button class="btn btn-sm btn-outline btn-error" onclick="deleteApartment('${apartmentId}')">
                                             🗑️ حذف
@@ -733,7 +639,6 @@
                     }
                 });
             });
-
             container.innerHTML = html || '<div class="alert"><span>لا توجد شقق تطابق المرشح</span></div>';
         }
 
@@ -741,7 +646,25 @@
         function filterApartments() {
             displayApartments();
         }
+
+        // ===== AUTO-START ON PAGE LOAD =====
+        // Waits for the Supabase library, then connects and loads data automatically.
+        function startApp() {
+            if (!window.supabase || !window.supabase.createClient) {
+                setTimeout(startApp, 100);
+                return;
+            }
+            if (initSupabase()) {
+                const setup = document.getElementById('setup-instructions');
+                if (setup) setup.style.display = 'none';
+                loadApartments().then(() => {
+                    // Data is loaded. Stats update automatically.
+                    // Uncomment the next line if you want the LIST shown on load instead of the form:
+                    // showApartmentsList();
+                });
+            }
+        }
+        startApp();
     </script>
 </body>
-
 </html>
