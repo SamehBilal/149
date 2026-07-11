@@ -6,15 +6,11 @@
 <title>نظام إدارة العمارة ١٤٩</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-  :root{
-    --accent:#4b5563; --bg:#f4f4f4; --card:#ffffff; --ink:#1a1a1a;
-    --muted:#6b7280; --line:#e5e7eb; --ok:#16a34a; --err:#dc2626; --info:#2563eb;
-  }
+  :root{--accent:#4b5563;--bg:#f4f4f4;--card:#ffffff;--ink:#1a1a1a;--muted:#6b7280;--line:#e5e7eb;--ok:#16a34a;--err:#dc2626;--info:#2563eb;}
   *{box-sizing:border-box}
   body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--ink)}
   .grid-bg{background:var(--bg);min-height:100vh}
   .container{max-width:1100px;margin:0 auto;padding:16px}
-
   .topbar{background:var(--ink);color:#fff;border-bottom:4px solid var(--accent);position:sticky;top:0;z-index:30}
   .topbar-inner{max-width:1100px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
   .brand{font-size:20px;font-weight:800;letter-spacing:.5px}
@@ -22,22 +18,18 @@
   .balance-chip .lbl{font-size:10px;text-transform:uppercase;opacity:.9}
   .balance-chip .val{font-size:18px;font-weight:800}
   .menu-btn{background:#fff;color:var(--ink);border:2px solid #fff;border-radius:8px;padding:8px 12px;font-weight:700;cursor:pointer}
-
   .card{background:var(--card);border:2px solid var(--ink);border-radius:10px;padding:18px;box-shadow:5px 5px 0 var(--ink);margin-bottom:18px}
   .card h2{font-size:14px;text-transform:uppercase;letter-spacing:.5px;margin:0 0 14px;border-bottom:2px solid var(--ink);padding-bottom:8px}
-
   .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
   .tab{background:#fff;border:2px solid var(--ink);border-radius:8px;padding:9px 14px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);transition:transform .05s}
   .tab:hover{transform:translateY(-1px)}
   .tab.active{background:var(--accent);color:#fff}
-
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:18px}
   .stat{background:#fff;border:2px solid var(--ink);border-radius:10px;padding:14px;box-shadow:4px 4px 0 var(--ink)}
   .stat .t{font-size:11px;text-transform:uppercase;color:var(--muted);font-weight:700}
   .stat .v{font-size:26px;font-weight:800;margin:4px 0}
   .stat .d{font-size:11px;color:var(--muted)}
   .v.ok{color:var(--ok)} .v.err{color:var(--err)} .v.info{color:var(--info)} .v.acc{color:var(--accent)}
-
   label{display:block;font-size:12px;font-weight:700;margin:0 0 5px;color:var(--muted)}
   input,select,textarea{width:100%;padding:9px 11px;font-size:14px;border:1.5px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);outline:none;font-family:inherit}
   input:focus,select:focus,textarea:focus{border-color:var(--accent)}
@@ -51,7 +43,6 @@
   button.ghost{background:#fff;color:var(--ink)}
   button.ok{background:var(--ok)} button.err{background:var(--err)} button.sm{padding:5px 9px;font-size:12px}
   .divider{text-align:center;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;margin:16px 0;border-top:2px dashed var(--line);padding-top:10px}
-
   .table-wrap{overflow-x:auto}
   table{width:100%;border-collapse:collapse;font-size:13px}
   th{background:var(--ink);color:#fff;padding:9px;text-align:right;font-size:11px;text-transform:uppercase;white-space:nowrap}
@@ -64,21 +55,19 @@
   .badge.info{background:#eff6ff;color:var(--info)}
   .txt-ok{color:var(--ok);font-weight:700} .txt-err{color:var(--err);font-weight:700}
   .inactive{opacity:.5}
-
   .alert{padding:11px 13px;border-radius:7px;font-size:13px;border:1.5px solid var(--line);margin-bottom:14px}
   .alert.info{background:#eff6ff;color:var(--info);border-color:#bfdbfe}
   .alert.ok{background:#f0fdf4;color:var(--ok);border-color:#bbf7d0}
   .alert.err{background:#fef2f2;color:var(--err);border-color:#fecaca}
   .alert.warn{background:#fffbeb;color:#b45309;border-color:#fde68a}
-
-  .toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;min-width:240px;text-align:center;display:none;box-shadow:4px 4px 0 var(--ink)}
+  .toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:70;min-width:240px;text-align:center;display:none;box-shadow:4px 4px 0 var(--ink)}
   .hidden{display:none}
   .dropdown{position:relative}
   .dropdown-menu{position:absolute;left:0;top:110%;background:#fff;border:2px solid var(--ink);border-radius:8px;box-shadow:4px 4px 0 var(--ink);min-width:230px;z-index:40;display:none;overflow:hidden}
   .dropdown-menu.open{display:block}
   .dropdown-menu a{display:block;padding:10px 13px;font-size:13px;font-weight:600;cursor:pointer;border-bottom:1px solid var(--line);color:var(--ink)}
   .dropdown-menu a:hover{background:var(--accent);color:#fff}
-  .dropdown-menu a.warn-item{color:#b45309} .dropdown-menu a.err-item{color:var(--err)}
+  .dropdown-menu a.warn-item{color:#b45309}
   .chip-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
   .chip{display:flex;align-items:center;gap:6px;background:#fff;border:1.5px solid var(--ink);border-radius:6px;padding:5px 9px;font-size:12px;font-weight:600}
   .chip button{padding:0 4px;font-size:14px;line-height:1;background:none;border:none;color:var(--err);box-shadow:none}
@@ -86,6 +75,21 @@
   .rescard.empty{opacity:.55}
   .rescard h3{margin:0 0 6px;font-size:15px}
   .rescard p{margin:3px 0;font-size:13px}
+  .people-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px;margin-bottom:18px}
+  .pcard{background:#fff;border:2px solid var(--ink);border-radius:10px;padding:14px;box-shadow:4px 4px 0 var(--ink);cursor:pointer;transition:transform .05s}
+  .pcard:hover{transform:translate(-1px,-1px)}
+  .pcard h3{margin:0 0 6px;font-size:15px}
+  .pcard .apt{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase}
+  .pcard p{margin:3px 0;font-size:12px}
+  .floor-group-title{font-size:13px;font-weight:800;text-transform:uppercase;color:var(--muted);margin:6px 0 10px;border-bottom:2px solid var(--line);padding-bottom:6px}
+  .pill{display:inline-block;padding:2px 7px;border-radius:20px;font-size:11px;font-weight:700;border:1.5px solid var(--ink)}
+  .pill.late{background:#fef2f2;color:var(--err)} .pill.clear{background:#f0fdf4;color:var(--ok)}
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:60;display:flex;align-items:flex-start;justify-content:center;padding:24px 12px;overflow-y:auto}
+  .modal-box{background:#fff;border:2px solid var(--ink);border-radius:12px;box-shadow:6px 6px 0 var(--ink);max-width:640px;width:100%;padding:22px;position:relative}
+  .modal-close{position:absolute;top:12px;left:12px;width:32px;height:32px;padding:0;border-radius:6px;background:var(--ink);color:#fff}
+  .modal-box h2{margin-top:0}
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:13px;margin:10px 0}
+  .kv b{color:var(--muted);font-weight:700}
   @media print{.no-print{display:none!important}.card{box-shadow:none}}
   @media (max-width:640px){.stat .v{font-size:20px}table{font-size:11px}th,td{padding:6px}.brand{font-size:16px}}
 </style>
@@ -111,7 +115,6 @@
 </div>
 
 <div class="container">
-
   <div class="toast alert" id="toast"><span id="toast-msg"></span></div>
 
   <div class="card no-print" id="period-card">
@@ -129,6 +132,8 @@
     <div class="tab" data-tab="accounts" onclick="showTab('accounts',this)">💳 حسابات الشقق</div>
     <div class="tab" data-tab="settings" onclick="showTab('settings',this)">⚙️ إعدادات الشقق</div>
     <div class="tab" data-tab="yearly" onclick="showTab('yearly',this)">📈 الملخص السنوي</div>
+    <div class="tab" data-tab="people" onclick="showTab('people',this)">👥 السكان والأقدمية</div>
+    <div class="tab" data-tab="meetings" onclick="showTab('meetings',this)">📝 الاجتماعات</div>
     <div class="tab" data-tab="residents" onclick="showTab('residents',this)">🏠 بيانات السكان</div>
   </div>
 
@@ -150,11 +155,8 @@
       <div class="stat"><div class="t">المتبقي</div><div class="v acc" id="p-remaining">0</div><div class="d">جنيه</div></div>
     </div>
     <div class="card"><h2 id="py-title">🗓️ نظرة سنوية على المدفوعات</h2>
-      <div class="table-wrap"><table>
-        <thead><tr id="py-head"></tr></thead>
-        <tbody id="py-body"></tbody>
-        <tfoot><tr id="py-foot"></tr></tfoot>
-      </table></div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">✓ = مدفوع · ✗ = غير مدفوع · اضغط على صف الشقة لعرض التفاصيل</div>
+      <div class="table-wrap"><table><thead><tr id="py-head"></tr></thead><tbody id="py-body"></tbody><tfoot><tr id="py-foot"></tr></tfoot></table></div>
     </div>
     <div class="card"><h2 id="p-title">💰 مدفوعات الشهر</h2>
       <div class="table-wrap"><table>
@@ -177,7 +179,6 @@
         <button type="submit">إضافة مصروف</button>
       </form>
     </div>
-
     <div class="card no-print"><h2>🏷️ أنواع المصاريف</h2>
       <div class="form-grid cols-2" style="align-items:end">
         <div class="field" style="margin:0"><label>اسم النوع الجديد</label><input type="text" id="new-type-label" placeholder="مثال: 🎨 دهانات"></div>
@@ -185,7 +186,6 @@
       </div>
       <div class="chip-list" id="type-chips"></div>
     </div>
-
     <div class="card"><h2 id="e-title">📋 مصاريف الشهر</h2><div id="e-body"></div></div>
   </div>
 
@@ -232,6 +232,46 @@
         <tfoot><tr><th>الإجمالي</th><th id="y-tot-income">0</th><th id="y-tot-expenses">0</th><th id="y-tot-net">0</th></tr></tfoot>
       </table></div>
     </div>
+  </div>
+
+  <!-- PEOPLE / SENIORITY -->
+  <div id="people" class="tab-content hidden">
+    <div class="card no-print"><h2>👥 ترتيب السكان</h2>
+      <div class="form-grid cols-3">
+        <div class="field" style="margin:0"><label>الترتيب</label>
+          <select id="people-sort" onchange="renderPeople()">
+            <option value="floor">حسب الدور</option>
+            <option value="seniority">حسب الأقدمية (الأقدم أولاً) — لتوزيع الجراج</option>
+            <option value="newest">الأحدث أولاً</option>
+          </select></div>
+        <div class="field" style="margin:0"><label>تصفية بالدور</label>
+          <select id="people-floor" onchange="renderPeople()">
+            <option value="">جميع الطوابق</option><option value="أرضي">أرضي</option><option value="أول">أول</option>
+            <option value="ثاني">ثاني</option><option value="ثالث">ثالث</option><option value="رابع">رابع</option><option value="خامس">خامس</option>
+          </select></div>
+        <div style="display:flex;align-items:flex-end"><button class="ghost" onclick="refreshData()">🔄 تحديث</button></div>
+      </div>
+    </div>
+    <div id="people-container"></div>
+  </div>
+
+  <!-- MEETINGS -->
+  <div id="meetings" class="tab-content hidden">
+    <div class="card no-print"><h2 id="mtg-form-title">➕ إضافة اجتماع</h2>
+      <input type="hidden" id="mtg-edit-id" value="">
+      <div class="form-grid cols-2">
+        <div class="field"><label>عنوان الاجتماع *</label><input type="text" id="mtg-title" placeholder="مثال: اجتماع يناير"></div>
+        <div class="field"><label>التاريخ *</label><input type="date" id="mtg-date"></div>
+      </div>
+      <div class="field"><label>الحضور (اختر الشقق)</label><div id="mtg-attendees" class="chip-list" style="gap:6px"></div></div>
+      <div class="field"><label>النقاط المتفق عليها (كل نقطة في سطر)</label><textarea id="mtg-points" rows="4" placeholder="نقطة في كل سطر..."></textarea></div>
+      <div class="field"><label>ملاحظات</label><textarea id="mtg-notes" rows="2"></textarea></div>
+      <div style="display:flex;gap:8px">
+        <button onclick="saveMeeting()">💾 حفظ الاجتماع</button>
+        <button class="ghost" onclick="resetMeetingForm()" id="mtg-cancel" style="display:none">إلغاء التعديل</button>
+      </div>
+    </div>
+    <div id="meetings-list"></div>
   </div>
 
   <!-- RESIDENTS -->
@@ -312,15 +352,23 @@
 </div>
 </div>
 
+<div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
 <script>
 /* ============ FINANCIAL (JSON file = source of truth) ============ */
 const STORAGE_KEY='building149_data';
 const floors=['أرضي','أول','ثاني','ثالث','رابع','خامس'];
 const apartments=[1,2,3];
+const MONTHS_ORDER=['01','02','03','04','05','06','07','08','09','10','11','12'];
 const months={'01':'يناير','02':'فبراير','03':'مارس','04':'إبريل','05':'مايو','06':'يونيو','07':'يوليو','08':'أغسطس','09':'سبتمبر','10':'أكتوبر','11':'نوفمبر','12':'ديسمبر'};
 const defaultExpenseTypes={water:'💧 مياه',electricity:'⚡ كهرباء',garage:'🧹 سلالم/جراج',elevator:'🛗 أسانسير',other:'📝 أخرى'};
 
-function getDefaultData(){ return { balance:0,payments:{},expenses:{},history:[],
+function getDefaultData(){ return { balance:0,payments:{},expenses:{},history:[],meetings:[],
   expense_type_defs:{...defaultExpenseTypes},
   apartments:{"0-1":{name:"",monthly_payment:100,active:true},"0-2":{name:"",monthly_payment:0,active:false},"0-3":{name:"",monthly_payment:200,active:true},
   "1-1":{name:"",monthly_payment:200,active:true},"1-2":{name:"سامح بلال",monthly_payment:200,active:true},"1-3":{name:"",monthly_payment:200,active:true},
@@ -334,13 +382,8 @@ let buildingData=getDefaultData();
 let currentYear=String(new Date().getFullYear());
 let currentMonth=String(new Date().getMonth()+1).padStart(2,'0');
 
-// File is authoritative: always try the committed JSON first (cache-busted).
 async function loadData(){
-  try{
-    const res=await fetch('building_data.json?t='+Date.now(),{cache:'no-store'});
-    if(res.ok){ buildingData=await res.json(); ensureShape(); saveData(); return; }
-  }catch(e){}
-  // Offline fallback (file:// or no file): use last working copy or defaults.
+  try{ const res=await fetch('building_data.json?t='+Date.now(),{cache:'no-store'}); if(res.ok){ buildingData=await res.json(); ensureShape(); saveData(); return; } }catch(e){}
   const saved=localStorage.getItem(STORAGE_KEY);
   if(saved){ try{ buildingData=JSON.parse(saved); ensureShape(); return; }catch(e){} }
   buildingData=getDefaultData(); ensureShape(); saveData();
@@ -350,6 +393,7 @@ function ensureShape(){
   buildingData.expenses=buildingData.expenses||{}; buildingData.history=buildingData.history||[];
   buildingData.apartments=buildingData.apartments||getDefaultData().apartments;
   buildingData.apartment_accounts=buildingData.apartment_accounts||{};
+  if(!Array.isArray(buildingData.meetings)) buildingData.meetings=[];
   if(!buildingData.expense_type_defs||!Object.keys(buildingData.expense_type_defs).length) buildingData.expense_type_defs={...defaultExpenseTypes};
 }
 function saveData(){ localStorage.setItem(STORAGE_KEY,JSON.stringify(buildingData)); }
@@ -365,7 +409,6 @@ function addHistory(type,description,amount){ buildingData.history.push({type,de
 function toggleMenu(e){ e.stopPropagation(); document.getElementById('main-menu').classList.toggle('open'); }
 document.addEventListener('click',()=>document.getElementById('main-menu').classList.remove('open'));
 
-// Owner name (المالك) — single source: the JSON apartments config.
 function ownerName(id){ const c=buildingData.apartments[id]; return (c&&c.name)?c.name:''; }
 
 function markPaid(id){ const m=monthKey(),cfg=buildingData.apartments[id]||{monthly_payment:200},amount=cfg.monthly_payment||200,[fi,apt]=id.split('-'); buildingData.payments[m]=buildingData.payments[m]||{}; buildingData.payments[m][id]={paid:true,amount,date:today(),floor:floors[fi],apartment:apt}; buildingData.balance+=amount; addHistory('income',`دفع شقة ${apt} - ${floors[fi]}`,amount); saveData(); render(); toast('تم تسجيل الدفع','ok'); }
@@ -379,69 +422,174 @@ function addExpenseType(){ const label=(document.getElementById('new-type-label'
 function removeExpenseType(key){ if(['water','electricity','garage','elevator','other'].includes(key)){ toast('لا يمكن حذف الأنواع الأساسية','warn'); return; } if(!confirm('حذف هذا النوع؟'))return; delete buildingData.expense_type_defs[key]; saveData(); renderExpenseTypes(); toast('تم حذف النوع','warn'); }
 function renderExpenseTypes(){ const sel=document.getElementById('expense-type-select'); sel.innerHTML=Object.entries(buildingData.expense_type_defs).map(([k,v])=>`<option value="${k}">${v}</option>`).join(''); document.getElementById('type-chips').innerHTML=Object.entries(buildingData.expense_type_defs).map(([k,v])=>{ const core=['water','electricity','garage','elevator','other'].includes(k); return `<span class="chip">${v}${core?'':`<button onclick="removeExpenseType('${k}')" title="حذف">×</button>`}</span>`; }).join(''); }
 
-function render(){ document.getElementById('hdr-balance').textContent=nf(buildingData.balance)+' ج'; document.getElementById('period-title').textContent=`${months[currentMonth]} ${currentYear}`; renderExpenseTypes(); renderDashboard(); renderPayments(); renderPaymentsYear(); renderExpenses(); renderAccounts(); renderSettings(); renderYearly(); }
+function render(){ document.getElementById('hdr-balance').textContent=nf(buildingData.balance)+' ج'; document.getElementById('period-title').textContent=`${months[currentMonth]} ${currentYear}`; renderExpenseTypes(); renderDashboard(); renderPayments(); renderPaymentsYear(); renderExpenses(); renderAccounts(); renderSettings(); renderYearly(); renderPeople(); renderMeetings(); }
 function renderDashboard(){ let inc=0,exp=0; Object.values(buildingData.payments).forEach(md=>Object.values(md).forEach(p=>{if(p.paid)inc+=p.amount;})); Object.values(buildingData.expenses).forEach(l=>l.forEach(e=>exp+=e.amount)); document.getElementById('d-income').textContent=nf(inc); document.getElementById('d-expenses').textContent=nf(exp); document.getElementById('d-net').textContent=nf(inc-exp); const h=buildingData.history.slice(-20).reverse(); document.getElementById('d-history').innerHTML=h.length?`<table><thead><tr><th>التاريخ</th><th>الوصف</th><th>النوع</th><th>المبلغ</th></tr></thead><tbody>${h.map(x=>`<tr><td>${x.date}</td><td>${x.description}</td><td><span class="badge ${x.type==='income'?'ok':'err'}">${x.type==='income'?'إيراد':'مصروف'}</span></td><td class="${x.type==='income'?'txt-ok':'txt-err'}">${x.type==='income'?'+':'-'}${nf(x.amount)}</td></tr>`).join('')}</tbody></table>`:`<div class="alert info">لا توجد عمليات</div>`; }
 function renderPayments(){ const m=monthKey(),mp=buildingData.payments[m]||{}; let req=0,col=0,rows=''; floors.forEach((fl,fi)=>apartments.forEach(apt=>{ const id=`${fi}-${apt}`,cfg=buildingData.apartments[id]||{name:'',monthly_payment:200,active:true},pay=mp[id],paid=pay&&pay.paid,bal=buildingData.apartment_accounts[id]||0; if(cfg.active)req+=cfg.monthly_payment; if(paid)col+=pay.amount; if(!cfg.active){rows+=`<tr class="inactive"><td>${fl}</td><td>${apt}</td><td>فارغة</td><td>-</td><td><span class="badge neutral">غير نشط</span></td><td>-</td><td>-</td><td class="no-print">-</td></tr>`;return;} rows+=`<tr><td>${fl}</td><td>${apt}</td><td>${ownerName(id)||'غير محدد'}</td><td>${nf(cfg.monthly_payment)} ج</td><td><span class="badge ${paid?'ok':'err'}">${paid?'تم الدفع':'لم يتم'}</span></td><td>${paid?pay.date:'-'}</td><td><span class="${bal>0?'txt-ok':(bal<0?'txt-err':'')}">${nf(bal)} ج</span></td><td class="no-print">${paid?`<button class="err sm" onclick="markUnpaid('${id}')">إلغاء</button>`:`<button class="ok sm" onclick="markPaid('${id}')">تم الدفع</button>`}</td></tr>`; })); document.getElementById('p-body').innerHTML=rows; document.getElementById('p-required').textContent=nf(req); document.getElementById('p-collected').textContent=nf(col); document.getElementById('p-remaining').textContent=nf(req-col); document.getElementById('p-title').textContent=`💰 مدفوعات ${months[currentMonth]} ${currentYear}`; }
+
+function renderPaymentsYear(){
+  document.getElementById('py-head').innerHTML=`<th>الشقة</th>${MONTHS_ORDER.map(mm=>`<th>${months[mm].slice(0,3)}</th>`).join('')}<th>الإجمالي</th>`;
+  document.getElementById('py-title').textContent=`🗓️ نظرة سنوية على المدفوعات — ${currentYear}`;
+  const colTotals=new Array(12).fill(0); let rowsHtml='';
+  floors.forEach((fl,fi)=>apartments.forEach(apt=>{
+    const id=`${fi}-${apt}`,cfg=buildingData.apartments[id]||{name:'',monthly_payment:200,active:true};
+    if(!cfg.active){ rowsHtml+=`<tr class="inactive"><td>${fl.slice(0,3)} ${apt}</td>${MONTHS_ORDER.map(()=>`<td style="text-align:center">-</td>`).join('')}<td style="text-align:center">-</td></tr>`; return; }
+    let rowTotal=0;
+    const cells=MONTHS_ORDER.map((mm,idx)=>{ const key=currentYear+'-'+mm; const pay=(buildingData.payments[key]||{})[id]; const paid=pay&&pay.paid; if(paid){ rowTotal+=pay.amount; colTotals[idx]+=pay.amount; return `<td style="text-align:center;color:var(--ok);font-weight:700" title="${pay.date} — ${nf(pay.amount)} ج">✓</td>`; } return `<td style="text-align:center;color:var(--err)">✗</td>`; }).join('');
+    rowsHtml+=`<tr style="cursor:pointer" onclick="openResident('${id}')"><td>${ownerName(id)||(fl.slice(0,3)+' '+apt)}</td>${cells}<td style="text-align:center;font-weight:700">${nf(rowTotal)}</td></tr>`;
+  }));
+  document.getElementById('py-body').innerHTML=rowsHtml;
+  const grand=colTotals.reduce((a,b)=>a+b,0);
+  document.getElementById('py-foot').innerHTML=`<th>الإجمالي</th>${colTotals.map(t=>`<th style="text-align:center">${nf(t)}</th>`).join('')}<th style="text-align:center">${nf(grand)}</th>`;
+}
+
 function renderExpenses(){ const m=monthKey(),list=buildingData.expenses[m]||[]; document.getElementById('e-title').textContent=`📋 مصاريف ${months[currentMonth]} ${currentYear}`; if(!list.length){document.getElementById('e-body').innerHTML=`<div class="alert info">لا توجد مصاريف لهذا الشهر</div>`;return;} let total=0; const rows=list.map(e=>{total+=e.amount;return `<tr><td>${e.date}</td><td>${e.description}</td><td>${buildingData.expense_type_defs[e.type]||'📝 أخرى'}</td><td class="txt-err">${nf(e.amount)} ج</td><td class="no-print"><button class="err sm" onclick="removeExpense('${e.id}')">حذف</button></td></tr>`;}).join(''); document.getElementById('e-body').innerHTML=`<div class="table-wrap"><table><thead><tr><th>التاريخ</th><th>الوصف</th><th>النوع</th><th>المبلغ</th><th class="no-print"></th></tr></thead><tbody>${rows}</tbody><tfoot><tr><th colspan="3">الإجمالي</th><th>${nf(total)} ج</th><th class="no-print"></th></tr></tfoot></table></div>`; }
 function renderAccounts(){ let pos=0,neg=0,rows=''; floors.forEach((fl,fi)=>apartments.forEach(apt=>{ const id=`${fi}-${apt}`,cfg=buildingData.apartments[id]||{name:'',active:true},bal=buildingData.apartment_accounts[id]||0; if(bal>0)pos+=bal; if(bal<0)neg+=Math.abs(bal); rows+=`<tr class="${!cfg.active?'inactive':''}"><td>${fl} - ${apt}</td><td>${ownerName(id)||'غير محدد'}</td><td><span class="${bal>0?'txt-ok':(bal<0?'txt-err':'')}">${nf(bal)} ج</span></td><td class="no-print"><div style="display:flex;gap:4px"><input id="amt-${id}" type="number" style="width:80px" placeholder="مبلغ"><input id="desc-${id}" type="text" style="width:110px" placeholder="وصف"></div></td><td class="no-print"><div style="display:flex;gap:4px"><button class="ok sm" onclick="updateAccount('${id}','add')">+</button><button class="err sm" onclick="updateAccount('${id}','deduct')">−</button></div></td></tr>`; })); document.getElementById('a-body').innerHTML=rows; document.getElementById('a-total').innerHTML=`<span class="txt-ok">+${nf(pos)}</span> / <span class="txt-err">-${nf(neg)}</span>`; }
 function renderSettings(){ let rows=''; floors.forEach((fl,fi)=>apartments.forEach(apt=>{ const id=`${fi}-${apt}`,cfg=buildingData.apartments[id]||{name:'',monthly_payment:200,active:true}; rows+=`<tr><td>${fl}</td><td>${apt}</td><td><input id="name-${id}" value="${(cfg.name||'').replace(/"/g,'&quot;')}"></td><td><input id="pay-${id}" type="number" style="width:90px" value="${cfg.monthly_payment}"></td><td style="text-align:center"><input id="act-${id}" type="checkbox" style="width:auto" ${cfg.active?'checked':''}></td><td><button class="sm" onclick="saveApartment('${id}')">حفظ</button></td></tr>`; })); document.getElementById('s-body').innerHTML=rows; }
-function renderPaymentsYear(){
-  const mk=Object.keys(months); // '01'..'12'
-  // header: apartment + 12 months + total
-  document.getElementById('py-head').innerHTML =
-    `<th>الشقة</th>${mk.map(mm=>`<th>${months[mm].slice(0,3)}</th>`).join('')}<th>الإجمالي</th>`;
-  document.getElementById('py-title').textContent=`🗓️ نظرة سنوية على المدفوعات — ${currentYear}`;
-
-  const colTotals=new Array(12).fill(0);
-  let rowsHtml='';
-  floors.forEach((fl,fi)=>apartments.forEach(apt=>{
-    const id=`${fi}-${apt}`; const cfg=buildingData.apartments[id]||{name:'',monthly_payment:200,active:true};
-    if(!cfg.active){
-      rowsHtml+=`<tr class="inactive"><td>${fl.slice(0,3)} ${apt}</td>${mk.map(()=>`<td style="text-align:center">-</td>`).join('')}<td style="text-align:center">-</td></tr>`;
-      return;
-    }
-    let rowTotal=0;
-    const cells=mk.map((mm,idx)=>{
-      const key=currentYear+'-'+mm;
-      const pay=(buildingData.payments[key]||{})[id];
-      const paid=pay&&pay.paid;
-      if(paid){ rowTotal+=pay.amount; colTotals[idx]+=pay.amount;
-        return `<td style="text-align:center;color:var(--ok);font-weight:700" title="${pay.date} — ${nf(pay.amount)} ج">✓</td>`; }
-      return `<td style="text-align:center;color:var(--err)">✗</td>`;
-    }).join('');
-    rowsHtml+=`<tr><td>${ownerName(id)||(fl.slice(0,3)+' '+apt)}</td>${cells}<td style="text-align:center;font-weight:700">${nf(rowTotal)}</td></tr>`;
-  }));
-  document.getElementById('py-body').innerHTML=rowsHtml;
-
-  const grand=colTotals.reduce((a,b)=>a+b,0);
-  document.getElementById('py-foot').innerHTML=
-    `<th>الإجمالي</th>${colTotals.map(t=>`<th style="text-align:center">${nf(t)}</th>`).join('')}<th style="text-align:center">${nf(grand)}</th>`;
-}
 
 function renderYearly(){
   const monthly=[]; let yInc=0,yExp=0;
-  Object.keys(months).forEach(mm=>{
-    const key=currentYear+'-'+mm; let col=0; const mp=buildingData.payments[key]||{};
-    Object.values(mp).forEach(p=>{ if(p.paid)col+=p.amount; });
-    let exp=0; (buildingData.expenses[key]||[]).forEach(e=>exp+=e.amount);
-    monthly.push({mm,label:months[mm],col,exp,net:col-exp}); yInc+=col; yExp+=exp;
-  });
-  document.getElementById('y-income').textContent=nf(yInc);
-  document.getElementById('y-expenses').textContent=nf(yExp);
-  document.getElementById('y-net').textContent=nf(yInc-yExp);
+  MONTHS_ORDER.forEach(mm=>{ const key=currentYear+'-'+mm; let col=0; const mp=buildingData.payments[key]||{}; Object.values(mp).forEach(p=>{ if(p.paid)col+=p.amount; }); let exp=0; (buildingData.expenses[key]||[]).forEach(e=>exp+=e.amount); monthly.push({mm,label:months[mm],col,exp,net:col-exp}); yInc+=col; yExp+=exp; });
+  document.getElementById('y-income').textContent=nf(yInc); document.getElementById('y-expenses').textContent=nf(yExp); document.getElementById('y-net').textContent=nf(yInc-yExp);
   document.getElementById('y-chart-title').textContent=`📈 المحصّل مقابل المصاريف — ${currentYear}`;
   document.getElementById('y-table-title').textContent=`📊 تفصيل شهري — ${currentYear}`;
   document.getElementById('y-body').innerHTML=monthly.map(r=>`<tr><td>${r.label}</td><td class="txt-ok">${nf(r.col)}</td><td class="txt-err">${nf(r.exp)}</td><td class="${r.net>0?'txt-ok':(r.net<0?'txt-err':'')}">${nf(r.net)}</td></tr>`).join('');
-  document.getElementById('y-tot-income').textContent=nf(yInc);
-  document.getElementById('y-tot-expenses').textContent=nf(yExp);
-  document.getElementById('y-tot-net').textContent=nf(yInc-yExp);
+  document.getElementById('y-tot-income').textContent=nf(yInc); document.getElementById('y-tot-expenses').textContent=nf(yExp); document.getElementById('y-tot-net').textContent=nf(yInc-yExp);
   const max=Math.max(1,...monthly.map(r=>Math.max(r.col,r.exp)));
   document.getElementById('y-chart').innerHTML=`<div style="display:flex;align-items:flex-end;gap:6px;height:220px;padding:10px 4px;overflow-x:auto;border-bottom:2px solid var(--ink)">${monthly.map(r=>`<div style="flex:1;min-width:42px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%"><div style="display:flex;gap:2px;align-items:flex-end;height:100%;width:100%;justify-content:center"><div title="محصّل: ${nf(r.col)}" style="width:40%;height:${(r.col/max*100)}%;background:var(--ok);border:1.5px solid var(--ink);min-height:${r.col?'3px':'0'}"></div><div title="مصاريف: ${nf(r.exp)}" style="width:40%;height:${(r.exp/max*100)}%;background:var(--err);border:1.5px solid var(--ink);min-height:${r.exp?'3px':'0'}"></div></div><div style="font-size:9px;margin-top:4px;white-space:nowrap;font-weight:700">${r.label.slice(0,3)}</div></div>`).join('')}</div>`;
 }
 
-function showTab(name,el){ document.querySelectorAll('.tab-content').forEach(t=>t.classList.add('hidden')); document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); document.getElementById(name).classList.remove('hidden'); if(el)el.classList.add('active'); document.getElementById('period-card').style.display=(name==='residents')?'none':'block'; if(name==='residents'&&!residentsLoaded)initResidents(); }
+/* ===== People tab + resident detail modal ===== */
+function residentFor(id){ return apartmentsData.find(a=>a.apartment_id===id)||null; }
+function delayedMonths(id){
+  const res=residentFor(id); const cfg=buildingData.apartments[id]||{monthly_payment:200,active:true};
+  if(!cfg.active) return [];
+  let start=(res&&res.move_in_date)? new Date(res.move_in_date) : new Date(parseInt(currentYear),0,1);
+  const now=new Date(); const out=[]; let y=start.getFullYear(), m=start.getMonth();
+  while(y<now.getFullYear() || (y===now.getFullYear() && m<=now.getMonth())){
+    const mm=String(m+1).padStart(2,'0'); const key=y+'-'+mm; const pay=(buildingData.payments[key]||{})[id];
+    if(!(pay&&pay.paid)) out.push({key,label:`${months[mm]} ${y}`});
+    m++; if(m>11){m=0;y++;}
+  }
+  return out;
+}
+function paymentHistory(id){ const rows=[]; Object.keys(buildingData.payments).sort().forEach(key=>{ const pay=buildingData.payments[key][id]; if(pay&&pay.paid){ const [yy,mm]=key.split('-'); rows.push({label:`${months[mm]} ${yy}`,amount:pay.amount,date:pay.date}); } }); return rows.reverse(); }
+
+function openResident(id){
+  const res=residentFor(id); const cfg=buildingData.apartments[id]||{name:'',monthly_payment:200,active:true};
+  const [fi,apt]=id.split('-'); const bal=buildingData.apartment_accounts[id]||0;
+  const late=delayedMonths(id); const hist=paymentHistory(id);
+  const name=(res&&res.resident_name)?((res.title?res.title+' ':'')+res.resident_name):(cfg.name||'غير محدد');
+  const lateTotal=late.length*(cfg.monthly_payment||0);
+  const contact = res ? `<div class="kv">
+      <b>النوع</b><span>${res.residence_type||'-'}</span>
+      <b>الهاتف</b><span>${res.primary_phone||'-'}</span>
+      <b>هاتف احتياطي</b><span>${res.secondary_phone||'-'}</span>
+      <b>الانتركم</b><span>${res.intercome||'-'}</span>
+      <b>البريد</b><span>${res.email||'-'}</span>
+      <b>أفراد الأسرة</b><span>${res.family_members||'-'}</span>
+      <b>الأطفال</b><span>${res.children_count||0}</span>
+      <b>تاريخ السكن</b><span>${res.move_in_date||'-'}</span>
+      <b>طوارئ</b><span>${res.emergency_contact_name||'-'} ${res.emergency_contact_phone?('— '+res.emergency_contact_phone):''}</span>
+      ${res.notes?`<b>ملاحظات</b><span>${res.notes}</span>`:''}
+    </div>` : `<div class="alert warn">لا توجد بيانات تواصل مسجلة لهذه الشقة في قاعدة السكان.</div>`;
+  const lateBlock = late.length ? `<div class="alert err"><b>متأخرات (${late.length} شهر = ${nf(lateTotal)} ج):</b> ${late.map(x=>x.label).join('، ')}</div>` : `<div class="alert ok">لا توجد متأخرات ✔</div>`;
+  const histBlock = hist.length ? `<div class="table-wrap"><table><thead><tr><th>الشهر</th><th>المبلغ</th><th>تاريخ الدفع</th></tr></thead><tbody>${hist.map(h=>`<tr><td>${h.label}</td><td class="txt-ok">${nf(h.amount)} ج</td><td>${h.date}</td></tr>`).join('')}</tbody></table></div>` : `<div class="alert info">لا يوجد سجل مدفوعات.</div>`;
+  document.getElementById('modal-content').innerHTML=`
+    <h2 style="border-bottom:2px solid var(--ink);padding-bottom:8px">🏠 ${floors[fi]} - شقة ${apt} <span style="font-size:12px;color:var(--muted)">(${id})</span></h2>
+    <p style="font-size:17px;font-weight:800;margin:6px 0">${name} ${late.length?`<span class="pill late">متأخر ${late.length}</span>`:`<span class="pill clear">منتظم</span>`}</p>
+    <div class="kv"><b>المبلغ الشهري</b><span>${nf(cfg.monthly_payment)} ج</span>
+      <b>رصيد الحساب</b><span class="${bal>0?'txt-ok':(bal<0?'txt-err':'')}">${nf(bal)} ج ${bal>0?'(رصيد إضافي)':(bal<0?'(مستحقات)':'')}</span></div>
+    <div class="divider">بيانات التواصل</div>${contact}
+    <div class="divider">الحالة المالية</div>${lateBlock}
+    <div class="divider">سجل المدفوعات</div>${histBlock}`;
+  document.getElementById('modal-overlay').classList.remove('hidden');
+}
+function closeModal(){ document.getElementById('modal-overlay').classList.add('hidden'); }
+
+function renderPeople(){
+  const cont=document.getElementById('people-container'); if(!cont) return;
+  const sortBy=document.getElementById('people-sort').value; const floorFilter=document.getElementById('people-floor').value;
+  let units=[];
+  floors.forEach((fl,fi)=>apartments.forEach(apt=>{ const id=`${fi}-${apt}`; const cfg=buildingData.apartments[id]||{name:'',monthly_payment:200,active:true}; const res=residentFor(id); if(!cfg.active && !res) return; units.push({ id, floorIdx:fi, floorName:fl, apt, name:(res&&res.resident_name)?((res.title?res.title+' ':'')+res.resident_name):(cfg.name||''), move:res&&res.move_in_date?res.move_in_date:'', phone:res?res.primary_phone:'', type:res?res.residence_type:'', late:delayedMonths(id).length }); }));
+  if(floorFilter) units=units.filter(u=>u.floorName===floorFilter);
+  const card=u=>`<div class="pcard" onclick="openResident('${u.id}')"><div class="apt">${u.floorName} - شقة ${u.apt} <span style="color:var(--ink)">(${u.id})</span></div><h3>${u.name||'غير مسجل'}</h3>${u.type?`<p>${u.type}</p>`:''}${u.phone?`<p>📞 ${u.phone}</p>`:''}<p>${u.move?('🗓️ '+u.move):'<span style="color:var(--muted)">لا يوجد تاريخ سكن</span>'}</p><p>${u.late?`<span class="pill late">متأخر ${u.late} شهر</span>`:`<span class="pill clear">منتظم</span>`}</p></div>`;
+  if(sortBy==='floor'){
+    let html=''; floors.forEach((fl,fi)=>{ const group=units.filter(u=>u.floorIdx===fi); if(!group.length) return; html+=`<div class="floor-group-title">${fl}</div><div class="people-grid">${group.map(card).join('')}</div>`; });
+    cont.innerHTML=html||'<div class="alert info">لا يوجد سكان مطابقون</div>';
+  } else {
+    const withDate=units.filter(u=>u.move), without=units.filter(u=>!u.move);
+    withDate.sort((a,b)=> sortBy==='seniority' ? new Date(a.move)-new Date(b.move) : new Date(b.move)-new Date(a.move));
+    const ordered=[...withDate,...without];
+    cont.innerHTML=`<div class="people-grid">${ordered.map(card).join('')}</div>`+(without.length?`<p style="font-size:12px;color:var(--muted)">* الشقق بدون تاريخ سكن مُدرجة في النهاية.</p>`:'');
+  }
+}
+
+/* ===== Meetings (stored in JSON) ===== */
+function attendeeName(id){ const res=residentFor(id); if(res&&res.resident_name) return (res.title?res.title+' ':'')+res.resident_name; const c=buildingData.apartments[id]; return (c&&c.name)?c.name:id; }
+function buildAttendeeCheckboxes(selected){
+  selected=selected||[]; let html='';
+  floors.forEach((fl,fi)=>apartments.forEach(apt=>{ const id=`${fi}-${apt}`; const cfg=buildingData.apartments[id]||{active:true}; if(!cfg.active) return; const nm=attendeeName(id)||id; const on=selected.includes(id)?'checked':''; html+=`<label class="chip" style="cursor:pointer;font-weight:600"><input type="checkbox" value="${id}" style="width:auto;margin:0" ${on}> ${fl.slice(0,3)}-${apt} ${nm&&nm!==id?('· '+nm):''}</label>`; }));
+  document.getElementById('mtg-attendees').innerHTML=html;
+}
+function saveMeeting(){
+  const title=(document.getElementById('mtg-title').value||'').trim();
+  const date=document.getElementById('mtg-date').value||today();
+  if(!title){ toast('أدخل عنوان الاجتماع','err'); return; }
+  const attendees=[...document.querySelectorAll('#mtg-attendees input:checked')].map(c=>c.value);
+  const points=(document.getElementById('mtg-points').value||'').split('\n').map(s=>s.trim()).filter(Boolean);
+  const notes=(document.getElementById('mtg-notes').value||'').trim();
+  const editId=document.getElementById('mtg-edit-id').value;
+  if(editId){ const mtg=buildingData.meetings.find(m=>m.id===editId); if(mtg){ Object.assign(mtg,{title,date,attendees,points,notes}); } toast('تم تحديث الاجتماع (صدّر الملف للنشر)','ok'); }
+  else { buildingData.meetings.push({id:'m'+Date.now(),title,date,attendees,points,notes}); toast('تم إضافة الاجتماع (صدّر الملف للنشر)','ok'); }
+  saveData(); resetMeetingForm(); renderMeetings();
+}
+function editMeeting(id){
+  const m=buildingData.meetings.find(x=>x.id===id); if(!m) return;
+  document.getElementById('mtg-edit-id').value=m.id;
+  document.getElementById('mtg-title').value=m.title||'';
+  document.getElementById('mtg-date').value=m.date||'';
+  document.getElementById('mtg-points').value=(m.points||[]).join('\n');
+  document.getElementById('mtg-notes').value=m.notes||'';
+  buildAttendeeCheckboxes(m.attendees||[]);
+  document.getElementById('mtg-form-title').textContent='✏️ تعديل اجتماع';
+  document.getElementById('mtg-cancel').style.display='inline-block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function deleteMeeting(id){ if(!confirm('حذف هذا الاجتماع؟')) return; buildingData.meetings=buildingData.meetings.filter(m=>m.id!==id); saveData(); renderMeetings(); toast('تم حذف الاجتماع','warn'); }
+function resetMeetingForm(){
+  document.getElementById('mtg-edit-id').value='';
+  document.getElementById('mtg-title').value='';
+  document.getElementById('mtg-date').value=today();
+  document.getElementById('mtg-points').value='';
+  document.getElementById('mtg-notes').value='';
+  buildAttendeeCheckboxes([]);
+  document.getElementById('mtg-form-title').textContent='➕ إضافة اجتماع';
+  document.getElementById('mtg-cancel').style.display='none';
+}
+function renderMeetings(){
+  buildAttendeeCheckboxes([...document.querySelectorAll('#mtg-attendees input:checked')].map(c=>c.value));
+  const cont=document.getElementById('meetings-list'); if(!cont) return;
+  const list=[...(buildingData.meetings||[])].sort((a,b)=>new Date(b.date)-new Date(a.date));
+  if(!list.length){ cont.innerHTML='<div class="alert info">لا توجد اجتماعات مسجلة بعد.</div>'; return; }
+  cont.innerHTML=list.map(m=>`
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px">
+        <div><h2 style="border:none;padding:0;margin:0">${m.title}</h2>
+          <span style="font-size:12px;color:var(--muted)">🗓️ ${m.date} · حضر ${(m.attendees||[]).length} من السكان</span></div>
+        <div class="no-print" style="display:flex;gap:6px">
+          <button class="sm" onclick="editMeeting('${m.id}')">✏️ تعديل</button>
+          <button class="err sm" onclick="deleteMeeting('${m.id}')">🗑️ حذف</button>
+        </div>
+      </div>
+      ${(m.attendees&&m.attendees.length)?`<div class="divider">الحضور</div><div class="chip-list">${m.attendees.map(id=>`<span class="chip">${attendeeName(id)} <span style="color:var(--muted)">(${id})</span></span>`).join('')}</div>`:''}
+      ${(m.points&&m.points.length)?`<div class="divider">النقاط المتفق عليها</div><ul style="margin:0;padding-inline-start:20px;font-size:14px">${m.points.map(p=>`<li style="margin:5px 0">${p}</li>`).join('')}</ul>`:''}
+      ${m.notes?`<div class="divider">ملاحظات</div><p style="font-size:13px;margin:0">${m.notes}</p>`:''}
+    </div>`).join('');
+}
+
+function showTab(name,el){ document.querySelectorAll('.tab-content').forEach(t=>t.classList.add('hidden')); document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active')); document.getElementById(name).classList.remove('hidden'); if(el)el.classList.add('active'); const hidePeriod=(name==='residents'||name==='people'||name==='meetings'); document.getElementById('period-card').style.display=hidePeriod?'none':'block'; if((name==='residents'||name==='people')&&!residentsLoaded)initResidents(); if(name==='people')renderPeople(); if(name==='meetings')renderMeetings(); }
 function changeDate(){ currentYear=document.getElementById('year-select').value; currentMonth=document.getElementById('month-select').value; render(); }
-function buildSelectors(){ const startYear=new Date().getFullYear(); const ys=document.getElementById('year-select'); for(let y=startYear;y<=startYear+6;y++){const o=document.createElement('option');o.value=y;o.textContent=y;if(String(y)===currentYear)o.selected=true;ys.appendChild(o);} const ms=document.getElementById('month-select'); Object.entries(months).forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;if(v===currentMonth)o.selected=true;ms.appendChild(o);}); }
+function buildSelectors(){ const startYear=new Date().getFullYear(); const ys=document.getElementById('year-select'); for(let y=startYear;y<=startYear+6;y++){const o=document.createElement('option');o.value=y;o.textContent=y;if(String(y)===currentYear)o.selected=true;ys.appendChild(o);} const ms=document.getElementById('month-select'); MONTHS_ORDER.forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=months[v];if(v===currentMonth)o.selected=true;ms.appendChild(o);}); }
 
 /* ============ RESIDENTS (Supabase — users add contact data) ============ */
 const SUPABASE_URL='https://apgddutljuzwwddivcrn.supabase.co';
@@ -452,7 +600,7 @@ let supabaseClient, apartmentsData=[], residentsLoaded=false;
 function regStatus(msg,type='info'){ const a=document.getElementById('reg-status'); document.getElementById('reg-status-msg').textContent=msg; a.className='alert '+type; a.classList.remove('hidden'); setTimeout(()=>a.classList.add('hidden'),4000); }
 function regLoading(s){ document.getElementById('reg-loading').classList.toggle('hidden',!s); }
 function initResidents(){ if(!window.supabase||!window.supabase.createClient){ setTimeout(initResidents,100); return; } try{ supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY); residentsLoaded=true; loadApartments(); }catch(e){ regStatus('خطأ في الاتصال: '+e.message,'err'); } }
-async function loadApartments(){ if(!supabaseClient)return; regLoading(true); try{ const {data,error}=await supabaseClient.from('apartments').select('*').order('apartment_id'); if(error)throw error; apartmentsData=data||[]; updateStats(); }catch(e){ regStatus('خطأ في تحميل البيانات: '+e.message,'err'); }finally{ regLoading(false); } }
+async function loadApartments(){ if(!supabaseClient)return; regLoading(true); try{ const {data,error}=await supabaseClient.from('apartments').select('*').order('apartment_id'); if(error)throw error; apartmentsData=data||[]; updateStats(); renderPeople(); renderPaymentsYear(); renderMeetings(); }catch(e){ regStatus('خطأ في تحميل البيانات: '+e.message,'err'); }finally{ regLoading(false); } }
 async function saveResident(d){ if(!supabaseClient)return false; regLoading(true); try{ const {data:ex}=await supabaseClient.from('apartments').select('id').eq('apartment_id',d.apartment_id).single(); let r; if(ex){ r=await supabaseClient.from('apartments').update(d).eq('apartment_id',d.apartment_id); }else{ r=await supabaseClient.from('apartments').insert([d]); } if(r.error)throw r.error; await loadApartments(); return true; }catch(e){ regStatus('خطأ في الحفظ: '+e.message,'err'); return false; }finally{ regLoading(false); } }
 async function deleteApartment(id){ if(!supabaseClient)return; if(!confirm('حذف بيانات هذه الشقة؟'))return; regLoading(true); try{ const {error}=await supabaseClient.from('apartments').delete().eq('apartment_id',id); if(error)throw error; await loadApartments(); displayApartments(); regStatus('تم حذف الشقة','ok'); }catch(e){ regStatus('خطأ في الحذف: '+e.message,'err'); }finally{ regLoading(false); } }
 async function refreshData(){ await loadApartments(); if(!document.getElementById('residents-list-card').classList.contains('hidden'))displayApartments(); }
@@ -480,8 +628,8 @@ function displayApartments(){
   const flrs=['أرضي','أول','ثاني','ثالث','رابع','خامس'],apts=[1,2,3];
   flrs.forEach((fl,fi)=>apts.forEach(n=>{ const id=`${fi}-${n}`,a=apartmentsData.find(x=>x.apartment_id===id),empty=!a;
     if(ff&&fl!==ff)return; if(tf==='empty'&&!empty)return; if(tf&&tf!=='empty'&&(empty||a.residence_type!==tf))return;
-    if(empty){ html+=`<div class="rescard empty"><h3>${fl} - شقة ${n}</h3><p>غير مسجلة</p><span class="badge warn">فارغة</span></div>`; }
-    else { html+=`<div class="rescard"><div class="form-grid cols-2"><div><h3>${a.floor} - شقة ${a.apartment_number}</h3><p><strong>الاسم:</strong> ${a.title?a.title+' ':''}${a.resident_name}</p><p><strong>النوع:</strong> <span class="badge ${a.residence_type==='مالك'?'ok':'info'}">${a.residence_type}</span></p><p><strong>الهاتف:</strong> ${a.primary_phone}</p><p><strong>الانتركم:</strong> ${a.intercome}</p>${a.email?`<p><strong>البريد:</strong> ${a.email}</p>`:''}</div><div><p><strong>أفراد الأسرة:</strong> ${a.family_members||'غير محدد'}</p><p><strong>الأطفال:</strong> ${a.children_count||0}</p>${a.move_in_date?`<p><strong>تاريخ السكن:</strong> ${a.move_in_date}</p>`:''}${a.notes?`<p><strong>ملاحظات:</strong> ${a.notes}</p>`:''}</div></div><div class="no-print" style="text-align:left;margin-top:8px"><button class="err sm" onclick="deleteApartment('${id}')">🗑️ حذف</button></div></div>`; }
+    if(empty){ html+=`<div class="rescard empty" onclick="openResident('${id}')"><h3>${fl} - شقة ${n}</h3><p>غير مسجلة</p><span class="badge warn">فارغة</span></div>`; }
+    else { html+=`<div class="rescard" style="cursor:pointer" onclick="openResident('${id}')"><div class="form-grid cols-2"><div><h3>${a.floor} - شقة ${a.apartment_number}</h3><p><strong>الاسم:</strong> ${a.title?a.title+' ':''}${a.resident_name}</p><p><strong>النوع:</strong> <span class="badge ${a.residence_type==='مالك'?'ok':'info'}">${a.residence_type}</span></p><p><strong>الهاتف:</strong> ${a.primary_phone}</p><p><strong>الانتركم:</strong> ${a.intercome}</p>${a.email?`<p><strong>البريد:</strong> ${a.email}</p>`:''}</div><div><p><strong>أفراد الأسرة:</strong> ${a.family_members||'غير محدد'}</p><p><strong>الأطفال:</strong> ${a.children_count||0}</p>${a.move_in_date?`<p><strong>تاريخ السكن:</strong> ${a.move_in_date}</p>`:''}${a.notes?`<p><strong>ملاحظات:</strong> ${a.notes}</p>`:''}</div></div><div class="no-print" style="text-align:left;margin-top:8px"><button class="err sm" onclick="event.stopPropagation();deleteApartment('${id}')">🗑️ حذف</button></div></div>`; }
   }));
   c.innerHTML=html||'<div class="alert info">لا توجد شقق مطابقة</div>';
 }
@@ -492,8 +640,10 @@ function filterApartments(){ displayApartments(); }
   buildSelectors();
   document.getElementById('gen-time').textContent='آخر تحديث: '+new Date().toLocaleString('en-GB');
   document.querySelector('#expenses input[name=date]').value=today();
+  const md=document.getElementById('mtg-date'); if(md) md.value=today();
   await loadData();
   render();
+  initResidents();
 })();
 </script>
 </body>
