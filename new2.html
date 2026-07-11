@@ -512,14 +512,21 @@ function renderYearly(){
 /* ===== People tab + resident detail modal ===== */
 function residentFor(id){ return apartmentsData.find(a=>a.apartment_id===id)||null; }
 function delayedMonths(id){
-  const res=residentFor(id); const cfg=buildingData.apartments[id]||{monthly_payment:200,active:true};
+  const cfg=buildingData.apartments[id]||{monthly_payment:200,active:true};
   if(!cfg.active) return [];
-  let start=(res&&res.move_in_date)? new Date(res.move_in_date) : new Date(parseInt(currentYear),0,1);
-  const now=new Date(); const out=[]; let y=start.getFullYear(), m=start.getMonth();
-  while(y<now.getFullYear() || (y===now.getFullYear() && m<=now.getMonth())){
-    const mm=String(m+1).padStart(2,'0'); const key=y+'-'+mm; const pay=(buildingData.payments[key]||{})[id];
-    if(!(pay&&pay.paid)) out.push({key,label:`${months[mm]} ${y}`});
-    m++; if(m>11){m=0;y++;}
+  const now=new Date();
+  const yr=parseInt(currentYear);
+  let lastMonth;
+  if(yr < now.getFullYear()) lastMonth=12;
+  else if(yr > now.getFullYear()) lastMonth=0;
+  else lastMonth=now.getMonth()+1; // current month (1-based)
+
+  const out=[];
+  for(let m=1; m<=lastMonth; m++){
+    const mm=String(m).padStart(2,'0');
+    const key=yr+'-'+mm;
+    const pay=(buildingData.payments[key]||{})[id];
+    if(!(pay&&pay.paid)) out.push({key,label:`${months[mm]} ${yr}`});
   }
   return out;
 }
