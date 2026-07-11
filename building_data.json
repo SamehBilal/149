@@ -11,6 +11,9 @@
     "elevator": "🛗 أسانسير",
     "other": "📝 أخرى"
   },
+  "technicians": {
+    "0": { "name": "محمد عبد الله", "phone": "01000000000" }
+  },
   "apartments": {
     "0-1": { "name": "", "monthly_payment": 100, "active": true },
     "0-2": { "name": "", "monthly_payment": 0, "active": false },
