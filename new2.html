@@ -63,7 +63,7 @@
   .alert.err{background:#fef2f2;color:var(--err);border-color:#fecaca}
   .alert.warn{background:#fffbeb;color:#b45309;border-color:#fde68a}
   .toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:70;min-width:240px;text-align:center;display:none;box-shadow:4px 4px 0 var(--ink)}
-  .hidden{display:none}
+  .hidden{display:none !important}
   .dropdown{position:relative}
   .dropdown-menu{position:absolute;left:0;top:110%;background:#fff;border:2px solid var(--ink);border-radius:8px;box-shadow:4px 4px 0 var(--ink);min-width:230px;z-index:40;display:none;overflow:hidden}
   .dropdown-menu.open{display:block}
@@ -642,6 +642,7 @@ function filterApartments(){ displayApartments(); }
 
 /* ============ START ============ */
 (async function start(){
+  document.getElementById('modal-overlay').classList.add('hidden');
   buildSelectors();
   updateLockBtn();
   document.getElementById('gen-time').textContent='آخر تحديث: '+new Date().toLocaleString('en-GB');
