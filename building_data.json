@@ -1,8 +1,807 @@
 {
-  "balance": 0,
+  "balance": 22000,
   "payments": [],
   "expenses": [],
-  "history": [],
+  "history": [
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أرضي",
+      "amount": 100,
+      "date": "2026-07-12",
+      "timestamp": 1783862922764
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أرضي",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862935267
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862941323
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862942012
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862949532
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862950118
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862953610
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862954427
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862955843
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862956319
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862956959
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862958111
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862958578
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862959634
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862961807
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أرضي",
+      "amount": 100,
+      "date": "2026-07-12",
+      "timestamp": 1783862977794
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أرضي",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862978721
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862979121
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862979594
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862980233
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862980814
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862982233
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862983384
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862983728
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862984131
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862984819
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862985346
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862986221
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862986542
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862987086
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أرضي",
+      "amount": 100,
+      "date": "2026-07-12",
+      "timestamp": 1783862997264
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أرضي",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783862998905
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863000474
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863002137
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863002673
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863005464
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863006178
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863006537
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863007114
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863008472
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863008729
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863009020
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863009330
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863009768
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863011938
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أرضي",
+      "amount": 100,
+      "date": "2026-07-12",
+      "timestamp": 1783863019957
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أرضي",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863029345
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863030193
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863034724
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863035063
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863036534
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863037711
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863040658
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863042637
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863044106
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863044697
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863045444
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863046603
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863046931
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أرضي",
+      "amount": 100,
+      "date": "2026-07-12",
+      "timestamp": 1783863063169
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أرضي",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863064303
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863067082
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863067727
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863068616
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863069314
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863071797
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863073025
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863076243
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863076628
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863077024
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863078726
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863079288
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أرضي",
+      "amount": 100,
+      "date": "2026-07-12",
+      "timestamp": 1783863093636
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أرضي",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863095218
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863096708
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863097412
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863098974
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863100456
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863102451
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثالث",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863105335
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863107126
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863108314
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863108784
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863109784
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أرضي",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863139198
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863149392
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863155841
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863160716
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863175565
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863177440
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أرضي",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863187859
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863193817
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863194350
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863201867
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863220252
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863221509
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أرضي",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863227191
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أول",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863233138
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863234518
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863246656
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863254629
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863256049
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أرضي",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863265338
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863273651
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثاني",
+      "amount": 100,
+      "date": "2026-07-12",
+      "timestamp": 1783863283927
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863297010
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - خامس",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863298412
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أرضي",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863312042
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863313561
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863318104
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - خامس",
+      "amount": 40,
+      "date": "2026-07-12",
+      "timestamp": 1783863322039
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - أرضي",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863330462
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - ثاني",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863334401
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 2 - رابع",
+      "amount": 200,
+      "date": "2026-07-12",
+      "timestamp": 1783863338693
+    }
+  ],
   "meetings": [
     {
       "id": "m1783862757820",
