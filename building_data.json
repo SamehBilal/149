@@ -879,84 +879,98 @@
     },
     "0-3": {
       "name": "محمد عبدالله الحميزي",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "1-1": {
       "name": "",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "1-2": {
       "name": "سامح رمضان أحمد بلال",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "1-3": {
       "name": "حسام سالم",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "2-1": {
       "name": "جمعه محمد حسانين",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "2-2": {
       "name": "الحج مسلم الفلسطيني",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "2-3": {
       "name": "عمرو عبد الرؤوف شكر",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "3-1": {
       "name": "",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "3-2": {
       "name": "",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "3-3": {
       "name": "اسلام شلبي",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "4-1": {
       "name": "احمد عادل عبد الفتاح",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "4-2": {
       "name": "عبد الحميد سامي الخولي",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "4-3": {
       "name": "شادى ابراهيم",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "5-1": {
       "name": "اسلام اسامة",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "5-2": {
       "name": "محمد حمدى طاهر",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     },
     "5-3": {
       "name": "",
-      "monthly_payment": 200,
+      "monthly_payment": 300,
       "active": true
     }
   },
-  "apartment_accounts": []
+  "apartment_accounts": [],
+  "residents": {
+    "2-1": { "resident_name": "جمعه محمد حسانين", "title": "دكتور", "residence_type": "مالك", "primary_phone": "01098508855", "secondary_phone": "", "email": "", "intercome": "", "family_members": null, "children_count": null, "move_in_date": "", "emergency_contact_name": "", "emergency_contact_phone": "", "notes": "" },
+    "3-3": { "resident_name": "اسلام شلبي", "title": "استاذ", "residence_type": "مالك", "primary_phone": "01020304909", "secondary_phone": "01020304909", "email": "", "intercome": "", "family_members": 3, "children_count": 1, "move_in_date": "", "emergency_contact_name": "", "emergency_contact_phone": "", "notes": "" },
+    "1-2": { "resident_name": "سامح رمضان أحمد بلال", "title": "مهندس", "residence_type": "مالك", "primary_phone": "01064444286", "secondary_phone": "01098363863", "email": "sameh.bilal@outlook.com", "intercome": "104", "family_members": 3, "children_count": 1, "move_in_date": "2021-06-04", "emergency_contact_name": "اسراء السيد زيدان", "emergency_contact_phone": "01098363863", "notes": "لاتوجد" },
+    "0-3": { "resident_name": "محمد عبدالله الحميزي", "title": "مستشار", "residence_type": "مالك", "primary_phone": "00966552282822", "secondary_phone": "01148000189", "email": "", "intercome": "103", "family_members": 1, "children_count": 1, "move_in_date": "2021-08-08", "emergency_contact_name": "اللواء حسام - الدور الثاني", "emergency_contact_phone": "", "notes": "شكراً لجهودك المميزة \nاخوك ابوعبدالله" },
+    "2-2": { "resident_name": "الحج مسلم الفلسطيني", "title": "الحج", "residence_type": "مالك", "primary_phone": "01020793463", "secondary_phone": "", "email": "mahmoud.msalam91@gmail.com", "intercome": "302", "family_members": 6, "children_count": 3, "move_in_date": "2021-06-05", "emergency_contact_name": "محمد مسلم", "emergency_contact_phone": "01022116631", "notes": "" },
+    "5-1": { "resident_name": "اسلام اسامة", "title": "استاذ", "residence_type": "مالك", "primary_phone": "01004182007", "secondary_phone": "01151020700", "email": "", "intercome": "٦٠١", "family_members": 5, "children_count": 3, "move_in_date": "2025-03-01", "emergency_contact_name": "انس", "emergency_contact_phone": "0102351523", "notes": "" },
+    "4-3": { "resident_name": "شادى ابراهيم", "title": "مهندس", "residence_type": "مالك", "primary_phone": "01007275873", "secondary_phone": "01116559773", "email": "shady.ibrahim.aly@gmail.com", "intercome": "٥٠٣", "family_members": 3, "children_count": 1, "move_in_date": "2022-12-01", "emergency_contact_name": "ابراهيم محمد", "emergency_contact_phone": "01114025515", "notes": "" },
+    "5-2": { "resident_name": "محمد حمدى طاهر", "title": "مهندس", "residence_type": "مالك", "primary_phone": "01027233267", "secondary_phone": "0225088301", "email": "mohamedhamdy20230101@gmail.com", "intercome": "106", "family_members": 4, "children_count": 2, "move_in_date": "2025-09-10", "emergency_contact_name": "يحيى", "emergency_contact_phone": "01020459274", "notes": "" },
+    "4-1": { "resident_name": "احمد عادل عبد الفتاح", "title": "استاذ", "residence_type": "مالك", "primary_phone": "01226226287", "secondary_phone": "", "email": "", "intercome": "501", "family_members": 2, "children_count": 1, "move_in_date": "2022-03-03", "emergency_contact_name": "", "emergency_contact_phone": "", "notes": "" },
+    "2-3": { "resident_name": "عمرو عبد الرؤوف شكر", "title": "مهندس", "residence_type": "مالك", "primary_phone": "01110188685", "secondary_phone": "", "email": "safaafiffi@gmail.com", "intercome": "303", "family_members": 3, "children_count": 1, "move_in_date": "2024-01-01", "emergency_contact_name": "مدام صفاء", "emergency_contact_phone": "01110188685", "notes": "" },
+    "1-3": { "resident_name": "حسام سالم", "title": "لواء", "residence_type": "مالك", "primary_phone": "0405037715", "secondary_phone": "01559666819", "email": "hossamslm@gmail.com", "intercome": "203", "family_members": null, "children_count": null, "move_in_date": "", "emergency_contact_name": "محمد حسام", "emergency_contact_phone": "+201000929551", "notes": "" },
+    "4-2": { "resident_name": "عبد الحميد سامي الخولي", "title": "أستاذ", "residence_type": "مالك", "primary_phone": "01274584710", "secondary_phone": "01090988997", "email": "abdelhamidelkholy92@gmail.com", "intercome": "502", "family_members": 2, "children_count": 2, "move_in_date": "2023-09-01", "emergency_contact_name": "عبد الحميد", "emergency_contact_phone": "01274584710", "notes": "" }
+  }
 }
