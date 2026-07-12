@@ -695,17 +695,6 @@
         <div class="container">
             <div class="toast alert" id="toast"><span id="toast-msg"></span></div>
 
-            <div class="card no-print" id="period-card">
-                <div class="form-grid cols-3">
-                    <div class="field" style="margin:0"><label>السنة</label><select id="year-select"
-                            onchange="changeDate()"></select></div>
-                    <div class="field" style="margin:0"><label>الشهر</label><select id="month-select"
-                            onchange="changeDate()"></select></div>
-                    <div style="display:flex;align-items:flex-end"><strong id="period-title"
-                            style="font-size:16px">—</strong></div>
-                </div>
-            </div>
-
             <div class="tabs no-print">
                 <div class="tab active" data-tab="dashboard" onclick="showTab('dashboard',this)">📊 لوحة التحكم</div>
                 <div class="tab" data-tab="payments" onclick="showTab('payments',this)">💰 المدفوعات</div>
@@ -718,6 +707,17 @@
                 <div class="tab" data-tab="technicians" onclick="showTab('technicians',this)">🔧 الفنيّون</div>
             </div>
 
+            <div class="card no-print" id="period-card">
+                <div class="form-grid cols-3">
+                    <div class="field" style="margin:0"><label>السنة</label><select id="year-select"
+                            onchange="changeDate()"></select></div>
+                    <div class="field" style="margin:0"><label>الشهر</label><select id="month-select"
+                            onchange="changeDate()"></select></div>
+                    <div style="display:flex;align-items:flex-end"><strong id="period-title"
+                            style="font-size:16px">—</strong></div>
+                </div>
+            </div>
+            
             <div id="dashboard" class="tab-content">
                 <div class="card no-print">
                     <h2>🔎 العرض</h2>
