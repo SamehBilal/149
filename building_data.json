@@ -2,164 +2,941 @@
   "balance": 4640,
   "payments": {
     "2026-01": {
-      "0-1": { "paid": true, "amount": 100, "date": "2026-01-01", "floor": "أرضي", "apartment": "1" },
-      "0-3": { "paid": true, "amount": 200, "date": "2026-01-01", "floor": "أرضي", "apartment": "3" },
-      "1-1": { "paid": true, "amount": 200, "date": "2026-01-01", "floor": "أول", "apartment": "1" },
-      "1-2": { "paid": true, "amount": 200, "date": "2026-01-01", "floor": "أول", "apartment": "2" },
-      "1-3": { "paid": true, "amount": 200, "date": "2026-01-01", "floor": "أول", "apartment": "3" },
-      "2-1": { "paid": true, "amount": 200, "date": "2026-01-01", "floor": "ثاني", "apartment": "1" },
-      "2-3": { "paid": true, "amount": 200, "date": "2026-01-01", "floor": "ثاني", "apartment": "3" },
-      "3-1": { "paid": true, "amount": 200, "date": "2026-01-01", "floor": "ثالث", "apartment": "1" },
-      "3-2": { "paid": true, "amount": 200, "date": "2026-01-01", "floor": "ثالث", "apartment": "2" },
-      "3-3": { "paid": true, "amount": 200, "date": "2026-01-01", "floor": "ثالث", "apartment": "3" },
-      "4-1": { "paid": true, "amount": 200, "date": "2026-01-01", "floor": "رابع", "apartment": "1" },
-      "4-2": { "paid": true, "amount": 200, "date": "2026-01-01", "floor": "رابع", "apartment": "2" },
-      "4-3": { "paid": true, "amount": 200, "date": "2026-01-01", "floor": "رابع", "apartment": "3" },
-      "5-1": { "paid": true, "amount": 200, "date": "2026-01-01", "floor": "خامس", "apartment": "1" },
-      "5-2": { "paid": true, "amount": 200, "date": "2026-01-01", "floor": "خامس", "apartment": "2" }
+      "0-1": {
+        "paid": true,
+        "amount": 100,
+        "date": "2026-01-01",
+        "floor": "أرضي",
+        "apartment": "1"
+      },
+      "0-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "أرضي",
+        "apartment": "3"
+      },
+      "1-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "أول",
+        "apartment": "1"
+      },
+      "1-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "أول",
+        "apartment": "2"
+      },
+      "1-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "أول",
+        "apartment": "3"
+      },
+      "2-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "ثاني",
+        "apartment": "1"
+      },
+      "2-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "ثاني",
+        "apartment": "3"
+      },
+      "3-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "ثالث",
+        "apartment": "1"
+      },
+      "3-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "ثالث",
+        "apartment": "2"
+      },
+      "3-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "ثالث",
+        "apartment": "3"
+      },
+      "4-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "رابع",
+        "apartment": "1"
+      },
+      "4-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "رابع",
+        "apartment": "2"
+      },
+      "4-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "رابع",
+        "apartment": "3"
+      },
+      "5-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "خامس",
+        "apartment": "1"
+      },
+      "5-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "خامس",
+        "apartment": "2"
+      }
     },
     "2026-02": {
-      "0-1": { "paid": true, "amount": 100, "date": "2026-02-01", "floor": "أرضي", "apartment": "1" },
-      "0-3": { "paid": true, "amount": 200, "date": "2026-02-01", "floor": "أرضي", "apartment": "3" },
-      "1-1": { "paid": true, "amount": 200, "date": "2026-02-01", "floor": "أول", "apartment": "1" },
-      "1-2": { "paid": true, "amount": 200, "date": "2026-02-01", "floor": "أول", "apartment": "2" },
-      "1-3": { "paid": true, "amount": 200, "date": "2026-02-01", "floor": "أول", "apartment": "3" },
-      "2-1": { "paid": true, "amount": 200, "date": "2026-02-01", "floor": "ثاني", "apartment": "1" },
-      "2-3": { "paid": true, "amount": 200, "date": "2026-02-01", "floor": "ثاني", "apartment": "3" },
-      "3-1": { "paid": true, "amount": 200, "date": "2026-02-01", "floor": "ثالث", "apartment": "1" },
-      "3-2": { "paid": true, "amount": 200, "date": "2026-02-01", "floor": "ثالث", "apartment": "2" },
-      "3-3": { "paid": true, "amount": 200, "date": "2026-02-01", "floor": "ثالث", "apartment": "3" },
-      "4-1": { "paid": true, "amount": 200, "date": "2026-02-01", "floor": "رابع", "apartment": "1" },
-      "4-2": { "paid": true, "amount": 200, "date": "2026-02-01", "floor": "رابع", "apartment": "2" },
-      "4-3": { "paid": true, "amount": 200, "date": "2026-02-01", "floor": "رابع", "apartment": "3" },
-      "5-1": { "paid": true, "amount": 200, "date": "2026-02-01", "floor": "خامس", "apartment": "1" },
-      "5-2": { "paid": true, "amount": 200, "date": "2026-02-01", "floor": "خامس", "apartment": "2" }
+      "0-1": {
+        "paid": true,
+        "amount": 100,
+        "date": "2026-02-01",
+        "floor": "أرضي",
+        "apartment": "1"
+      },
+      "0-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "أرضي",
+        "apartment": "3"
+      },
+      "1-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "أول",
+        "apartment": "1"
+      },
+      "1-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "أول",
+        "apartment": "2"
+      },
+      "1-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "أول",
+        "apartment": "3"
+      },
+      "2-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "ثاني",
+        "apartment": "1"
+      },
+      "2-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "ثاني",
+        "apartment": "3"
+      },
+      "3-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "ثالث",
+        "apartment": "1"
+      },
+      "3-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "ثالث",
+        "apartment": "2"
+      },
+      "3-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "ثالث",
+        "apartment": "3"
+      },
+      "4-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "رابع",
+        "apartment": "1"
+      },
+      "4-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "رابع",
+        "apartment": "2"
+      },
+      "4-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "رابع",
+        "apartment": "3"
+      },
+      "5-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "خامس",
+        "apartment": "1"
+      },
+      "5-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "خامس",
+        "apartment": "2"
+      }
     },
     "2026-03": {
-      "0-1": { "paid": true, "amount": 100, "date": "2026-03-01", "floor": "أرضي", "apartment": "1" },
-      "0-3": { "paid": true, "amount": 200, "date": "2026-03-01", "floor": "أرضي", "apartment": "3" },
-      "1-1": { "paid": true, "amount": 200, "date": "2026-03-01", "floor": "أول", "apartment": "1" },
-      "1-2": { "paid": true, "amount": 200, "date": "2026-03-01", "floor": "أول", "apartment": "2" },
-      "1-3": { "paid": true, "amount": 200, "date": "2026-03-01", "floor": "أول", "apartment": "3" },
-      "2-1": { "paid": true, "amount": 200, "date": "2026-03-01", "floor": "ثاني", "apartment": "1" },
-      "2-3": { "paid": true, "amount": 200, "date": "2026-03-01", "floor": "ثاني", "apartment": "3" },
-      "3-1": { "paid": true, "amount": 200, "date": "2026-03-01", "floor": "ثالث", "apartment": "1" },
-      "3-2": { "paid": true, "amount": 200, "date": "2026-03-01", "floor": "ثالث", "apartment": "2" },
-      "3-3": { "paid": true, "amount": 200, "date": "2026-03-01", "floor": "ثالث", "apartment": "3" },
-      "4-1": { "paid": true, "amount": 200, "date": "2026-03-01", "floor": "رابع", "apartment": "1" },
-      "4-2": { "paid": true, "amount": 200, "date": "2026-03-01", "floor": "رابع", "apartment": "2" },
-      "4-3": { "paid": true, "amount": 200, "date": "2026-03-01", "floor": "رابع", "apartment": "3" },
-      "5-1": { "paid": true, "amount": 200, "date": "2026-03-01", "floor": "خامس", "apartment": "1" },
-      "5-2": { "paid": true, "amount": 200, "date": "2026-03-01", "floor": "خامس", "apartment": "2" }
+      "0-1": {
+        "paid": true,
+        "amount": 100,
+        "date": "2026-03-01",
+        "floor": "أرضي",
+        "apartment": "1"
+      },
+      "0-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "أرضي",
+        "apartment": "3"
+      },
+      "1-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "أول",
+        "apartment": "1"
+      },
+      "1-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "أول",
+        "apartment": "2"
+      },
+      "1-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "أول",
+        "apartment": "3"
+      },
+      "2-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "ثاني",
+        "apartment": "1"
+      },
+      "2-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "ثاني",
+        "apartment": "3"
+      },
+      "3-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "ثالث",
+        "apartment": "1"
+      },
+      "3-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "ثالث",
+        "apartment": "2"
+      },
+      "3-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "ثالث",
+        "apartment": "3"
+      },
+      "4-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "رابع",
+        "apartment": "1"
+      },
+      "4-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "رابع",
+        "apartment": "2"
+      },
+      "4-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "رابع",
+        "apartment": "3"
+      },
+      "5-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "خامس",
+        "apartment": "1"
+      },
+      "5-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "خامس",
+        "apartment": "2"
+      }
     },
     "2026-04": {
-      "0-1": { "paid": true, "amount": 100, "date": "2026-04-01", "floor": "أرضي", "apartment": "1" },
-      "0-3": { "paid": true, "amount": 200, "date": "2026-04-01", "floor": "أرضي", "apartment": "3" },
-      "1-2": { "paid": true, "amount": 200, "date": "2026-04-01", "floor": "أول", "apartment": "2" },
-      "1-3": { "paid": true, "amount": 200, "date": "2026-04-01", "floor": "أول", "apartment": "3" },
-      "2-1": { "paid": true, "amount": 200, "date": "2026-04-01", "floor": "ثاني", "apartment": "1" },
-      "2-3": { "paid": true, "amount": 200, "date": "2026-04-01", "floor": "ثاني", "apartment": "3" },
-      "3-1": { "paid": true, "amount": 200, "date": "2026-04-01", "floor": "ثالث", "apartment": "1" },
-      "3-3": { "paid": true, "amount": 200, "date": "2026-04-01", "floor": "ثالث", "apartment": "3" },
-      "4-1": { "paid": true, "amount": 200, "date": "2026-04-01", "floor": "رابع", "apartment": "1" },
-      "4-2": { "paid": true, "amount": 200, "date": "2026-04-01", "floor": "رابع", "apartment": "2" },
-      "4-3": { "paid": true, "amount": 200, "date": "2026-04-01", "floor": "رابع", "apartment": "3" },
-      "5-1": { "paid": true, "amount": 200, "date": "2026-04-01", "floor": "خامس", "apartment": "1" },
-      "5-2": { "paid": true, "amount": 200, "date": "2026-04-01", "floor": "خامس", "apartment": "2" }
+      "0-1": {
+        "paid": true,
+        "amount": 100,
+        "date": "2026-04-01",
+        "floor": "أرضي",
+        "apartment": "1"
+      },
+      "0-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-04-01",
+        "floor": "أرضي",
+        "apartment": "3"
+      },
+      "1-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-04-01",
+        "floor": "أول",
+        "apartment": "2"
+      },
+      "1-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-04-01",
+        "floor": "أول",
+        "apartment": "3"
+      },
+      "2-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-04-01",
+        "floor": "ثاني",
+        "apartment": "1"
+      },
+      "2-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-04-01",
+        "floor": "ثاني",
+        "apartment": "3"
+      },
+      "3-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-04-01",
+        "floor": "ثالث",
+        "apartment": "1"
+      },
+      "3-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-04-01",
+        "floor": "ثالث",
+        "apartment": "3"
+      },
+      "4-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-04-01",
+        "floor": "رابع",
+        "apartment": "1"
+      },
+      "4-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-04-01",
+        "floor": "رابع",
+        "apartment": "2"
+      },
+      "4-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-04-01",
+        "floor": "رابع",
+        "apartment": "3"
+      },
+      "5-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-04-01",
+        "floor": "خامس",
+        "apartment": "1"
+      },
+      "5-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-04-01",
+        "floor": "خامس",
+        "apartment": "2"
+      }
     },
     "2026-05": {
-      "0-1": { "paid": true, "amount": 100, "date": "2026-05-01", "floor": "أرضي", "apartment": "1" },
-      "0-3": { "paid": true, "amount": 200, "date": "2026-05-01", "floor": "أرضي", "apartment": "3" },
-      "1-2": { "paid": true, "amount": 200, "date": "2026-05-01", "floor": "أول", "apartment": "2" },
-      "1-3": { "paid": true, "amount": 200, "date": "2026-05-01", "floor": "أول", "apartment": "3" },
-      "2-1": { "paid": true, "amount": 200, "date": "2026-05-01", "floor": "ثاني", "apartment": "1" },
-      "2-3": { "paid": true, "amount": 200, "date": "2026-05-01", "floor": "ثاني", "apartment": "3" },
-      "3-1": { "paid": true, "amount": 200, "date": "2026-05-01", "floor": "ثالث", "apartment": "1" },
-      "3-3": { "paid": true, "amount": 200, "date": "2026-05-01", "floor": "ثالث", "apartment": "3" },
-      "4-1": { "paid": true, "amount": 200, "date": "2026-05-01", "floor": "رابع", "apartment": "1" },
-      "4-2": { "paid": true, "amount": 200, "date": "2026-05-01", "floor": "رابع", "apartment": "2" },
-      "4-3": { "paid": true, "amount": 200, "date": "2026-05-01", "floor": "رابع", "apartment": "3" },
-      "5-1": { "paid": true, "amount": 200, "date": "2026-05-01", "floor": "خامس", "apartment": "1" },
-      "5-2": { "paid": true, "amount": 200, "date": "2026-05-01", "floor": "خامس", "apartment": "2" }
+      "0-1": {
+        "paid": true,
+        "amount": 100,
+        "date": "2026-05-01",
+        "floor": "أرضي",
+        "apartment": "1"
+      },
+      "0-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-05-01",
+        "floor": "أرضي",
+        "apartment": "3"
+      },
+      "1-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-05-01",
+        "floor": "أول",
+        "apartment": "2"
+      },
+      "1-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-05-01",
+        "floor": "أول",
+        "apartment": "3"
+      },
+      "2-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-05-01",
+        "floor": "ثاني",
+        "apartment": "1"
+      },
+      "2-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-05-01",
+        "floor": "ثاني",
+        "apartment": "3"
+      },
+      "3-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-05-01",
+        "floor": "ثالث",
+        "apartment": "1"
+      },
+      "3-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-05-01",
+        "floor": "ثالث",
+        "apartment": "3"
+      },
+      "4-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-05-01",
+        "floor": "رابع",
+        "apartment": "1"
+      },
+      "4-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-05-01",
+        "floor": "رابع",
+        "apartment": "2"
+      },
+      "4-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-05-01",
+        "floor": "رابع",
+        "apartment": "3"
+      },
+      "5-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-05-01",
+        "floor": "خامس",
+        "apartment": "1"
+      },
+      "5-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-05-01",
+        "floor": "خامس",
+        "apartment": "2"
+      }
     },
     "2026-06": {
-      "0-1": { "paid": true, "amount": 100, "date": "2026-06-01", "floor": "أرضي", "apartment": "1" },
-      "0-3": { "paid": true, "amount": 200, "date": "2026-06-01", "floor": "أرضي", "apartment": "3" },
-      "1-2": { "paid": true, "amount": 200, "date": "2026-06-01", "floor": "أول", "apartment": "2" },
-      "1-3": { "paid": true, "amount": 200, "date": "2026-06-01", "floor": "أول", "apartment": "3" },
-      "2-1": { "paid": true, "amount": 200, "date": "2026-06-01", "floor": "ثاني", "apartment": "1" },
-      "2-3": { "paid": true, "amount": 200, "date": "2026-06-01", "floor": "ثاني", "apartment": "3" },
-      "3-1": { "paid": true, "amount": 200, "date": "2026-06-01", "floor": "ثالث", "apartment": "1" },
-      "3-3": { "paid": true, "amount": 200, "date": "2026-06-01", "floor": "ثالث", "apartment": "3" },
-      "4-2": { "paid": true, "amount": 200, "date": "2026-06-01", "floor": "رابع", "apartment": "2" },
-      "4-3": { "paid": true, "amount": 200, "date": "2026-06-01", "floor": "رابع", "apartment": "3" },
-      "5-1": { "paid": true, "amount": 200, "date": "2026-06-01", "floor": "خامس", "apartment": "1" },
-      "5-2": { "paid": true, "amount": 200, "date": "2026-06-01", "floor": "خامس", "apartment": "2" }
+      "0-1": {
+        "paid": true,
+        "amount": 100,
+        "date": "2026-06-01",
+        "floor": "أرضي",
+        "apartment": "1"
+      },
+      "0-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-06-01",
+        "floor": "أرضي",
+        "apartment": "3"
+      },
+      "1-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-06-01",
+        "floor": "أول",
+        "apartment": "2"
+      },
+      "1-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-06-01",
+        "floor": "أول",
+        "apartment": "3"
+      },
+      "2-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-06-01",
+        "floor": "ثاني",
+        "apartment": "1"
+      },
+      "2-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-06-01",
+        "floor": "ثاني",
+        "apartment": "3"
+      },
+      "3-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-06-01",
+        "floor": "ثالث",
+        "apartment": "1"
+      },
+      "3-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-06-01",
+        "floor": "ثالث",
+        "apartment": "3"
+      },
+      "4-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-06-01",
+        "floor": "رابع",
+        "apartment": "2"
+      },
+      "4-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-06-01",
+        "floor": "رابع",
+        "apartment": "3"
+      },
+      "5-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-06-01",
+        "floor": "خامس",
+        "apartment": "1"
+      },
+      "5-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-06-01",
+        "floor": "خامس",
+        "apartment": "2"
+      }
     },
     "2026-07": {
-      "0-3": { "paid": true, "amount": 200, "date": "2026-07-01", "floor": "أرضي", "apartment": "3" },
-      "1-3": { "paid": true, "amount": 200, "date": "2026-07-01", "floor": "أول", "apartment": "3" },
-      "2-1": { "paid": true, "amount": 200, "date": "2026-07-01", "floor": "ثاني", "apartment": "1" },
-      "2-3": { "paid": true, "amount": 200, "date": "2026-07-01", "floor": "ثاني", "apartment": "3" },
-      "4-2": { "paid": true, "amount": 200, "date": "2026-07-01", "floor": "رابع", "apartment": "2" },
-      "5-1": { "paid": true, "amount": 200, "date": "2026-07-01", "floor": "خامس", "apartment": "1" }
+      "0-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-07-01",
+        "floor": "أرضي",
+        "apartment": "3"
+      },
+      "1-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-07-01",
+        "floor": "أول",
+        "apartment": "3"
+      },
+      "2-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-07-01",
+        "floor": "ثاني",
+        "apartment": "1"
+      },
+      "2-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-07-01",
+        "floor": "ثاني",
+        "apartment": "3"
+      },
+      "4-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-07-01",
+        "floor": "رابع",
+        "apartment": "2"
+      },
+      "5-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-07-01",
+        "floor": "خامس",
+        "apartment": "1"
+      }
     },
     "2026-08": {
-      "0-3": { "paid": true, "amount": 200, "date": "2026-08-01", "floor": "أرضي", "apartment": "3" },
-      "1-3": { "paid": true, "amount": 200, "date": "2026-08-01", "floor": "أول", "apartment": "3" },
-      "2-1": { "paid": true, "amount": 200, "date": "2026-08-01", "floor": "ثاني", "apartment": "1" },
-      "2-3": { "paid": true, "amount": 200, "date": "2026-08-01", "floor": "ثاني", "apartment": "3" },
-      "4-2": { "paid": true, "amount": 200, "date": "2026-08-01", "floor": "رابع", "apartment": "2" },
-      "5-1": { "paid": true, "amount": 200, "date": "2026-08-01", "floor": "خامس", "apartment": "1" }
+      "0-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-08-01",
+        "floor": "أرضي",
+        "apartment": "3"
+      },
+      "1-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-08-01",
+        "floor": "أول",
+        "apartment": "3"
+      },
+      "2-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-08-01",
+        "floor": "ثاني",
+        "apartment": "1"
+      },
+      "2-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-08-01",
+        "floor": "ثاني",
+        "apartment": "3"
+      },
+      "4-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-08-01",
+        "floor": "رابع",
+        "apartment": "2"
+      },
+      "5-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-08-01",
+        "floor": "خامس",
+        "apartment": "1"
+      }
     },
     "2026-09": {
-      "0-3": { "paid": true, "amount": 200, "date": "2026-09-01", "floor": "أرضي", "apartment": "3" },
-      "1-3": { "paid": true, "amount": 200, "date": "2026-09-01", "floor": "أول", "apartment": "3" },
-      "2-1": { "paid": true, "amount": 200, "date": "2026-09-01", "floor": "ثاني", "apartment": "1" },
-      "2-3": { "paid": true, "amount": 200, "date": "2026-09-01", "floor": "ثاني", "apartment": "3" },
-      "4-2": { "paid": true, "amount": 200, "date": "2026-09-01", "floor": "رابع", "apartment": "2" },
-      "5-1": { "paid": true, "amount": 200, "date": "2026-09-01", "floor": "خامس", "apartment": "1" }
+      "0-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-09-01",
+        "floor": "أرضي",
+        "apartment": "3"
+      },
+      "1-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-09-01",
+        "floor": "أول",
+        "apartment": "3"
+      },
+      "2-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-09-01",
+        "floor": "ثاني",
+        "apartment": "1"
+      },
+      "2-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-09-01",
+        "floor": "ثاني",
+        "apartment": "3"
+      },
+      "4-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-09-01",
+        "floor": "رابع",
+        "apartment": "2"
+      },
+      "5-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-09-01",
+        "floor": "خامس",
+        "apartment": "1"
+      }
     },
     "2026-10": {
-      "0-3": { "paid": true, "amount": 200, "date": "2026-10-01", "floor": "أرضي", "apartment": "3" },
-      "2-1": { "paid": true, "amount": 200, "date": "2026-10-01", "floor": "ثاني", "apartment": "1" },
-      "2-3": { "paid": true, "amount": 100, "date": "2026-10-01", "floor": "ثاني", "apartment": "3" },
-      "4-2": { "paid": true, "amount": 200, "date": "2026-10-01", "floor": "رابع", "apartment": "2" },
-      "5-1": { "paid": true, "amount": 200, "date": "2026-10-01", "floor": "خامس", "apartment": "1" }
+      "0-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-10-01",
+        "floor": "أرضي",
+        "apartment": "3"
+      },
+      "2-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-10-01",
+        "floor": "ثاني",
+        "apartment": "1"
+      },
+      "2-3": {
+        "paid": true,
+        "amount": 100,
+        "date": "2026-10-01",
+        "floor": "ثاني",
+        "apartment": "3"
+      },
+      "4-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-10-01",
+        "floor": "رابع",
+        "apartment": "2"
+      },
+      "5-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-10-01",
+        "floor": "خامس",
+        "apartment": "1"
+      }
     },
     "2026-11": {
-      "0-3": { "paid": true, "amount": 200, "date": "2026-11-01", "floor": "أرضي", "apartment": "3" },
-      "2-1": { "paid": true, "amount": 200, "date": "2026-11-01", "floor": "ثاني", "apartment": "1" },
-      "4-2": { "paid": true, "amount": 200, "date": "2026-11-01", "floor": "رابع", "apartment": "2" },
-      "5-1": { "paid": true, "amount": 40, "date": "2026-11-01", "floor": "خامس", "apartment": "1" }
+      "0-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-11-01",
+        "floor": "أرضي",
+        "apartment": "3"
+      },
+      "2-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-11-01",
+        "floor": "ثاني",
+        "apartment": "1"
+      },
+      "4-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-11-01",
+        "floor": "رابع",
+        "apartment": "2"
+      },
+      "5-1": {
+        "paid": true,
+        "amount": 40,
+        "date": "2026-11-01",
+        "floor": "خامس",
+        "apartment": "1"
+      }
     },
     "2026-12": {
-      "0-3": { "paid": true, "amount": 200, "date": "2026-12-01", "floor": "أرضي", "apartment": "3" },
-      "2-1": { "paid": true, "amount": 200, "date": "2026-12-01", "floor": "ثاني", "apartment": "1" },
-      "4-2": { "paid": true, "amount": 200, "date": "2026-12-01", "floor": "رابع", "apartment": "2" }
+      "0-3": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-12-01",
+        "floor": "أرضي",
+        "apartment": "3"
+      },
+      "2-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-12-01",
+        "floor": "ثاني",
+        "apartment": "1"
+      },
+      "4-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-12-01",
+        "floor": "رابع",
+        "apartment": "2"
+      }
     }
   },
+  "rate_schedule": [
+    {
+      "from": "2020-01",
+      "amount": 200
+    },
+    {
+      "from": "2026-07",
+      "amount": 300
+    }
+  ],
+  "opening_debt": {
+    "5-3": 600
+  },
+  "special_collections": [
+    { "id": "sc1", "title": "صيانة المصعد", "date": "2026-01", "per_apartment": 1000, "paid": ["1-1","1-2","1-3","2-1","2-2","2-3","3-1","3-2","3-3","4-1","4-2","4-3","5-1","5-2"] },
+    { "id": "sc2", "title": "صيانة المصعد", "date": "2026-07", "per_apartment": 1500, "paid": [] }
+  ],
   "expenses": {},
   "history": [
-    { "type": "income", "description": "استعادة مدفوعات يناير 2026", "amount": 2900, "date": "2026-01-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات فبراير 2026", "amount": 2900, "date": "2026-02-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات مارس 2026", "amount": 2900, "date": "2026-03-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات أبريل 2026", "amount": 2500, "date": "2026-04-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات مايو 2026", "amount": 2500,"date": "2026-05-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات يونيو 2026", "amount": 2300, "date": "2026-06-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات يوليو 2026", "amount": 1200, "date": "2026-07-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات اغسطس 2026", "amount": 1200, "date": "2026-08-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات سبتمبر 2026", "amount": 1200, "date": "2026-09-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات اكتوبر 2026", "amount": 900, "date": "2026-10-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات نوفمبر 2026", "amount": 640, "date": "2026-11-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات ديسمبر 2026", "amount": 600, "date": "2026-12-01", "timestamp": 1783863338694 }
+    {
+      "type": "income",
+      "description": "استعادة مدفوعات يناير 2026",
+      "amount": 2900,
+      "date": "2026-01-01",
+      "timestamp": 1783863338694
+    },
+    {
+      "type": "income",
+      "description": "استعادة مدفوعات فبراير 2026",
+      "amount": 2900,
+      "date": "2026-02-01",
+      "timestamp": 1783863338694
+    },
+    {
+      "type": "income",
+      "description": "استعادة مدفوعات مارس 2026",
+      "amount": 2900,
+      "date": "2026-03-01",
+      "timestamp": 1783863338694
+    },
+    {
+      "type": "income",
+      "description": "استعادة مدفوعات أبريل 2026",
+      "amount": 2500,
+      "date": "2026-04-01",
+      "timestamp": 1783863338694
+    },
+    {
+      "type": "income",
+      "description": "استعادة مدفوعات مايو 2026",
+      "amount": 2500,
+      "date": "2026-05-01",
+      "timestamp": 1783863338694
+    },
+    {
+      "type": "income",
+      "description": "استعادة مدفوعات يونيو 2026",
+      "amount": 2300,
+      "date": "2026-06-01",
+      "timestamp": 1783863338694
+    },
+    {
+      "type": "income",
+      "description": "استعادة مدفوعات يوليو 2026",
+      "amount": 1200,
+      "date": "2026-07-01",
+      "timestamp": 1783863338694
+    },
+    {
+      "type": "income",
+      "description": "استعادة مدفوعات اغسطس 2026",
+      "amount": 1200,
+      "date": "2026-08-01",
+      "timestamp": 1783863338694
+    },
+    {
+      "type": "income",
+      "description": "استعادة مدفوعات سبتمبر 2026",
+      "amount": 1200,
+      "date": "2026-09-01",
+      "timestamp": 1783863338694
+    },
+    {
+      "type": "income",
+      "description": "استعادة مدفوعات اكتوبر 2026",
+      "amount": 900,
+      "date": "2026-10-01",
+      "timestamp": 1783863338694
+    },
+    {
+      "type": "income",
+      "description": "استعادة مدفوعات نوفمبر 2026",
+      "amount": 640,
+      "date": "2026-11-01",
+      "timestamp": 1783863338694
+    },
+    {
+      "type": "income",
+      "description": "استعادة مدفوعات ديسمبر 2026",
+      "amount": 600,
+      "date": "2026-12-01",
+      "timestamp": 1783863338694
+    }
   ],
   "meetings": [
     {
       "id": "m1783862757820",
       "title": "اجتماع يوليو",
       "date": "2026-07-10",
-      "attendees": ["1-1","1-2","1-3","2-2","3-1","3-3","4-1","4-3","5-1"],
+      "attendees": [
+        "1-1",
+        "1-2",
+        "1-3",
+        "2-2",
+        "3-1",
+        "3-3",
+        "4-1",
+        "4-3",
+        "5-1"
+      ],
       "points": [
         "زيادة مصروف الصيانة الشهرية إلى 300 جنيه اعتباراً من شهر يوليو 2026.",
         "زيادة بند النظافة من 250 جنيهاً إلى 300 جنيه شهرياً، على ان يشمل ذلك تنظيف السلم مرة أسبوعياً وتنظيف الجراج مرة شهرياً.",
@@ -177,51 +954,371 @@
     }
   ],
   "technicians": [
-    { "id": "t1783859989449", "name": "محمد", "spec": "عامل نظافة", "phone": "01552269047", "phone2": "01151687124", "intercom": "", "notes": "شهرية 300 بعد الزيادة" },
-    { "id": "t1783861268757", "name": "عم عادل", "spec": "سباك (مياه)", "phone": "01149113900", "phone2": "", "intercom": "", "notes": "" },
-    { "id": "t1783861386678", "name": "مجدي عبد الفتاح", "spec": "انتركم", "phone": "01124302527", "phone2": "01552228500", "intercom": "", "notes": "" }
+    {
+      "id": "t1783859989449",
+      "name": "محمد",
+      "spec": "عامل نظافة",
+      "phone": "01552269047",
+      "phone2": "01151687124",
+      "intercom": "",
+      "notes": "شهرية 300 بعد الزيادة"
+    },
+    {
+      "id": "t1783861268757",
+      "name": "عم عادل",
+      "spec": "سباك (مياه)",
+      "phone": "01149113900",
+      "phone2": "",
+      "intercom": "",
+      "notes": ""
+    },
+    {
+      "id": "t1783861386678",
+      "name": "مجدي عبد الفتاح",
+      "spec": "انتركم",
+      "phone": "01124302527",
+      "phone2": "01552228500",
+      "intercom": "",
+      "notes": ""
+    }
   ],
   "expense_type_defs": {
-    "water": "💧 مياه", "electricity": "⚡ كهرباء", "garage": "🧹 سلالم/جراج", "elevator": "🛗 أسانسير", "other": "📝 أخرى"
+    "water": "💧 مياه",
+    "electricity": "⚡ كهرباء",
+    "garage": "🧹 سلالم/جراج",
+    "elevator": "🛗 أسانسير",
+    "other": "📝 أخرى"
   },
   "apartments": {
-    "0-1": { "monthly_payment": 100, "active": true },
-    "0-2": { "monthly_payment": 0, "active": false },
-    "0-3": { "monthly_payment": 300, "active": true },
-    "1-1": { "monthly_payment": 300, "active": true },
-    "1-2": { "monthly_payment": 300, "active": true },
-    "1-3": { "monthly_payment": 300, "active": true },
-    "2-1": { "monthly_payment": 300, "active": true },
-    "2-2": { "monthly_payment": 300, "active": true },
-    "2-3": { "monthly_payment": 300, "active": true },
-    "3-1": { "monthly_payment": 300, "active": true },
-    "3-2": { "monthly_payment": 300, "active": true },
-    "3-3": { "monthly_payment": 300, "active": true },
-    "4-1": { "monthly_payment": 300, "active": true },
-    "4-2": { "monthly_payment": 300, "active": true },
-    "4-3": { "monthly_payment": 300, "active": true },
-    "5-1": { "monthly_payment": 300, "active": true },
-    "5-2": { "monthly_payment": 300, "active": true },
-    "5-3": { "monthly_payment": 300, "active": true }
+    "0-1": {
+      "monthly_payment": 100,
+      "active": true
+    },
+    "0-2": {
+      "monthly_payment": 0,
+      "active": false
+    },
+    "0-3": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "1-1": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "1-2": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "1-3": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "2-1": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "2-2": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "2-3": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "3-1": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "3-2": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "3-3": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "4-1": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "4-2": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "4-3": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "5-1": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "5-2": {
+      "monthly_payment": 300,
+      "active": true
+    },
+    "5-3": {
+      "monthly_payment": 300,
+      "active": true
+    }
   },
   "apartment_accounts": {},
   "residents": {
-    "0-1": { "resident_name": "خالد عبد اللطيف", "title": "أستاذ", "residence_type": "مالك", "primary_phone": "01006183535", "secondary_phone": "", "email": "", "intercome": "101", "family_members": null, "children_count": null, "move_in_date": "", "emergency_contact_name": "", "emergency_contact_phone": "", "notes": "" },
-    "0-3": { "resident_name": "محمد عبدالله الحميزي", "title": "مستشار", "residence_type": "مالك", "primary_phone": "00966552282822", "secondary_phone": "01148000189", "email": "", "intercome": "103", "family_members": 1, "children_count": 1, "move_in_date": "2021-08-08", "emergency_contact_name": "اللواء حسام - الدور الثاني", "emergency_contact_phone": "", "notes": "شكراً لجهودك المميزة \nاخوك ابوعبدالله" },
-    "1-1": { "resident_name": "عبد العليم", "title": "أستاذ", "residence_type": "مالك", "primary_phone": "01155448873", "secondary_phone": "", "email": "", "intercome": "201", "family_members": 5, "children_count": 3, "move_in_date": "", "emergency_contact_name": "", "emergency_contact_phone": "", "notes": "" },
-    "1-2": { "resident_name": "سامح رمضان أحمد بلال", "title": "مهندس", "residence_type": "مالك", "primary_phone": "01064444286", "secondary_phone": "01098363863", "email": "sameh.bilal@outlook.com", "intercome": "104", "family_members": 3, "children_count": 1, "move_in_date": "2021-06-04", "emergency_contact_name": "اسراء السيد زيدان", "emergency_contact_phone": "01098363863", "notes": "لاتوجد" },
-    "1-3": { "resident_name": "حسام سالم", "title": "لواء", "residence_type": "مالك", "primary_phone": "0405037715", "secondary_phone": "01559666819", "email": "hossamslm@gmail.com", "intercome": "203", "family_members": null, "children_count": null, "move_in_date": "2021-06-05", "emergency_contact_name": "محمد حسام", "emergency_contact_phone": "+201000929551", "notes": "" },
-    "2-1": { "resident_name": "جمعه محمد حسانين", "title": "دكتور", "residence_type": "مالك", "primary_phone": "01098508855", "secondary_phone": "", "email": "", "intercome": "", "family_members": null, "children_count": null, "move_in_date": "2022-03-10", "emergency_contact_name": "", "emergency_contact_phone": "", "notes": "" },
-    "2-2": { "resident_name": "مسلم الفلسطيني", "title": "الحج", "residence_type": "مالك", "primary_phone": "01020793463", "secondary_phone": "", "email": "mahmoud.msalam91@gmail.com", "intercome": "302", "family_members": 6, "children_count": 3, "move_in_date": "2021-06-05", "emergency_contact_name": "محمد مسلم", "emergency_contact_phone": "01022116631", "notes": "" },
-    "2-3": { "resident_name": "عمرو عبد الرؤوف شكر", "title": "مهندس", "residence_type": "مالك", "primary_phone": "01110188685", "secondary_phone": "", "email": "safaafiffi@gmail.com", "intercome": "303", "family_members": 3, "children_count": 1, "move_in_date": "2024-01-01", "emergency_contact_name": "مدام صفاء", "emergency_contact_phone": "01110188685", "notes": "" },
-    "3-1": { "resident_name": "عبد الرحمن", "title": "دكتور", "residence_type": "مالك", "primary_phone": "+966596946521", "secondary_phone": "", "email": "", "intercome": "401", "family_members": 4, "children_count": 2, "move_in_date": "2026-01-01", "emergency_contact_name": "", "emergency_contact_phone": "", "notes": "" },
-    "3-2": { "resident_name": "داليا", "title": "أستاذة", "residence_type": "مستأجر", "primary_phone": "01129082884", "secondary_phone": "", "email": "", "intercome": "402", "family_members": null, "children_count": null, "move_in_date": "2024-01-01", "emergency_contact_name": "", "emergency_contact_phone": "", "notes": "" },
-    "3-3": { "resident_name": "سمية بكري", "title": "استاذة", "residence_type": "مالك", "primary_phone": "01060533874", "secondary_phone": "", "email": "", "intercome": "403", "family_members": 1, "children_count": 0, "move_in_date": "2026-07-01", "emergency_contact_name": "", "emergency_contact_phone": "", "notes": "" },
-    "4-1": { "resident_name": "احمد عادل عبد الفتاح", "title": "استاذ", "residence_type": "مالك", "primary_phone": "01226226287", "secondary_phone": "", "email": "", "intercome": "501", "family_members": 2, "children_count": 1, "move_in_date": "2022-03-03", "emergency_contact_name": "", "emergency_contact_phone": "", "notes": "" },
-    "4-2": { "resident_name": "عبد الحميد سامي الخولي", "title": "أستاذ", "residence_type": "مالك", "primary_phone": "01274584710", "secondary_phone": "01090988997", "email": "abdelhamidelkholy92@gmail.com", "intercome": "502", "family_members": 2, "children_count": 2, "move_in_date": "2023-09-01", "emergency_contact_name": "عبد الحميد", "emergency_contact_phone": "01274584710", "notes": "" },
-    "4-3": { "resident_name": "شادى ابراهيم", "title": "مهندس", "residence_type": "مالك", "primary_phone": "01007275873", "secondary_phone": "01116559773", "email": "shady.ibrahim.aly@gmail.com", "intercome": "٥٠٣", "family_members": 3, "children_count": 1, "move_in_date": "2021-12-01", "emergency_contact_name": "ابراهيم محمد", "emergency_contact_phone": "01114025515", "notes": "" },
-    "5-1": { "resident_name": "اسلام اسامة", "title": "استاذ", "residence_type": "مالك", "primary_phone": "01004182007", "secondary_phone": "01151020700", "email": "", "intercome": "٦٠١", "family_members": 5, "children_count": 3, "move_in_date": "2025-03-01", "emergency_contact_name": "انس", "emergency_contact_phone": "0102351523", "notes": "" },
-    "5-2": { "resident_name": "محمد حمدى طاهر", "title": "مهندس", "residence_type": "مالك", "primary_phone": "01027233267", "secondary_phone": "0225088301", "email": "mohamedhamdy20230101@gmail.com", "intercome": "106", "family_members": 4, "children_count": 2, "move_in_date": "2025-09-10", "emergency_contact_name": "يحيى", "emergency_contact_phone": "01020459274", "notes": "" },
-    "5-3": { "resident_name": "محمد شحاتة", "title": "دكتور", "residence_type": "مالك", "primary_phone": "01092797901", "secondary_phone": "", "email": "", "intercome": "603", "family_members": 2, "children_count": null, "move_in_date": "2022-03-12", "emergency_contact_name": "", "emergency_contact_phone": "", "notes": "" }
+    "0-1": {
+      "resident_name": "خالد عبد اللطيف",
+      "title": "أستاذ",
+      "residence_type": "مالك",
+      "primary_phone": "01006183535",
+      "secondary_phone": "",
+      "email": "",
+      "intercome": "101",
+      "family_members": null,
+      "children_count": null,
+      "move_in_date": "",
+      "emergency_contact_name": "",
+      "emergency_contact_phone": "",
+      "notes": ""
+    },
+    "0-3": {
+      "resident_name": "محمد عبدالله الحميزي",
+      "title": "مستشار",
+      "residence_type": "مالك",
+      "primary_phone": "00966552282822",
+      "secondary_phone": "01148000189",
+      "email": "",
+      "intercome": "103",
+      "family_members": 1,
+      "children_count": 1,
+      "move_in_date": "2021-08-08",
+      "emergency_contact_name": "اللواء حسام - الدور الثاني",
+      "emergency_contact_phone": "",
+      "notes": "شكراً لجهودك المميزة \nاخوك ابوعبدالله"
+    },
+    "1-1": {
+      "resident_name": "عبد العليم",
+      "title": "أستاذ",
+      "residence_type": "مالك",
+      "primary_phone": "01155448873",
+      "secondary_phone": "",
+      "email": "",
+      "intercome": "201",
+      "family_members": 5,
+      "children_count": 3,
+      "move_in_date": "",
+      "emergency_contact_name": "",
+      "emergency_contact_phone": "",
+      "notes": ""
+    },
+    "1-2": {
+      "resident_name": "سامح رمضان بلال",
+      "title": "مهندس",
+      "residence_type": "مالك",
+      "primary_phone": "01064444286",
+      "secondary_phone": "01098363863",
+      "email": "sameh.bilal@outlook.com",
+      "intercome": "104",
+      "family_members": 3,
+      "children_count": 1,
+      "move_in_date": "2021-06-04",
+      "emergency_contact_name": "اسراء السيد زيدان",
+      "emergency_contact_phone": "01098363863",
+      "notes": "لاتوجد"
+    },
+    "1-3": {
+      "resident_name": "حسام سالم",
+      "title": "لواء",
+      "residence_type": "مالك",
+      "primary_phone": "0405037715",
+      "secondary_phone": "01559666819",
+      "email": "hossamslm@gmail.com",
+      "intercome": "203",
+      "family_members": null,
+      "children_count": null,
+      "move_in_date": "2021-06-05",
+      "emergency_contact_name": "محمد حسام",
+      "emergency_contact_phone": "+201000929551",
+      "notes": ""
+    },
+    "2-1": {
+      "resident_name": "جمعه محمد حسانين",
+      "title": "دكتور",
+      "residence_type": "مالك",
+      "primary_phone": "01098508855",
+      "secondary_phone": "",
+      "email": "",
+      "intercome": "",
+      "family_members": null,
+      "children_count": null,
+      "move_in_date": "2022-03-10",
+      "emergency_contact_name": "",
+      "emergency_contact_phone": "",
+      "notes": ""
+    },
+    "2-2": {
+      "resident_name": "مسلم الفلسطيني",
+      "title": "الحج",
+      "residence_type": "مالك",
+      "primary_phone": "01020793463",
+      "secondary_phone": "",
+      "email": "mahmoud.msalam91@gmail.com",
+      "intercome": "302",
+      "family_members": 6,
+      "children_count": 3,
+      "move_in_date": "2021-06-05",
+      "emergency_contact_name": "محمد مسلم",
+      "emergency_contact_phone": "01022116631",
+      "notes": ""
+    },
+    "2-3": {
+      "resident_name": "عمرو عبد الرؤوف شكر",
+      "title": "مهندس",
+      "residence_type": "مالك",
+      "primary_phone": "01110188685",
+      "secondary_phone": "",
+      "email": "safaafiffi@gmail.com",
+      "intercome": "303",
+      "family_members": 3,
+      "children_count": 1,
+      "move_in_date": "2024-01-01",
+      "emergency_contact_name": "مدام صفاء",
+      "emergency_contact_phone": "01110188685",
+      "notes": ""
+    },
+    "3-1": {
+      "resident_name": "عبد الرحمن",
+      "title": "دكتور",
+      "residence_type": "مالك",
+      "primary_phone": "+966596946521",
+      "secondary_phone": "",
+      "email": "",
+      "intercome": "401",
+      "family_members": 4,
+      "children_count": 2,
+      "move_in_date": "2026-01-01",
+      "emergency_contact_name": "",
+      "emergency_contact_phone": "",
+      "notes": ""
+    },
+    "3-2": {
+      "resident_name": "داليا",
+      "title": "أستاذة",
+      "residence_type": "مستأجر",
+      "primary_phone": "01129082884",
+      "secondary_phone": "",
+      "email": "",
+      "intercome": "402",
+      "family_members": null,
+      "children_count": null,
+      "move_in_date": "2024-01-01",
+      "emergency_contact_name": "",
+      "emergency_contact_phone": "",
+      "notes": ""
+    },
+    "3-3": {
+      "resident_name": "سمية بكري",
+      "title": "استاذة",
+      "residence_type": "مالك",
+      "primary_phone": "01060533874",
+      "secondary_phone": "",
+      "email": "",
+      "intercome": "403",
+      "family_members": 1,
+      "children_count": 0,
+      "move_in_date": "2026-07-01",
+      "emergency_contact_name": "",
+      "emergency_contact_phone": "",
+      "notes": ""
+    },
+    "4-1": {
+      "resident_name": "احمد عادل عبد الفتاح",
+      "title": "استاذ",
+      "residence_type": "مالك",
+      "primary_phone": "01226226287",
+      "secondary_phone": "",
+      "email": "",
+      "intercome": "501",
+      "family_members": 2,
+      "children_count": 1,
+      "move_in_date": "2022-03-03",
+      "emergency_contact_name": "",
+      "emergency_contact_phone": "",
+      "notes": ""
+    },
+    "4-2": {
+      "resident_name": "عبد الحميد سامي الخولي",
+      "title": "أستاذ",
+      "residence_type": "مالك",
+      "primary_phone": "01274584710",
+      "secondary_phone": "01090988997",
+      "email": "abdelhamidelkholy92@gmail.com",
+      "intercome": "502",
+      "family_members": 2,
+      "children_count": 2,
+      "move_in_date": "2023-09-01",
+      "emergency_contact_name": "عبد الحميد",
+      "emergency_contact_phone": "01274584710",
+      "notes": ""
+    },
+    "4-3": {
+      "resident_name": "شادى ابراهيم",
+      "title": "مهندس",
+      "residence_type": "مالك",
+      "primary_phone": "01007275873",
+      "secondary_phone": "01116559773",
+      "email": "shady.ibrahim.aly@gmail.com",
+      "intercome": "٥٠٣",
+      "family_members": 3,
+      "children_count": 1,
+      "move_in_date": "2021-12-01",
+      "emergency_contact_name": "ابراهيم محمد",
+      "emergency_contact_phone": "01114025515",
+      "notes": ""
+    },
+    "5-1": {
+      "resident_name": "اسلام اسامة",
+      "title": "استاذ",
+      "residence_type": "مالك",
+      "primary_phone": "01004182007",
+      "secondary_phone": "01151020700",
+      "email": "",
+      "intercome": "٦٠١",
+      "family_members": 5,
+      "children_count": 3,
+      "move_in_date": "2025-03-01",
+      "emergency_contact_name": "انس",
+      "emergency_contact_phone": "0102351523",
+      "notes": ""
+    },
+    "5-2": {
+      "resident_name": "محمد حمدى طاهر",
+      "title": "مهندس",
+      "residence_type": "مالك",
+      "primary_phone": "01027233267",
+      "secondary_phone": "0225088301",
+      "email": "mohamedhamdy20230101@gmail.com",
+      "intercome": "106",
+      "family_members": 4,
+      "children_count": 2,
+      "move_in_date": "2025-09-10",
+      "emergency_contact_name": "يحيى",
+      "emergency_contact_phone": "01020459274",
+      "notes": ""
+    },
+    "5-3": {
+      "resident_name": "محمد شحاتة",
+      "title": "دكتور",
+      "residence_type": "مالك",
+      "primary_phone": "01092797901",
+      "secondary_phone": "",
+      "email": "",
+      "intercome": "603",
+      "family_members": 2,
+      "children_count": null,
+      "move_in_date": "2022-03-12",
+      "emergency_contact_name": "",
+      "emergency_contact_phone": "",
+      "notes": ""
+    }
   }
 }
