@@ -91,7 +91,7 @@
   <div class="topbar-inner">
     <span class="brand">🏢 عمارة ١٤٩</span>
     <div class="balance-chip"><div class="lbl">الرصيد الحالي:</div><div class="val" id="hdr-balance">0 ج</div></div>
-    <button class="lock-btn no-print" id="lock-btn" onclick="toggleAdmin()">🔒 دخول المشرف</button>
+    <button class="lock-btn no-print" id="lock-btn" onclick="toggleAdmin()">🔒 دخول الأدمن</button>
     <div class="dropdown admin-only">
       <button class="menu-btn no-print" onclick="toggleMenu(event)">⚙︎ القائمة</button>
       <div class="dropdown-menu" id="main-menu">
@@ -319,7 +319,7 @@
 const ADMIN_PASSWORD='149admin';
 let isAdmin=false;
 function toggleAdmin(){ if(isAdmin){ isAdmin=false; document.body.classList.remove('admin-mode'); updateLockBtn(); render(); toast('تم قفل وضع التعديل','info'); return; } const p=prompt('أدخل كلمة المرور:'); if(p===null)return; if(p===ADMIN_PASSWORD){ isAdmin=true; document.body.classList.add('admin-mode'); updateLockBtn(); render(); toast('تم فتح وضع التعديل','ok'); } else toast('كلمة المرور غير صحيحة','err'); }
-function updateLockBtn(){ const b=document.getElementById('lock-btn'); if(b) b.textContent=isAdmin?'🔓 وضع التعديل (اضغط للقفل)':'🔒 دخول المشرف'; }
+function updateLockBtn(){ const b=document.getElementById('lock-btn'); if(b) b.textContent=isAdmin?'🔓 وضع التعديل (اضغط للقفل)':'🔒 دخول الأدمن'; }
 function requireAdmin(){ if(!isAdmin){ toast('هذا الإجراء يتطلب الدخول كمشرف','warn'); return false; } return true; }
 
 const STORAGE_KEY='building149_data';
