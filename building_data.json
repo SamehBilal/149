@@ -144,15 +144,15 @@
     { "type": "income", "description": "استعادة مدفوعات يناير 2026", "amount": 2900, "date": "2026-01-01", "timestamp": 1783863338694 },
     { "type": "income", "description": "استعادة مدفوعات فبراير 2026", "amount": 2900, "date": "2026-02-01", "timestamp": 1783863338694 },
     { "type": "income", "description": "استعادة مدفوعات مارس 2026", "amount": 2900, "date": "2026-03-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات أبريل 2026", "amount": 2900, "date": "2026-04-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات مايو 2026", "amount": 2900,"date": "2026-05-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات يونيو 2026", "amount": 2900, "date": "2026-06-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات يوليو 2026", "amount": 2900, "date": "2026-06-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات اغسطس 2026", "amount": 2900, "date": "2026-06-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات سبتمبر 2026", "amount": 2900, "date": "2026-06-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات اكتوبر 2026", "amount": 2900, "date": "2026-06-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات نوفمبر 2026", "amount": 2900, "date": "2026-06-01", "timestamp": 1783863338694 },
-    { "type": "income", "description": "استعادة مدفوعات ديسمبر 2026", "amount": 2900, "date": "2026-06-01", "timestamp": 1783863338694 }
+    { "type": "income", "description": "استعادة مدفوعات أبريل 2026", "amount": 2500, "date": "2026-04-01", "timestamp": 1783863338694 },
+    { "type": "income", "description": "استعادة مدفوعات مايو 2026", "amount": 2500,"date": "2026-05-01", "timestamp": 1783863338694 },
+    { "type": "income", "description": "استعادة مدفوعات يونيو 2026", "amount": 2300, "date": "2026-06-01", "timestamp": 1783863338694 },
+    { "type": "income", "description": "استعادة مدفوعات يوليو 2026", "amount": 1200, "date": "2026-07-01", "timestamp": 1783863338694 },
+    { "type": "income", "description": "استعادة مدفوعات اغسطس 2026", "amount": 1200, "date": "2026-08-01", "timestamp": 1783863338694 },
+    { "type": "income", "description": "استعادة مدفوعات سبتمبر 2026", "amount": 1200, "date": "2026-09-01", "timestamp": 1783863338694 },
+    { "type": "income", "description": "استعادة مدفوعات اكتوبر 2026", "amount": 900, "date": "2026-10-01", "timestamp": 1783863338694 },
+    { "type": "income", "description": "استعادة مدفوعات نوفمبر 2026", "amount": 640, "date": "2026-11-01", "timestamp": 1783863338694 },
+    { "type": "income", "description": "استعادة مدفوعات ديسمبر 2026", "amount": 600, "date": "2026-12-01", "timestamp": 1783863338694 }
   ],
   "meetings": [
     {
