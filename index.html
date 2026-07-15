@@ -1151,6 +1151,7 @@
             buildingData = getDefaultData(); ensureShape();
         }
         function ensureShape() {
+            buildingData.last_updated=buildingData.last_updated||'';
             buildingData.balance = buildingData.balance || 0;
             if (Array.isArray(buildingData.payments) || !buildingData.payments) buildingData.payments = {};
             if (Array.isArray(buildingData.expenses) || !buildingData.expenses) buildingData.expenses = {};
@@ -1165,7 +1166,13 @@
             buildingData.opening_debt = buildingData.opening_debt || {};
             if (!buildingData.expense_type_defs || !Object.keys(buildingData.expense_type_defs).length) buildingData.expense_type_defs = { ...defaultExpenseTypes };
         }
-        function saveData() { localStorage.setItem(STORAGE_KEY, JSON.stringify(buildingData)); fetch('save.php', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(buildingData) }).catch(() => { }); }
+        function saveData(){
+  const d=new Date();
+  const pad=n=>String(n).padStart(2,'0');
+  buildingData.last_updated=`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(buildingData));
+  fetch('save.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(buildingData)}).catch(()=>{});
+}
         function exportData() { const b = new Blob([JSON.stringify(buildingData, null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'building_data.json'; a.click(); URL.revokeObjectURL(a.href); toast('تم تصدير building_data.json', 'ok'); }
         function importData(ev) { if (!requireAdmin()) { ev.target.value = ''; return; } const f = ev.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = e => { try { buildingData = JSON.parse(e.target.result); ensureShape(); saveData(); render(); toast('تم الاستيراد', 'ok'); } catch (err) { toast('ملف غير صالح', 'err'); } }; r.readAsText(f); ev.target.value = ''; }
         async function reloadSeed() { if (!confirm('إعادة التحميل من building_data.json؟')) return; localStorage.removeItem(STORAGE_KEY); await loadData(); render(); toast('تم التحميل', 'info'); }
@@ -1287,7 +1294,7 @@
         function delayedTotal(id) { return delayedMonths(id).reduce((s, x) => s + x.amount, 0); }
         function paymentHistory(id) { const rows = []; Object.keys(buildingData.payments).sort().forEach(key => { const pay = buildingData.payments[key][id]; if (pay && pay.paid) { const [yy, mm] = key.split('-'); rows.push({ label: `${months[mm]} ${yy}`, amount: pay.amount, date: pay.date }); } }); return rows.reverse(); }
 
-        function render() { document.getElementById('hdr-balance').textContent = nf(buildingData.balance) + ' ج'; document.getElementById('period-title').textContent = `${months[currentMonth]} ${currentYear}`; renderExpenseTypes(); renderDashboard(); renderPayments(); renderPaymentsYear(); renderCollections(); renderExpenses(); renderAccounts(); renderSettings(); renderPeople(); renderMeetings(); renderTechnicians(); }
+        function render() { document.getElementById('hdr-balance').textContent = nf(buildingData.balance) + ' ج'; document.getElementById('gen-time').textContent = buildingData.last_updated ? ('آخر تحديث للبيانات: '+buildingData.last_updated) : 'لا يوجد تحديث مسجل'; document.getElementById('period-title').textContent = `${months[currentMonth]} ${currentYear}`; renderExpenseTypes(); renderDashboard(); renderPayments(); renderPaymentsYear(); renderCollections(); renderExpenses(); renderAccounts(); renderSettings(); renderPeople(); renderMeetings(); renderTechnicians(); }
 
         function renderDashboard() {
             const mode = document.getElementById('dash-filter').value; const cont = document.getElementById('dash-body'); if (!cont) return;
@@ -1378,7 +1385,6 @@
         (async function start() {
             document.getElementById('modal-overlay').classList.add('hidden');
             buildSelectors(); updateLockBtn();
-            document.getElementById('gen-time').textContent = 'آخر تحديث: ' + new Date().toLocaleString('en-GB');
             document.querySelector('#expenses input[name=date]').value = today();
             const md = document.getElementById('mtg-date'); if (md) md.value = today();
             await loadData();
