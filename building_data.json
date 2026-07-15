@@ -1,5 +1,5 @@
 {
-  "balance": 7235,
+  "balance": 6735,
   "payments": {
     "2026-01": {
       "0-1": {
@@ -863,10 +863,24 @@
         "amount": 29105,
         "description": "كل المصروفات القديمة",
         "date": "2026-07-12"
+      },
+      {
+        "id": "17841393182404066",
+        "type": "electricity",
+        "amount": 500,
+        "description": "شحن كارتين الكهرباء ... كل كارت 250",
+        "date": "2026-07-14"
       }
     ]
   },
   "history": [
+    {
+      "type": "expense",
+      "description": "كل المصروفات القديمة",
+      "amount": 29105,
+      "date": "2026-01-01",
+      "timestamp": 1784139318240
+    },
     {
       "type": "income",
       "description": "استعادة مدفوعات يناير 2026",
@@ -950,6 +964,13 @@
       "amount": 800,
       "date": "2026-12-01",
       "timestamp": 1783863338694
+    },
+    {
+      "type": "expense",
+      "description": "شحن كارتين الكهرباء ... كل كارت 250",
+      "amount": 500,
+      "date": "2026-07-15",
+      "timestamp": 1784139318240
     }
   ],
   "meetings": [
@@ -1352,5 +1373,5 @@
       "notes": ""
     }
   },
-  "last_updated": "2026-07-15 14:30:00"
+  "last_updated": "2026-07-15 21:15:18"
 }
