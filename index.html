@@ -241,6 +241,9 @@
             gap: 14px
         }
 
+        #sc-tabs .tab{padding:7px 11px;font-size:12px;box-shadow:2px 2px 0 var(--ink)}
+        #sc-tabs .tab .amt{font-weight:800;opacity:.85}
+
         .cols-2 {
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))
         }
@@ -789,15 +792,16 @@
                 <div class="card">
                     <h2>🚨 التحصيلات الطارئة (مساهمات خاصة)</h2>
                      <div class="admin-only no-print" style="margin-bottom:14px">
-        <div class="form-grid cols-4" style="align-items:end">
-          <div class="field" style="margin:0"><label>العنوان</label><input type="text" id="sc-title" placeholder="مثال: صيانة المصعد"></div>
-          <div class="field" style="margin:0"><label>المبلغ لكل شقة (جنيه)</label><input type="number" id="sc-amount" min="1"></div>
-          <div class="field" style="margin:0"><label style="display:flex;align-items:center;gap:6px;cursor:pointer">
-            <input type="checkbox" id="sc-skip-ground" style="width:auto;margin:0" checked> استثناء الدور الأرضي
-          </label><span style="font-size:11px;color:var(--muted)">مثل صيانة المصعد</span></div>
-          <div><button onclick="addCollection()">➕ إنشاء تحصيل</button></div>
-        </div>
-      </div>
+                        <div class="form-grid cols-4" style="align-items:end">
+                        <div class="field" style="margin:0"><label>العنوان</label><input type="text" id="sc-title" placeholder="مثال: صيانة المصعد"></div>
+                        <div class="field" style="margin:0"><label>المبلغ لكل شقة (جنيه)</label><input type="number" id="sc-amount" min="1"></div>
+                        <div class="field" style="margin:0"><label style="display:flex;align-items:center;gap:6px;cursor:pointer">
+                            <input type="checkbox" id="sc-skip-ground" style="width:auto;margin:0" checked> استثناء الدور الأرضي
+                        </label><span style="font-size:11px;color:var(--muted)">مثل صيانة المصعد</span></div>
+                        <div><button onclick="addCollection()">➕ إنشاء تحصيل</button></div>
+                        </div>
+                    </div>
+                    <div id="sc-tabs" class="tabs no-print" style="margin-bottom:14px"></div>
                     <div id="sc-list"></div>
                 </div>
             </div>
@@ -1177,31 +1181,75 @@
         function updateAccount(id, type) { if (!requireAdmin()) return; const amount = parseFloat(document.getElementById('amt-' + id).value), desc = (document.getElementById('desc-' + id).value || '').trim(); if (!(amount > 0)) { toast('أدخل مبلغاً', 'err'); return; } if (!desc) { toast('أدخل وصفاً', 'err'); return; } buildingData.apartment_accounts[id] = buildingData.apartment_accounts[id] || 0; if (type === 'add') { buildingData.apartment_accounts[id] += amount; buildingData.balance += amount; } else { buildingData.apartment_accounts[id] -= amount; buildingData.balance -= amount; } addHistory(type === 'add' ? 'income' : 'expense', `${desc} - حساب شقة ${id}`, amount); saveData(); render(); toast('تم تحديث الحساب', 'ok'); }
 
         /* Special collections */
-        function addCollection(){ if(!requireAdmin())return; const title=(document.getElementById('sc-title').value||'').trim(); const per=parseFloat(document.getElementById('sc-amount').value); const skipGround=document.getElementById('sc-skip-ground').checked; if(!title||!(per>0)){toast('أدخل العنوان والمبلغ','err');return;} buildingData.special_collections.push({id:'sc'+Date.now(),title,date:monthKey(),per_apartment:per,skip_ground:skipGround,paid:[]}); saveData(); document.getElementById('sc-title').value=''; document.getElementById('sc-amount').value=''; renderCollections(); toast('تم إنشاء التحصيل','ok'); }
-        function deleteCollection(cid) { if (!requireAdmin()) return; if (!confirm('حذف هذا التحصيل؟ سيُخصم ما حُصّل منه من الرصيد.')) return; const c = buildingData.special_collections.find(x => x.id === cid); if (c) { buildingData.balance -= (c.paid.length * c.per_apartment); } buildingData.special_collections = buildingData.special_collections.filter(x => x.id !== cid); saveData(); render(); toast('تم الحذف', 'warn'); }
+        function addCollection(){ if(!requireAdmin())return; const title=(document.getElementById('sc-title').value||'').trim(); const per=parseFloat(document.getElementById('sc-amount').value); const skipGround=document.getElementById('sc-skip-ground').checked; if(!title||!(per>0)){toast('أدخل العنوان والمبلغ','err');return;} const newId='sc'+Date.now();
+  buildingData.special_collections.push({id:newId,title,date:monthKey(),per_apartment:per,skip_ground:skipGround,paid:[]});
+  activeCollection=newId; saveData(); document.getElementById('sc-title').value=''; document.getElementById('sc-amount').value=''; renderCollections(); toast('تم إنشاء التحصيل','ok'); }
+        function deleteCollection(cid) { if (!requireAdmin()) return; if (!confirm('حذف هذا التحصيل؟ سيُخصم ما حُصّل منه من الرصيد.')) return; const c = buildingData.special_collections.find(x => x.id === cid); if (c) { buildingData.balance -= (c.paid.length * c.per_apartment); } buildingData.special_collections = buildingData.special_collections.filter(x => x.id !== cid); if(activeCollection===cid) activeCollection=null; saveData(); render(); toast('تم الحذف', 'warn'); }
         function toggleCollectionPaid(cid, id) { if (!requireAdmin()) return; const c = buildingData.special_collections.find(x => x.id === cid); if (!c) return; const i = c.paid.indexOf(id); if (i > -1) { c.paid.splice(i, 1); buildingData.balance -= c.per_apartment; addHistory('expense', `تراجع ${c.title} - شقة ${id}`, c.per_apartment); } else { c.paid.push(id); buildingData.balance += c.per_apartment; addHistory('income', `${c.title} - شقة ${id}`, c.per_apartment); } saveData(); render(); }
+        let activeCollection = null;   // currently selected collection id
+
         function renderCollections(){
-            const cont=document.getElementById('sc-list'); if(!cont)return;
-            const list=buildingData.special_collections||[];
-            if(!list.length){ cont.innerHTML='<div class="alert info">لا توجد تحصيلات طارئة.</div>'; return; }
-            cont.innerHTML=list.slice().reverse().map(c=>{
-                const activeUnits=[];
-                floors.forEach((fl,fi)=>apartments.forEach(apt=>{
-                const id=`${fi}-${apt}`;
-                const cfg=buildingData.apartments[id]||{active:true};
-                if(!cfg.active) return;
-                if(c.skip_ground && fi===0) return;   // ground floor excluded (e.g. elevator)
-                activeUnits.push({id,fl,apt});
-                }));
-                const collected=c.paid.length*c.per_apartment;
-                const target=activeUnits.length*c.per_apartment;
-                const rows=activeUnits.map(u=>{
-                const paid=c.paid.includes(u.id);
-                return `<tr><td>${u.fl} - ${u.apt}</td><td>${ownerName(u.id)||'—'}</td><td><span class="badge ${paid?'ok':'err'}">${paid?'دفع':'لم يدفع'}</span></td><td class="no-print admin-only"><button class="${paid?'err':'ok'} sm" onclick="toggleCollectionPaid('${c.id}','${u.id}')">${paid?'تراجع':'دفع'}</button></td></tr>`;
-                }).join('');
-                return `<div class="card" style="box-shadow:3px 3px 0 var(--ink)"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:center"><div><strong style="font-size:15px">${c.title}</strong> <span class="badge info">${nf(c.per_apartment)} ج/شقة</span>${c.skip_ground?' <span class="badge neutral">بدون الأرضي</span>':''}<div style="font-size:12px;color:var(--muted)">${c.date} · حُصّل ${nf(collected)} من ${nf(target)} ج (${c.paid.length}/${activeUnits.length} شقة)</div></div><button class="err sm admin-only no-print" onclick="deleteCollection('${c.id}')">🗑️ حذف</button></div><div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>الشقة</th><th>المالك</th><th>الحالة</th><th class="no-print admin-only">إجراء</th></tr></thead><tbody>${rows}</tbody></table></div></div>`;
-            }).join('');
+        const tabsEl=document.getElementById('sc-tabs'), cont=document.getElementById('sc-list');
+        if(!tabsEl||!cont) return;
+        const list=buildingData.special_collections||[];
+
+        if(!list.length){
+            tabsEl.innerHTML=''; 
+            cont.innerHTML='<div class="alert info">لا توجد تحصيلات طارئة.</div>';
+            return;
         }
+
+        // newest first; default selection = newest
+        const ordered=[...list].reverse();
+        if(!activeCollection || !list.some(c=>c.id===activeCollection)) activeCollection=ordered[0].id;
+
+        // tabs
+        tabsEl.innerHTML=ordered.map(c=>
+            `<div class="tab ${c.id===activeCollection?'active':''}" onclick="selectCollection('${c.id}')">
+            ${c.title} <span class="amt">${nf(c.per_apartment)} ج/شقة</span>
+            </div>`).join('');
+
+        // selected collection body
+        const c=list.find(x=>x.id===activeCollection);
+        if(!c){ cont.innerHTML=''; return; }
+
+        const units=[];
+        floors.forEach((fl,fi)=>apartments.forEach(apt=>{
+            const id=`${fi}-${apt}`;
+            const cfg=buildingData.apartments[id]||{active:true};
+            if(!cfg.active) return;
+            if(c.skip_ground && fi===0) return;
+            units.push({id,fl,apt});
+        }));
+
+        const collected=c.paid.length*c.per_apartment;
+        const target=units.length*c.per_apartment;
+        const remaining=target-collected;
+
+        const rows=units.map(u=>{
+            const paid=c.paid.includes(u.id);
+            return `<tr><td>${u.fl} - ${u.apt}</td><td>${ownerName(u.id)||'—'}</td>
+            <td><span class="badge ${paid?'ok':'err'}">${paid?'دفع':'لم يدفع'}</span></td>
+            <td class="no-print admin-only"><button class="${paid?'err':'ok'} sm" onclick="toggleCollectionPaid('${c.id}','${u.id}')">${paid?'تراجع':'دفع'}</button></td></tr>`;
+        }).join('');
+
+        cont.innerHTML=`
+            <div class="stats" style="margin-bottom:14px">
+            <div class="stat"><div class="t">المطلوب</div><div class="v info">${nf(target)}</div><div class="d">${units.length} شقة × ${nf(c.per_apartment)}</div></div>
+            <div class="stat"><div class="t">المحصّل</div><div class="v ok">${nf(collected)}</div><div class="d">${c.paid.length} شقة</div></div>
+            <div class="stat"><div class="t">المتبقي</div><div class="v err">${nf(remaining)}</div><div class="d">${units.length-c.paid.length} شقة</div></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+            <div style="font-size:12px;color:var(--muted)">🗓️ ${c.date} ${c.skip_ground?'· <span class="badge neutral">بدون الأرضي</span>':''}</div>
+            <button class="err sm admin-only no-print" onclick="deleteCollection('${c.id}')">🗑️ حذف هذا التحصيل</button>
+            </div>
+            <div class="table-wrap"><table>
+            <thead><tr><th>الشقة</th><th>المالك</th><th>الحالة</th><th class="no-print admin-only">إجراء</th></tr></thead>
+            <tbody>${rows}</tbody>
+            </table></div>`;
+        }
+
+        function selectCollection(id){ activeCollection=id; renderCollections(); }
 
         function addExpenseType() { if (!requireAdmin()) return; const label = (document.getElementById('new-type-label').value || '').trim(); if (!label) { toast('أدخل اسم النوع', 'err'); return; } buildingData.expense_type_defs['custom_' + Date.now()] = label; saveData(); document.getElementById('new-type-label').value = ''; renderExpenseTypes(); toast('تم إضافة النوع', 'ok'); }
         function removeExpenseType(key) { if (!requireAdmin()) return; if (['water', 'electricity', 'garage', 'elevator', 'other'].includes(key)) { toast('لا يمكن حذف الأنواع الأساسية', 'warn'); return; } if (!confirm('حذف؟')) return; delete buildingData.expense_type_defs[key]; saveData(); renderExpenseTypes(); toast('تم الحذف', 'warn'); }
