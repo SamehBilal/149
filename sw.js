@@ -1,4 +1,4 @@
-const CACHE = 'building149-v1';
+const CACHE = 'building149-v2';
 const ASSETS = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', e => {
@@ -14,17 +14,28 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
-  const url = e.request.url;
-  // Never cache the data file or PHP — always fetch fresh so data stays current
+  const req = e.request;
+  const url = req.url;
+
+  // Only handle same-origin http(s) GET requests.
+  // Skips chrome-extension://, POST (save.php/upload.php), and cross-origin.
+  if (req.method !== 'GET') return;
+  if (!url.startsWith('http')) return;
+  if (new URL(url).origin !== self.location.origin) return;
+
+  // Never cache live data — always fetch fresh
   if (url.includes('building_data.json') || url.includes('save.php') || url.includes('upload.php')) {
-    e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+    e.respondWith(fetch(req).catch(() => caches.match(req)));
     return;
   }
-  // Cache-first for the app shell (works offline)
+
+  // Cache-first for the app shell
   e.respondWith(
-    caches.match(e.request).then(cached => cached || fetch(e.request).then(res => {
+    caches.match(req).then(cached => cached || fetch(req).then(res => {
+      // Only cache valid, basic (same-origin) responses
+      if (!res || res.status !== 200 || res.type !== 'basic') return res;
       const copy = res.clone();
-      caches.open(CACHE).then(c => c.put(e.request, copy));
+      caches.open(CACHE).then(c => c.put(req, copy));
       return res;
     }).catch(() => caches.match('./index.html')))
   );
