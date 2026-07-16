@@ -962,13 +962,6 @@
   },
   "history": [
     {
-      "type": "expense",
-      "description": "كل المصروفات القديمة",
-      "amount": 29105,
-      "date": "2026-01-01",
-      "timestamp": 1784139318240
-    },
-    {
       "type": "income",
       "description": "استعادة مدفوعات يناير 2026",
       "amount": 2900,
