@@ -1,5 +1,5 @@
 {
-  "balance": 19635,
+  "balance": 20635,
   "payments": {
     "2026-01": {
       "0-1": {
@@ -646,7 +646,7 @@
       },
       "5-1": {
         "paid": true,
-        "amount": 200,
+        "amount": 300,
         "date": "2026-07-01",
         "floor": "خامس",
         "apartment": "1"
@@ -704,7 +704,7 @@
       },
       "5-1": {
         "paid": true,
-        "amount": 200,
+        "amount": 300,
         "date": "2026-08-01",
         "floor": "خامس",
         "apartment": "1"
@@ -762,7 +762,7 @@
       },
       "5-1": {
         "paid": true,
-        "amount": 200,
+        "amount": 300,
         "date": "2026-09-01",
         "floor": "خامس",
         "apartment": "1"
@@ -806,7 +806,7 @@
       },
       "5-1": {
         "paid": true,
-        "amount": 200,
+        "amount": 300,
         "date": "2026-10-01",
         "floor": "خامس",
         "apartment": "1"
@@ -843,7 +843,7 @@
       },
       "5-1": {
         "paid": true,
-        "amount": 40,
+        "amount": 300,
         "date": "2026-11-01",
         "floor": "خامس",
         "apartment": "1"
@@ -877,6 +877,13 @@
         "date": "2026-12-01",
         "floor": "رابع",
         "apartment": "2"
+      },
+      "5-1": {
+        "paid": true,
+        "amount": 300,
+        "date": "2026-12-01",
+        "floor": "خامس",
+        "apartment": "1"
       }
     }
   },
@@ -1048,42 +1055,42 @@
     {
       "type": "income",
       "description": "استعادة مدفوعات يوليو 2026",
-      "amount": 1900,
+      "amount": 2000,
       "date": "2026-07-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات اغسطس 2026",
-      "amount": 1900,
+      "amount": 2000,
       "date": "2026-08-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات سبتمبر 2026",
-      "amount": 1900,
+      "amount": 2000,
       "date": "2026-09-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات اكتوبر 2026",
-      "amount": 1200,
+      "amount": 1300,
       "date": "2026-10-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات نوفمبر 2026",
-      "amount": 940,
+      "amount": 1200,
       "date": "2026-11-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات ديسمبر 2026",
-      "amount": 900,
+      "amount": 1200,
       "date": "2026-12-01",
       "timestamp": 1783863338694
     },
