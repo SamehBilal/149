@@ -712,6 +712,7 @@
                         <a onclick="document.getElementById('import-file').click()">⬆️ استيراد البيانات</a>
                         <a onclick="window.print()">🖨️ طباعة</a>
                         <a onclick="reloadSeed()">🔄 إعادة التحميل من الملف</a>
+                        <a onclick="forceRefreshApp()">🧹 مسح الذاكرة المؤقتة وتحديث</a>
                     </div>
                 </div>
                 <input type="file" id="import-file" accept=".json,application/json" class="hidden"
@@ -758,74 +759,87 @@
             </div>
 
             <div id="payments" class="tab-content hidden">
-                <div class="stats">
-                    <div class="stat">
-                        <div class="t">المطلوب</div>
-                        <div class="v info" id="p-required">0</div>
-                        <div class="d">جنيه</div>
+                <div class="tabs no-print" id="pay-subtabs">
+                    <div class="tab active" data-ptab="monthly" onclick="showPaySubTab('monthly',this)">📅 الشهر الحالي</div>
+                    <div class="tab" data-ptab="yearly" onclick="showPaySubTab('yearly',this)">🗓️ نظرة سنوية</div>
+                    <div class="tab" data-ptab="collections" onclick="showPaySubTab('collections',this)">🚨 التحصيلات الطارئة</div>
+                </div>
+
+                <div id="pay-sub-monthly" class="pay-subtab">
+                    <div class="stats">
+                        <div class="stat">
+                            <div class="t">المطلوب</div>
+                            <div class="v info" id="p-required">0</div>
+                            <div class="d">جنيه</div>
+                        </div>
+                        <div class="stat">
+                            <div class="t">المحصّل</div>
+                            <div class="v ok" id="p-collected">0</div>
+                            <div class="d">جنيه</div>
+                        </div>
+                        <div class="stat">
+                            <div class="t">المتبقي</div>
+                            <div class="v acc" id="p-remaining">0</div>
+                            <div class="d">جنيه</div>
+                        </div>
                     </div>
-                    <div class="stat">
-                        <div class="t">المحصّل</div>
-                        <div class="v ok" id="p-collected">0</div>
-                        <div class="d">جنيه</div>
-                    </div>
-                    <div class="stat">
-                        <div class="t">المتبقي</div>
-                        <div class="v acc" id="p-remaining">0</div>
-                        <div class="d">جنيه</div>
+                    <div class="card">
+                        <h2 id="p-title">💰 مدفوعات الشهر</h2>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>الدور</th>
+                                        <th>الشقة</th>
+                                        <th>المالك</th>
+                                        <th>المبلغ</th>
+                                        <th>الحالة</th>
+                                        <th>تاريخ الدفع</th>
+                                        <th>رصيد الحساب</th>
+                                        <th class="no-print admin-only">إجراء</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="p-body"></tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-                <div class="card">
-                    <h2 id="py-title">🗓️ نظرة سنوية على المدفوعات</h2>
-                    <div style="font-size:11px;color:var(--muted);margin-bottom:8px">✓ مدفوع بالكامل · <span style="color:#b45309">◐ دفع جزئي</span> · ✗ غير مدفوع · اضغط صف الشقة للتفاصيل</div>
-                    <div class="table-wrap">
-                        <table>
-                            <thead>
-                                <tr id="py-head"></tr>
-                            </thead>
-                            <tbody id="py-body"></tbody>
-                            <tfoot>
-                                <tr id="py-foot"></tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                </div>
-                <div class="card">
-                    <h2 id="p-title">💰 مدفوعات الشهر</h2>
-                    <div class="table-wrap">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>الدور</th>
-                                    <th>الشقة</th>
-                                    <th>المالك</th>
-                                    <th>المبلغ</th>
-                                    <th>الحالة</th>
-                                    <th>تاريخ الدفع</th>
-                                    <th>رصيد الحساب</th>
-                                    <th class="no-print admin-only">إجراء</th>
-                                </tr>
-                            </thead>
-                            <tbody id="p-body"></tbody>
-                        </table>
+
+                <div id="pay-sub-yearly" class="pay-subtab hidden">
+                    <div class="card">
+                        <h2 id="py-title">🗓️ نظرة سنوية على المدفوعات</h2>
+                        <div style="font-size:11px;color:var(--muted);margin-bottom:8px">✓ مدفوع بالكامل · <span style="color:#b45309">◐ دفع جزئي</span> · ✗ غير مدفوع · اضغط صف الشقة للتفاصيل</div>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr id="py-head"></tr>
+                                </thead>
+                                <tbody id="py-body"></tbody>
+                                <tfoot>
+                                    <tr id="py-foot"></tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
                 <!-- EMERGENCY / SPECIAL COLLECTIONS -->
-                <div class="card">
-                    <h2>🚨 التحصيلات الطارئة (مساهمات خاصة)</h2>
-                     <div class="admin-only no-print" style="margin-bottom:14px">
-                        <div class="form-grid cols-4" style="align-items:end">
-                        <div class="field" style="margin:0"><label>العنوان</label><input type="text" id="sc-title" placeholder="مثال: صيانة المصعد"></div>
-                        <div class="field" style="margin:0"><label>المبلغ لكل شقة (جنيه)</label><input type="number" id="sc-amount" min="1"></div>
-                        <div class="field" style="margin:0"><label style="display:flex;align-items:center;gap:6px;cursor:pointer">
-                            <input type="checkbox" id="sc-skip-ground" style="width:auto;margin:0" checked> استثناء الدور الأرضي
-                        </label><span style="font-size:11px;color:var(--muted)">مثل صيانة المصعد</span></div>
-                        <div><button onclick="addCollection()">➕ إنشاء تحصيل</button></div>
+                <div id="pay-sub-collections" class="pay-subtab hidden">
+                    <div class="card">
+                        <h2>🚨 التحصيلات الطارئة (مساهمات خاصة)</h2>
+                         <div class="admin-only no-print" style="margin-bottom:14px">
+                            <div class="form-grid cols-4" style="align-items:end">
+                            <div class="field" style="margin:0"><label>العنوان</label><input type="text" id="sc-title" placeholder="مثال: صيانة المصعد"></div>
+                            <div class="field" style="margin:0"><label>المبلغ لكل شقة (جنيه)</label><input type="number" id="sc-amount" min="1"></div>
+                            <div class="field" style="margin:0"><label style="display:flex;align-items:center;gap:6px;cursor:pointer">
+                                <input type="checkbox" id="sc-skip-ground" style="width:auto;margin:0" checked> استثناء الدور الأرضي
+                            </label><span style="font-size:11px;color:var(--muted)">مثل صيانة المصعد</span></div>
+                            <div><button onclick="addCollection()">➕ إنشاء تحصيل</button></div>
+                            </div>
                         </div>
+                        <div id="sc-tabs" class="tabs no-print" style="margin-bottom:14px"></div>
+                        <div id="sc-list"></div>
                     </div>
-                    <div id="sc-tabs" class="tabs no-print" style="margin-bottom:14px"></div>
-                    <div id="sc-list"></div>
                 </div>
             </div>
 
@@ -1125,9 +1139,25 @@
             }
         });
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js').catch(e => console.log('SW registration failed', e));
+            let swRefreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (swRefreshing) return;
+                swRefreshing = true;
+                window.location.reload();
             });
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').then(reg => {
+                    reg.update();
+                    setInterval(() => reg.update(), 5 * 60 * 1000);
+                }).catch(e => console.log('SW registration failed', e));
+            });
+        }
+        async function forceRefreshApp() {
+            try {
+                if ('caches' in window) { const keys = await caches.keys(); await Promise.all(keys.map(k => caches.delete(k))); }
+                if ('serviceWorker' in navigator) { const regs = await navigator.serviceWorker.getRegistrations(); await Promise.all(regs.map(r => r.unregister())); }
+            } catch (e) { }
+            location.reload();
         }
         const ADMIN_PASSWORD = '149admin';
         let isAdmin = false;
@@ -1526,6 +1556,7 @@
         function resetTechnicianForm(){ ['tech-edit-id','tech-name','tech-spec','tech-phone','tech-phone2','tech-phone3','tech-notes'].forEach(i=>document.getElementById(i).value=''); document.getElementById('tech-form-title').textContent='➕ إضافة فنّي'; document.getElementById('tech-cancel').style.display='none'; }
         function renderTechnicians(){ const cont=document.getElementById('tech-list'); if(!cont)return; const list=buildingData.technicians||[]; if(!list.length){ cont.innerHTML='<div class="alert info">لا يوجد فنّيون.</div>'; return; } cont.innerHTML=list.map(t=>`<div class="tcard"><span class="spec">${t.spec||'—'}</span><h3>${t.name}</h3><p>📞 <a href="tel:${t.phone}">${t.phone}</a></p>${t.phone2?`<p>📞 <a href="tel:${t.phone2}">${t.phone2}</a></p>`:''}${t.phone3?`<p>📞 <a href="tel:${t.phone3}">${t.phone3}</a></p>`:''}${t.notes?`<p style="color:var(--muted)">📝 ${t.notes}</p>`:''}<div class="no-print admin-only" style="display:flex;gap:6px;margin-top:8px"><button class="sm" onclick="editTechnician('${t.id}')">✏️</button><button class="err sm" onclick="deleteTechnician('${t.id}')">🗑️</button></div></div>`).join(''); }
         function showTab(name, el) { document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden')); document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); document.getElementById(name).classList.remove('hidden'); if (el) el.classList.add('active'); const showPeriod = (name === 'dashboard' || name === 'payments' || name === 'expenses'); document.getElementById('period-card').style.display = showPeriod ? 'block' : 'none'; }
+        function showPaySubTab(name, el) { document.querySelectorAll('.pay-subtab').forEach(t => t.classList.add('hidden')); document.querySelectorAll('#pay-subtabs .tab').forEach(t => t.classList.remove('active')); document.getElementById('pay-sub-' + name).classList.remove('hidden'); if (el) el.classList.add('active'); }
         function changeDate() { currentYear = document.getElementById('year-select').value; currentMonth = document.getElementById('month-select').value; render(); }
         function buildSelectors() { const sy = new Date().getFullYear(); const ys = document.getElementById('year-select'); for (let y = sy - 1; y <= sy + 6; y++) { const o = document.createElement('option'); o.value = y; o.textContent = y; if (String(y) === currentYear) o.selected = true; ys.appendChild(o); } const ms = document.getElementById('month-select'); MONTHS_ORDER.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = months[v]; if (v === currentMonth) o.selected = true; ms.appendChild(o); }); }
 
