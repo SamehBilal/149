@@ -1281,9 +1281,16 @@
     {
       "type": "expense",
       "description": "كل المصروفات القديمة",
-      "amount": 22310,
+      "amount": 21710,
       "date": "2026-07-16",
       "timestamp": 1784211490248
+    },
+    {
+      "type": "expense",
+      "description": "صيانة الكهرباء",
+      "amount": 1200,
+      "date": "2026-07-01",
+      "timestamp": 1783863338694
     }
   ],
   "meetings": [
