@@ -1,5 +1,5 @@
 {
-  "balance": 20635,
+  "balance": 23035,
   "payments": {
     "2026-01": {
       "0-1": {
@@ -43,6 +43,13 @@
         "date": "2026-01-01",
         "floor": "ثاني",
         "apartment": "1"
+      },
+      "2-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-01-01",
+        "floor": "ثاني",
+        "apartment": "2"
       },
       "2-3": {
         "paid": true,
@@ -151,6 +158,13 @@
         "floor": "ثاني",
         "apartment": "1"
       },
+      "2-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-02-01",
+        "floor": "ثاني",
+        "apartment": "2"
+      },
       "2-3": {
         "paid": true,
         "amount": 200,
@@ -258,6 +272,13 @@
         "floor": "ثاني",
         "apartment": "1"
       },
+      "2-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-03-01",
+        "floor": "ثاني",
+        "apartment": "2"
+      },
       "2-3": {
         "paid": true,
         "amount": 200,
@@ -358,6 +379,13 @@
         "floor": "ثاني",
         "apartment": "1"
       },
+      "2-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-04-01",
+        "floor": "ثاني",
+        "apartment": "2"
+      },
       "2-3": {
         "paid": true,
         "amount": 200,
@@ -450,6 +478,13 @@
         "date": "2026-05-01",
         "floor": "ثاني",
         "apartment": "1"
+      },
+      "2-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-05-01",
+        "floor": "ثاني",
+        "apartment": "2"
       },
       "2-3": {
         "paid": true,
@@ -544,6 +579,13 @@
         "floor": "ثاني",
         "apartment": "1"
       },
+      "2-2": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-06-01",
+        "floor": "ثاني",
+        "apartment": "2"
+      },
       "2-3": {
         "paid": true,
         "amount": 200,
@@ -616,6 +658,13 @@
         "floor": "ثاني",
         "apartment": "1"
       },
+      "2-2": {
+        "paid": true,
+        "amount": 300,
+        "date": "2026-07-01",
+        "floor": "ثاني",
+        "apartment": "2"
+      },
       "2-3": {
         "paid": true,
         "amount": 200,
@@ -673,6 +722,13 @@
         "date": "2026-08-01",
         "floor": "ثاني",
         "apartment": "1"
+      },
+      "2-2": {
+        "paid": true,
+        "amount": 300,
+        "date": "2026-08-01",
+        "floor": "ثاني",
+        "apartment": "2"
       },
       "2-3": {
         "paid": true,
@@ -732,6 +788,13 @@
         "floor": "ثاني",
         "apartment": "1"
       },
+      "2-2": {
+        "paid": true,
+        "amount": 300,
+        "date": "2026-09-01",
+        "floor": "ثاني",
+        "apartment": "2"
+      },
       "2-3": {
         "paid": true,
         "amount": 200,
@@ -789,6 +852,13 @@
         "date": "2026-10-01",
         "floor": "ثاني",
         "apartment": "1"
+      },
+      "2-2": {
+        "paid": true,
+        "amount": 300,
+        "date": "2026-10-01",
+        "floor": "ثاني",
+        "apartment": "2"
       },
       "2-3": {
         "paid": true,
@@ -1013,70 +1083,70 @@
     {
       "type": "income",
       "description": "استعادة مدفوعات يناير 2026",
-      "amount": 2900,
+      "amount": 3100,
       "date": "2026-01-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات فبراير 2026",
-      "amount": 2900,
+      "amount": 3100,
       "date": "2026-02-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات مارس 2026",
-      "amount": 2900,
+      "amount": 3100,
       "date": "2026-03-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات أبريل 2026",
-      "amount": 2500,
+      "amount": 2700,
       "date": "2026-04-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات مايو 2026",
-      "amount": 2500,
+      "amount": 2700,
       "date": "2026-05-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات يونيو 2026",
-      "amount": 2300,
+      "amount": 2500,
       "date": "2026-06-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات يوليو 2026",
-      "amount": 2000,
+      "amount": 2300,
       "date": "2026-07-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات اغسطس 2026",
-      "amount": 2000,
+      "amount": 2300,
       "date": "2026-08-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات سبتمبر 2026",
-      "amount": 2000,
+      "amount": 2300,
       "date": "2026-09-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات اكتوبر 2026",
-      "amount": 1300,
+      "amount": 1600,
       "date": "2026-10-01",
       "timestamp": 1783863338694
     },
