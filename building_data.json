@@ -1117,13 +1117,6 @@
     },
     {
       "type": "expense",
-      "description": "كل المصروفات القديمة",
-      "amount": 25840,
-      "date": "2026-07-16",
-      "timestamp": 1784206334199
-    },
-    {
-      "type": "expense",
       "description": "صيانة شهرية",
       "amount": 550,
       "date": "2026-07-16",
@@ -1149,13 +1142,6 @@
       "amount": 180,
       "date": "2026-07-16",
       "timestamp": 1784211352156
-    },
-    {
-      "type": "expense",
-      "description": "كل المصروفات القديمة",
-      "amount": 22810,
-      "date": "2026-07-16",
-      "timestamp": 1784211405315
     },
     {
       "type": "expense",
