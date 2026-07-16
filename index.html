@@ -368,6 +368,9 @@
             color: var(--err)
         }
 
+        .badge.partial{background:#fffbeb;color:#b45309}
+        .txt-partial{color:#b45309;font-weight:700}
+
         .badge.warn {
             background: #fffbeb;
             color: #b45309
@@ -774,8 +777,7 @@
                 </div>
                 <div class="card">
                     <h2 id="py-title">🗓️ نظرة سنوية على المدفوعات</h2>
-                    <div style="font-size:11px;color:var(--muted);margin-bottom:8px">✓ مدفوع · ✗ غير مدفوع · اضغط صف
-                        الشقة للتفاصيل</div>
+                    <div style="font-size:11px;color:var(--muted);margin-bottom:8px">✓ مدفوع بالكامل · <span style="color:#b45309">◐ دفع جزئي</span> · ✗ غير مدفوع · اضغط صف الشقة للتفاصيل</div>
                     <div class="table-wrap">
                         <table>
                             <thead>
@@ -946,11 +948,11 @@
                                     required></div>
                         </div>
                         <div class="field"><label>نوع الإقامة *</label>
-                            <select name="residence_type" required>
-                                <option value="">اختر النوع</option>
-                                <option value="مالك">مالك</option>
-                                <option value="مستأجر">مستأجر</option>
-                            </select>
+                            <select name="residence_type" required onchange="toggleOwnerFields()"><option value="">اختر النوع</option><option value="مالك">مالك</option><option value="مستأجر">مستأجر</option></select>
+                        </div>
+                        <div class="form-grid cols-2" id="owner-fields" style="display:none">
+                            <div class="field"><label>اسم المالك (إذا كان الساكن مستأجراً)</label><input type="text" name="owner_name"></div>
+                            <div class="field"><label>هاتف المالك</label><input type="tel" name="owner_phone"></div>
                         </div>
                         <div class="form-grid cols-2">
                             <div class="field"><label>الهاتف الأساسي *</label><input type="tel" name="primary_phone"
@@ -1053,8 +1055,9 @@
                         </div>
                         <div class="field"><label>الهاتف *</label><input type="tel" id="tech-phone"></div>
                     </div>
-                    <div class="form-grid cols-3">
+                    <div class="form-grid cols-4">
                         <div class="field"><label>هاتف بديل</label><input type="tel" id="tech-phone2"></div>
+                        <div class="field"><label>هاتف ثالث</label><input type="tel" id="tech-phone3"></div>
                         <div class="field"><label>الانتركم</label><input type="text" id="tech-intercom"></div>
                         <div class="field"><label>ملاحظات</label><input type="text" id="tech-notes"></div>
                     </div>
@@ -1169,12 +1172,12 @@
             if (!buildingData.expense_type_defs || !Object.keys(buildingData.expense_type_defs).length) buildingData.expense_type_defs = { ...defaultExpenseTypes };
         }
         function saveData(){
-  const d=new Date();
-  const pad=n=>String(n).padStart(2,'0');
-  buildingData.last_updated=`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(buildingData));
-  fetch('save.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(buildingData)}).catch(()=>{});
-}
+            const d=new Date();
+            const pad=n=>String(n).padStart(2,'0');
+            buildingData.last_updated=`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+            localStorage.setItem(STORAGE_KEY,JSON.stringify(buildingData));
+            fetch('save.php',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(buildingData)}).catch(()=>{});
+        }
         function exportData() { const b = new Blob([JSON.stringify(buildingData, null, 2)], { type: 'application/json' }); const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'building_data.json'; a.click(); URL.revokeObjectURL(a.href); toast('تم تصدير building_data.json', 'ok'); }
         function importData(ev) { if (!requireAdmin()) { ev.target.value = ''; return; } const f = ev.target.files[0]; if (!f) return; const r = new FileReader(); r.onload = e => { try { buildingData = JSON.parse(e.target.result); ensureShape(); saveData(); render(); toast('تم الاستيراد', 'ok'); } catch (err) { toast('ملف غير صالح', 'err'); } }; r.readAsText(f); ev.target.value = ''; }
         async function reloadSeed() { if (!confirm('إعادة التحميل من building_data.json؟')) return; localStorage.removeItem(STORAGE_KEY); await loadData(); render(); toast('تم التحميل', 'info'); }
@@ -1210,71 +1213,71 @@
 
         /* Special collections */
         function addCollection(){ if(!requireAdmin())return; const title=(document.getElementById('sc-title').value||'').trim(); const per=parseFloat(document.getElementById('sc-amount').value); const skipGround=document.getElementById('sc-skip-ground').checked; if(!title||!(per>0)){toast('أدخل العنوان والمبلغ','err');return;} const newId='sc'+Date.now();
-  buildingData.special_collections.push({id:newId,title,date:monthKey(),per_apartment:per,skip_ground:skipGround,paid:[]});
-  activeCollection=newId; saveData(); document.getElementById('sc-title').value=''; document.getElementById('sc-amount').value=''; renderCollections(); toast('تم إنشاء التحصيل','ok'); }
+        buildingData.special_collections.push({id:newId,title,date:monthKey(),per_apartment:per,skip_ground:skipGround,paid:[]});
+        activeCollection=newId; saveData(); document.getElementById('sc-title').value=''; document.getElementById('sc-amount').value=''; renderCollections(); toast('تم إنشاء التحصيل','ok'); }
         function deleteCollection(cid) { if (!requireAdmin()) return; if (!confirm('حذف هذا التحصيل؟ سيُخصم ما حُصّل منه من الرصيد.')) return; const c = buildingData.special_collections.find(x => x.id === cid); if (c) { buildingData.balance -= (c.paid.length * c.per_apartment); } buildingData.special_collections = buildingData.special_collections.filter(x => x.id !== cid); if(activeCollection===cid) activeCollection=null; saveData(); render(); toast('تم الحذف', 'warn'); }
         function toggleCollectionPaid(cid, id) { if (!requireAdmin()) return; const c = buildingData.special_collections.find(x => x.id === cid); if (!c) return; const i = c.paid.indexOf(id); if (i > -1) { c.paid.splice(i, 1); buildingData.balance -= c.per_apartment; addHistory('expense', `تراجع ${c.title} - شقة ${id}`, c.per_apartment); } else { c.paid.push(id); buildingData.balance += c.per_apartment; addHistory('income', `${c.title} - شقة ${id}`, c.per_apartment); } saveData(); render(); }
         let activeCollection = null;   // currently selected collection id
 
         function renderCollections(){
-        const tabsEl=document.getElementById('sc-tabs'), cont=document.getElementById('sc-list');
-        if(!tabsEl||!cont) return;
-        const list=buildingData.special_collections||[];
+            const tabsEl=document.getElementById('sc-tabs'), cont=document.getElementById('sc-list');
+            if(!tabsEl||!cont) return;
+            const list=buildingData.special_collections||[];
 
-        if(!list.length){
-            tabsEl.innerHTML=''; 
-            cont.innerHTML='<div class="alert info">لا توجد تحصيلات طارئة.</div>';
-            return;
-        }
+            if(!list.length){
+                tabsEl.innerHTML=''; 
+                cont.innerHTML='<div class="alert info">لا توجد تحصيلات طارئة.</div>';
+                return;
+            }
 
-        // newest first; default selection = newest
-        const ordered=[...list].reverse();
-        if(!activeCollection || !list.some(c=>c.id===activeCollection)) activeCollection=ordered[0].id;
+            // newest first; default selection = newest
+            const ordered=[...list].reverse();
+            if(!activeCollection || !list.some(c=>c.id===activeCollection)) activeCollection=ordered[0].id;
 
-        // tabs
-        tabsEl.innerHTML=ordered.map(c=>
-            `<div class="tab ${c.id===activeCollection?'active':''}" onclick="selectCollection('${c.id}')">
-            ${c.title} <span class="amt">${nf(c.per_apartment)} ج/شقة</span>
-            </div>`).join('');
+            // tabs
+            tabsEl.innerHTML=ordered.map(c=>
+                `<div class="tab ${c.id===activeCollection?'active':''}" onclick="selectCollection('${c.id}')">
+                ${c.title} <span class="amt">${nf(c.per_apartment)} ج/شقة</span>
+                </div>`).join('');
 
-        // selected collection body
-        const c=list.find(x=>x.id===activeCollection);
-        if(!c){ cont.innerHTML=''; return; }
+            // selected collection body
+            const c=list.find(x=>x.id===activeCollection);
+            if(!c){ cont.innerHTML=''; return; }
 
-        const units=[];
-        floors.forEach((fl,fi)=>apartments.forEach(apt=>{
-            const id=`${fi}-${apt}`;
-            const cfg=buildingData.apartments[id]||{active:true};
-            if(!cfg.active) return;
-            if(c.skip_ground && fi===0) return;
-            units.push({id,fl,apt});
-        }));
+            const units=[];
+            floors.forEach((fl,fi)=>apartments.forEach(apt=>{
+                const id=`${fi}-${apt}`;
+                const cfg=buildingData.apartments[id]||{active:true};
+                if(!cfg.active) return;
+                if(c.skip_ground && fi===0) return;
+                units.push({id,fl,apt});
+            }));
 
-        const collected=c.paid.length*c.per_apartment;
-        const target=units.length*c.per_apartment;
-        const remaining=target-collected;
+            const collected=c.paid.length*c.per_apartment;
+            const target=units.length*c.per_apartment;
+            const remaining=target-collected;
 
-        const rows=units.map(u=>{
-            const paid=c.paid.includes(u.id);
-            return `<tr><td>${u.fl} - ${u.apt}</td><td>${ownerName(u.id)||'—'}</td>
-            <td><span class="badge ${paid?'ok':'err'}">${paid?'دفع':'لم يدفع'}</span></td>
-            <td class="no-print admin-only"><button class="${paid?'err':'ok'} sm" onclick="toggleCollectionPaid('${c.id}','${u.id}')">${paid?'تراجع':'دفع'}</button></td></tr>`;
-        }).join('');
+            const rows=units.map(u=>{
+                const paid=c.paid.includes(u.id);
+                return `<tr><td>${u.fl} - ${u.apt}</td><td>${payerName(u.id)||'—'}</td>
+                <td><span class="badge ${paid?'ok':'err'}">${paid?'دفع':'لم يدفع'}</span></td>
+                <td class="no-print admin-only"><button class="${paid?'err':'ok'} sm" onclick="toggleCollectionPaid('${c.id}','${u.id}')">${paid?'تراجع':'دفع'}</button></td></tr>`;
+            }).join('');
 
-        cont.innerHTML=`
-            <div class="stats" style="margin-bottom:14px">
-            <div class="stat"><div class="t">المطلوب</div><div class="v info">${nf(target)}</div><div class="d">${units.length} شقة × ${nf(c.per_apartment)}</div></div>
-            <div class="stat"><div class="t">المحصّل</div><div class="v ok">${nf(collected)}</div><div class="d">${c.paid.length} شقة</div></div>
-            <div class="stat"><div class="t">المتبقي</div><div class="v err">${nf(remaining)}</div><div class="d">${units.length-c.paid.length} شقة</div></div>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">
-            <div style="font-size:12px;color:var(--muted)">🗓️ ${c.date} ${c.skip_ground?'· <span class="badge neutral">بدون الأرضي</span>':''}</div>
-            <button class="err sm admin-only no-print" onclick="deleteCollection('${c.id}')">🗑️ حذف هذا التحصيل</button>
-            </div>
-            <div class="table-wrap"><table>
-            <thead><tr><th>الشقة</th><th>المالك</th><th>الحالة</th><th class="no-print admin-only">إجراء</th></tr></thead>
-            <tbody>${rows}</tbody>
-            </table></div>`;
+            cont.innerHTML=`
+                <div class="stats" style="margin-bottom:14px">
+                <div class="stat"><div class="t">المطلوب</div><div class="v info">${nf(target)}</div><div class="d">${units.length} شقة × ${nf(c.per_apartment)}</div></div>
+                <div class="stat"><div class="t">المحصّل</div><div class="v ok">${nf(collected)}</div><div class="d">${c.paid.length} شقة</div></div>
+                <div class="stat"><div class="t">المتبقي</div><div class="v err">${nf(remaining)}</div><div class="d">${units.length-c.paid.length} شقة</div></div>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+                <div style="font-size:12px;color:var(--muted)">🗓️ ${c.date} ${c.skip_ground?'· <span class="badge neutral">بدون الأرضي</span>':''}</div>
+                <button class="err sm admin-only no-print" onclick="deleteCollection('${c.id}')">🗑️ حذف هذا التحصيل</button>
+                </div>
+                <div class="table-wrap"><table>
+                <thead><tr><th>الشقة</th><th>المالك (الدافع)</th><th>الحالة</th><th class="no-print admin-only">إجراء</th></tr></thead>
+                <tbody>${rows}</tbody>
+                </table></div>`;
         }
 
         function selectCollection(id){ activeCollection=id; renderCollections(); }
@@ -1284,13 +1287,18 @@
         function renderExpenseTypes() { const sel = document.getElementById('expense-type-select'); if (sel) sel.innerHTML = Object.entries(buildingData.expense_type_defs).map(([k, v]) => `<option value="${k}">${v}</option>`).join(''); const ch = document.getElementById('type-chips'); if (ch) ch.innerHTML = Object.entries(buildingData.expense_type_defs).map(([k, v]) => { const core = ['water', 'electricity', 'garage', 'elevator', 'other'].includes(k); return `<span class="chip">${v}${core ? '' : `<button onclick="removeExpenseType('${k}')">×</button>`}</span>`; }).join(''); }
 
         /* delayed: current year only, valued per-month rate; plus opening_debt line separately */
-        function delayedMonths(id) {
-            const cfg = buildingData.apartments[id] || { active: true };
-            if (!cfg.active) return [];
-            const now = new Date(); const yr = parseInt(currentYear);
-            let lastMonth; if (yr < now.getFullYear()) lastMonth = 12; else if (yr > now.getFullYear()) lastMonth = 0; else lastMonth = now.getMonth() + 1;
-            const out = [];
-            for (let m = 1; m <= lastMonth; m++) { const mm = String(m).padStart(2, '0'); const key = yr + '-' + mm; const pay = (buildingData.payments[key] || {})[id]; if (!(pay && pay.paid)) out.push({ key, label: `${months[mm]} ${yr}`, amount: rateForMonth(id, key) }); }
+        function delayedMonths(id){
+            const cfg=buildingData.apartments[id]||{active:true};
+            if(!cfg.active) return [];
+            const now=new Date(); const yr=parseInt(currentYear);
+            let lastMonth; if(yr<now.getFullYear())lastMonth=12; else if(yr>now.getFullYear())lastMonth=0; else lastMonth=now.getMonth()+1;
+            const out=[];
+            for(let m=1;m<=lastMonth;m++){
+                const mm=String(m).padStart(2,'0'); const key=yr+'-'+mm;
+                const due=rateForMonth(id,key); const pay=(buildingData.payments[key]||{})[id];
+                const paidAmt=(pay&&pay.paid)?pay.amount:0;
+                if(paidAmt<due) out.push({key,label:`${months[mm]} ${yr}`+(paidAmt>0?` (متبقي ${nf(due-paidAmt)})`:''),amount:due-paidAmt});
+            }
             return out;
         }
         function delayedTotal(id) { return delayedMonths(id).reduce((s, x) => s + x.amount, 0); }
@@ -1316,13 +1324,60 @@
             }
         }
 
-        function renderPayments() { const m = monthKey(), mp = buildingData.payments[m] || {}; let req = 0, col = 0, rows = ''; floors.forEach((fl, fi) => apartments.forEach(apt => { const id = `${fi}-${apt}`, cfg = buildingData.apartments[id] || { active: true }, pay = mp[id], paid = pay && pay.paid, bal = buildingData.apartment_accounts[id] || 0; const monthRate = rateForMonth(id, m); if (cfg.active) req += monthRate; if (paid) col += pay.amount; if (!cfg.active) { rows += `<tr class="inactive"><td>${fl}</td><td>${apt}</td><td>فارغة</td><td>-</td><td><span class="badge neutral">غير نشط</span></td><td>-</td><td>-</td><td class="no-print admin-only">-</td></tr>`; return; } rows += `<tr><td>${fl}</td><td>${apt}</td><td>${ownerName(id) || 'غير محدد'}</td><td>${nf(monthRate)} ج</td><td><span class="badge ${paid ? 'ok' : 'err'}">${paid ? 'تم الدفع' : 'لم يتم'}</span></td><td>${paid ? pay.date : '-'}</td><td><span class="${bal > 0 ? 'txt-ok' : (bal < 0 ? 'txt-err' : '')}">${nf(bal)} ج</span></td><td class="no-print admin-only">${paid ? `<button class="err sm" onclick="markUnpaid('${id}')">إلغاء</button>` : `<button class="ok sm" onclick="markPaid('${id}')">تم الدفع</button>`}</td></tr>`; })); document.getElementById('p-body').innerHTML = rows; document.getElementById('p-required').textContent = nf(req); document.getElementById('p-collected').textContent = nf(col); document.getElementById('p-remaining').textContent = nf(req - col); document.getElementById('p-title').textContent = `💰 مدفوعات ${months[currentMonth]} ${currentYear}`; }
+        /* returns 'full' | 'partial' | 'none' */
+        function payStatus(id,ymKey){
+            const pay=(buildingData.payments[ymKey]||{})[id];
+            if(!pay||!pay.paid) return 'none';
+            return pay.amount < rateForMonth(id,ymKey) ? 'partial' : 'full';
+        }
+
+        function markPartial(id){
+            if(!requireAdmin())return;
+            const m=monthKey(); const due=rateForMonth(id,m);
+            const prev=(buildingData.payments[m]||{})[id];
+            const input=prompt(`المبلغ المدفوع لشهر ${months[currentMonth]} (المطلوب ${nf(due)} ج):`, prev?prev.amount:'');
+            if(input===null) return;
+            const amount=parseFloat(input);
+            if(!(amount>0)){ toast('أدخل مبلغاً صحيحاً','err'); return; }
+            const [fi,apt]=id.split('-');
+            if(prev&&prev.paid) buildingData.balance-=prev.amount;   // replace old value
+            buildingData.payments[m]=buildingData.payments[m]||{};
+            buildingData.payments[m][id]={paid:true,amount,date:today(),floor:floors[fi],apartment:apt};
+            buildingData.balance+=amount;
+            addHistory('income',`دفع${amount<due?' جزئي':''} شقة ${apt} - ${floors[fi]}`,amount);
+            saveData(); render(); toast(amount<due?`دفع جزئي — متبقي ${nf(due-amount)} ج`:'تم تسجيل الدفع','ok');
+        }
+
+        function renderPayments(){
+            const m=monthKey(),mp=buildingData.payments[m]||{}; let req=0,col=0,rows='';
+            floors.forEach((fl,fi)=>apartments.forEach(apt=>{
+                const id=`${fi}-${apt}`,cfg=buildingData.apartments[id]||{active:true},pay=mp[id],bal=buildingData.apartment_accounts[id]||0;
+                const due=rateForMonth(id,m); const st=payStatus(id,m);
+                if(cfg.active)req+=due; if(pay&&pay.paid)col+=pay.amount;
+                if(!cfg.active){ rows+=`<tr class="inactive"><td>${fl}</td><td>${apt}</td><td>فارغة</td><td>-</td><td><span class="badge neutral">غير نشط</span></td><td>-</td><td>-</td><td class="no-print admin-only">-</td></tr>`; return; }
+                const badge = st==='full' ? `<span class="badge ok">تم الدفع</span>`
+                            : st==='partial' ? `<span class="badge partial">جزئي — متبقي ${nf(due-pay.amount)}</span>`
+                            : `<span class="badge err">لم يتم</span>`;
+                const amountCell = (pay&&pay.paid) ? `<span class="${st==='partial'?'txt-partial':'txt-ok'}">${nf(pay.amount)}</span> / ${nf(due)} ج` : `${nf(due)} ج`;
+                rows+=`<tr><td>${fl}</td><td>${apt}</td><td>${ownerName(id)||'غير محدد'}</td><td>${amountCell}</td><td>${badge}</td><td>${pay&&pay.paid?pay.date:'-'}</td><td><span class="${bal>0?'txt-ok':(bal<0?'txt-err':'')}">${nf(bal)} ج</span></td><td class="no-print admin-only"><div style="display:flex;gap:4px">${(pay&&pay.paid)?`<button class="err sm" onclick="markUnpaid('${id}')">إلغاء</button>`:`<button class="ok sm" onclick="markPaid('${id}')">كامل</button>`}<button class="ghost sm" onclick="markPartial('${id}')">مبلغ…</button></div></td></tr>`;
+            }));
+            document.getElementById('p-body').innerHTML=rows;
+            document.getElementById('p-required').textContent=nf(req);
+            document.getElementById('p-collected').textContent=nf(col);
+            document.getElementById('p-remaining').textContent=nf(req-col);
+            document.getElementById('p-title').textContent=`💰 مدفوعات ${months[currentMonth]} ${currentYear}`;
+        }
 
         function renderPaymentsYear() {
             document.getElementById('py-head').innerHTML = `<th>الشقة</th>${MONTHS_ORDER.map(mm => `<th>${months[mm].slice(0, 3)}</th>`).join('')}<th>الإجمالي</th>`;
             document.getElementById('py-title').textContent = `🗓️ نظرة سنوية — ${currentYear}`;
             const colTotals = new Array(12).fill(0); let rowsHtml = '';
-            floors.forEach((fl, fi) => apartments.forEach(apt => { const id = `${fi}-${apt}`, cfg = buildingData.apartments[id] || { active: true }; if (!cfg.active) { rowsHtml += `<tr class="inactive"><td>${fl.slice(0, 3)} ${apt}</td>${MONTHS_ORDER.map(() => `<td style="text-align:center">-</td>`).join('')}<td style="text-align:center">-</td></tr>`; return; } let rowTotal = 0; const cells = MONTHS_ORDER.map((mm, idx) => { const key = currentYear + '-' + mm; const pay = (buildingData.payments[key] || {})[id]; const paid = pay && pay.paid; if (paid) { rowTotal += pay.amount; colTotals[idx] += pay.amount; return `<td style="text-align:center;color:var(--ok);font-weight:700" title="${pay.date}">✓</td>`; } return `<td style="text-align:center;color:var(--err)">✗</td>`; }).join(''); rowsHtml += `<tr style="cursor:pointer" onclick="openResident('${id}')"><td>${ownerName(id) || (fl.slice(0, 3) + ' ' + apt)}</td>${cells}<td style="text-align:center;font-weight:700">${nf(rowTotal)}</td></tr>`; }));
+            floors.forEach((fl, fi) => apartments.forEach(apt => { const id = `${fi}-${apt}`, cfg = buildingData.apartments[id] || { active: true }; if (!cfg.active) { rowsHtml += `<tr class="inactive"><td>${fl.slice(0, 3)} ${apt}</td>${MONTHS_ORDER.map(() => `<td style="text-align:center">-</td>`).join('')}<td style="text-align:center">-</td></tr>`; return; } let rowTotal = 0; const cells=MONTHS_ORDER.map((mm,idx)=>{
+      const key=currentYear+'-'+mm; const pay=(buildingData.payments[key]||{})[id]; const st=payStatus(id,key);
+      if(st==='full'){ rowTotal+=pay.amount; colTotals[idx]+=pay.amount; return `<td style="text-align:center;color:var(--ok);font-weight:700" title="${pay.date} — ${nf(pay.amount)} ج">✓</td>`; }
+      if(st==='partial'){ rowTotal+=pay.amount; colTotals[idx]+=pay.amount; return `<td style="text-align:center;color:#b45309;font-weight:700" title="جزئي: ${nf(pay.amount)} من ${nf(rateForMonth(id,key))} ج">◐</td>`; }
+      return `<td style="text-align:center;color:var(--err)">✗</td>`;
+    }).join(''); rowsHtml += `<tr style="cursor:pointer" onclick="openResident('${id}')"><td>${ownerName(id) || (fl.slice(0, 3) + ' ' + apt)}</td>${cells}<td style="text-align:center;font-weight:700">${nf(rowTotal)}</td></tr>`; }));
             document.getElementById('py-body').innerHTML = rowsHtml;
             const grand = colTotals.reduce((a, b) => a + b, 0);
             document.getElementById('py-foot').innerHTML = `<th>الإجمالي</th>${colTotals.map(t => `<th style="text-align:center">${nf(t)}</th>`).join('')}<th style="text-align:center">${nf(grand)}</th>`;
@@ -1338,7 +1393,7 @@
             const late = delayedMonths(id); const lateTotal = delayedTotal(id); const opening = buildingData.opening_debt[id] || 0; const hist = paymentHistory(id);
             const name = (res && res.resident_name) ? ((res.title ? res.title + ' ' : '') + res.resident_name) : 'غير محدد';
             const totalOwed = lateTotal + opening;
-            const contact = res ? `<div class="kv"><b>النوع</b><span>${res.residence_type || '-'}</span><b>الهاتف</b><span>${res.primary_phone || '-'}</span><b>هاتف احتياطي</b><span>${res.secondary_phone || '-'}</span><b>الانتركم</b><span>${res.intercome || '-'}</span><b>البريد</b><span>${res.email || '-'}</span><b>أفراد الأسرة</b><span>${res.family_members || '-'}</span><b>الأطفال</b><span>${res.children_count || 0}</span><b>تاريخ السكن</b><span>${res.move_in_date || '-'}</span><b>طوارئ</b><span>${res.emergency_contact_name || '-'} ${res.emergency_contact_phone ? ('— ' + res.emergency_contact_phone) : ''}</span>${res.notes ? `<b>ملاحظات</b><span>${res.notes}</span>` : ''}</div>` : `<div class="alert warn">لا توجد بيانات ساكن لهذه الشقة.</div>`;
+            const contact = res ? `<div class="kv"><b>النوع</b>${res.residence_type==='مستأجر'&&res.owner_name?`<b>المالك</b><span>${res.owner_name}${res.owner_phone?' — '+res.owner_phone:''}</span>`:''}<span>${res.residence_type || '-'}</span><b>الهاتف</b><span>${res.primary_phone || '-'}</span><b>هاتف احتياطي</b><span>${res.secondary_phone || '-'}</span><b>الانتركم</b><span>${res.intercome || '-'}</span><b>البريد</b><span>${res.email || '-'}</span><b>أفراد الأسرة</b><span>${res.family_members || '-'}</span><b>الأطفال</b><span>${res.children_count || 0}</span><b>تاريخ السكن</b><span>${res.move_in_date || '-'}</span><b>طوارئ</b><span>${res.emergency_contact_name || '-'} ${res.emergency_contact_phone ? ('— ' + res.emergency_contact_phone) : ''}</span>${res.notes ? `<b>ملاحظات</b><span>${res.notes}</span>` : ''}</div>` : `<div class="alert warn">لا توجد بيانات ساكن لهذه الشقة.</div>`;
             let fin = '';
             if (opening > 0) fin += `<div class="alert warn"><b>متأخرات سابقة (قبل 2026):</b> ${nf(opening)} ج</div>`;
             fin += late.length ? `<div class="alert err"><b>متأخرات ${currentYear} (${late.length} شهر = ${nf(lateTotal)} ج):</b> ${late.map(x => x.label).join('، ')}</div>` : `<div class="alert ok">لا توجد متأخرات لسنة ${currentYear} ✔</div>`;
@@ -1360,11 +1415,10 @@
             else { const withDate = units.filter(u => u.move), without = units.filter(u => !u.move); withDate.sort((a, b) => sortBy === 'seniority' ? new Date(a.move) - new Date(b.move) : new Date(b.move) - new Date(a.move)); const ordered = [...withDate, ...without]; cont.innerHTML = `<div class="people-grid">${ordered.map(card).join('')}</div>` + (without.length ? `<p style="font-size:12px;color:var(--muted)">* بدون تاريخ سكن في النهاية.</p>` : ''); }
         }
         function updateApartmentId() { const fl = document.querySelector('#resident-form select[name=floor]').value, apt = document.querySelector('#resident-form select[name=apartment]').value, disp = document.getElementById('apartment-id'), ind = document.getElementById('existing-indicator'); if (fl && apt) { const id = `${floorMapping[fl]}-${apt}`; disp.textContent = id; const ex = residentFor(id); if (ex) { ind.classList.remove('hidden'); prefillResident(ex); } else { ind.classList.add('hidden'); } } else { disp.textContent = '—'; ind.classList.add('hidden'); } }
-        function prefillResident(d) { const f = document.getElementById('resident-form');['resident_name', 'title', 'intercome', 'residence_type', 'primary_phone', 'secondary_phone', 'email', 'family_members', 'children_count', 'move_in_date', 'emergency_contact_name', 'emergency_contact_phone', 'notes'].forEach(k => { const i = f.querySelector(`[name="${k}"]`); if (i) i.value = (d[k] != null ? d[k] : ''); }); }
-        function editResident(id) { if (!requireAdmin()) return; closeModal(); showTab('people', document.querySelector('[data-tab=people]')); const [fi, apt] = id.split('-'); const f = document.getElementById('resident-form'); f.querySelector('[name=floor]').value = floors[fi]; f.querySelector('[name=apartment]').value = apt; updateApartmentId(); document.getElementById('res-form-title').textContent = '✏️ تعديل ساكن'; document.getElementById('res-cancel').style.display = 'inline-block'; window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function prefillResident(d){ const f=document.getElementById('resident-form'); ['resident_name','title','intercome','residence_type','owner_name','owner_phone','primary_phone','secondary_phone','email','family_members','children_count','move_in_date','emergency_contact_name','emergency_contact_phone','notes'].forEach(k=>{ const i=f.querySelector(`[name="${k}"]`); if(i) i.value=(d[k]!=null?d[k]:''); }); toggleOwnerFields(); }        function editResident(id) { if (!requireAdmin()) return; closeModal(); showTab('people', document.querySelector('[data-tab=people]')); const [fi, apt] = id.split('-'); const f = document.getElementById('resident-form'); f.querySelector('[name=floor]').value = floors[fi]; f.querySelector('[name=apartment]').value = apt; updateApartmentId(); document.getElementById('res-form-title').textContent = '✏️ تعديل ساكن'; document.getElementById('res-cancel').style.display = 'inline-block'; window.scrollTo({ top: 0, behavior: 'smooth' }); }
         function deleteResident(id) { if (!requireAdmin()) return; if (!confirm('حذف بيانات هذا الساكن؟')) return; delete buildingData.residents[id]; saveData(); closeModal(); render(); toast('تم حذف الساكن', 'warn'); }
-        function resetResidentForm() { document.getElementById('resident-form').reset(); document.getElementById('apartment-id').textContent = '—'; document.getElementById('existing-indicator').classList.add('hidden'); document.getElementById('res-form-title').textContent = '➕ إضافة / تعديل ساكن'; document.getElementById('res-cancel').style.display = 'none'; }
-        document.getElementById('resident-form').addEventListener('submit', function (ev) { ev.preventDefault(); if (!requireAdmin()) return; const f = new FormData(ev.target), fl = f.get('floor'), apt = f.get('apartment'); if (!fl || !apt) { toast('اختر الطابق ورقم الشقة', 'err'); return; } const id = `${floorMapping[fl]}-${apt}`; buildingData.residents[id] = { resident_name: f.get('resident_name'), title: f.get('title'), intercome: f.get('intercome'), residence_type: f.get('residence_type'), primary_phone: f.get('primary_phone'), secondary_phone: f.get('secondary_phone'), email: f.get('email'), family_members: parseInt(f.get('family_members')) || null, children_count: parseInt(f.get('children_count')) || null, move_in_date: f.get('move_in_date') || '', emergency_contact_name: f.get('emergency_contact_name'), emergency_contact_phone: f.get('emergency_contact_phone'), notes: f.get('notes') }; saveData(); resetResidentForm(); render(); toast('تم حفظ الساكن', 'ok'); });
+        function resetResidentForm() { document.getElementById('resident-form').reset(); document.getElementById('apartment-id').textContent = '—'; document.getElementById('existing-indicator').classList.add('hidden'); document.getElementById('res-form-title').textContent = '➕ إضافة / تعديل ساكن'; document.getElementById('res-cancel').style.display = 'none'; toggleOwnerFields(); }
+        document.getElementById('resident-form').addEventListener('submit', function (ev) { ev.preventDefault(); if (!requireAdmin()) return; const f = new FormData(ev.target), fl = f.get('floor'), apt = f.get('apartment'); if (!fl || !apt) { toast('اختر الطابق ورقم الشقة', 'err'); return; } const id = `${floorMapping[fl]}-${apt}`; buildingData.residents[id]={ resident_name:f.get('resident_name'),title:f.get('title'),intercome:f.get('intercome'),residence_type:f.get('residence_type'),owner_name:f.get('owner_name')||'',owner_phone:f.get('owner_phone')||'',primary_phone:f.get('primary_phone'),secondary_phone:f.get('secondary_phone'),email:f.get('email'),family_members:parseInt(f.get('family_members'))||null,children_count:parseInt(f.get('children_count'))||null,move_in_date:f.get('move_in_date')||'',emergency_contact_name:f.get('emergency_contact_name'),emergency_contact_phone:f.get('emergency_contact_phone'),notes:f.get('notes') }; saveData(); resetResidentForm(); render(); toast('تم حفظ الساكن', 'ok'); });
 
         function attendeeName(id) { const res = residentFor(id); return res ? ((res.title ? res.title + ' ' : '') + res.resident_name) : id; }
         function buildAttendeeCheckboxes(selected) { selected = selected || []; let html = ''; floors.forEach((fl, fi) => apartments.forEach(apt => { const id = `${fi}-${apt}`; const cfg = buildingData.apartments[id] || { active: true }; if (!cfg.active) return; const nm = attendeeName(id); const on = selected.includes(id) ? 'checked' : ''; html += `<label class="chip" style="cursor:pointer"><input type="checkbox" value="${id}" style="width:auto;margin:0" ${on}> ${fl.slice(0, 3)}-${apt} ${nm !== id ? ('· ' + nm) : ''}</label>`; })); document.getElementById('mtg-attendees').innerHTML = html; }
@@ -1374,12 +1428,11 @@
         function resetMeetingForm() { document.getElementById('mtg-edit-id').value = ''; document.getElementById('mtg-title').value = ''; document.getElementById('mtg-date').value = today(); document.getElementById('mtg-points').value = ''; document.getElementById('mtg-notes').value = ''; document.getElementById('mtg-file').value = ''; const cur = document.getElementById('mtg-file-current'); cur.dataset.path = ''; cur.textContent = ''; buildAttendeeCheckboxes([]); document.getElementById('mtg-form-title').textContent = '➕ إضافة اجتماع'; document.getElementById('mtg-cancel').style.display = 'none'; }
         function renderMeetings() { buildAttendeeCheckboxes([...document.querySelectorAll('#mtg-attendees input:checked')].map(c => c.value)); const cont = document.getElementById('meetings-list'); if (!cont) return; const list = [...(buildingData.meetings || [])].sort((a, b) => new Date(b.date) - new Date(a.date)); if (!list.length) { cont.innerHTML = '<div class="alert info">لا توجد اجتماعات.</div>'; return; } cont.innerHTML = list.map(m => `<div class="card"><div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px"><div><h2 style="border:none;padding:0;margin:0">${m.title}</h2><span style="font-size:12px;color:var(--muted)">🗓️ ${m.date} · حضر ${(m.attendees || []).length}</span></div><div class="no-print admin-only" style="display:flex;gap:6px"><button class="sm" onclick="editMeeting('${m.id}')">✏️</button><button class="err sm" onclick="deleteMeeting('${m.id}')">🗑️</button></div></div>${m.file?`<p style="margin:8px 0"><a href="${m.file}" target="_blank" class="filelink">${fileIcon(m.file)} ${m.file.split('/').pop()}</a> <button class="ghost sm" onclick="event.stopPropagation();viewMeetingFile('${m.file}')">👁️ عرض</button></p>`:''}${(m.attendees && m.attendees.length) ? `<div class="divider">الحضور</div><div class="chip-list">${m.attendees.map(id => `<span class="chip">${attendeeName(id)} (${id})</span>`).join('')}</div>` : ''}${(m.points && m.points.length) ? `<div class="divider">النقاط المتفق عليها</div><ul style="margin:0;padding-inline-start:20px;font-size:14px">${m.points.map(p => `<li style="margin:5px 0">${p}</li>`).join('')}</ul>` : ''}${m.notes ? `<div class="divider">ملاحظات</div><p style="font-size:13px;margin:0">${m.notes}</p>` : ''}</div>`).join(''); }
 
-        function saveTechnician() { if (!requireAdmin()) return; const name = (document.getElementById('tech-name').value || '').trim(), spec = (document.getElementById('tech-spec').value || '').trim(), phone = (document.getElementById('tech-phone').value || '').trim(), phone2 = (document.getElementById('tech-phone2').value || '').trim(), intercom = (document.getElementById('tech-intercom').value || '').trim(), notes = (document.getElementById('tech-notes').value || '').trim(); if (!name || !spec || !phone) { toast('أدخل الاسم والتخصص والهاتف', 'err'); return; } const editId = document.getElementById('tech-edit-id').value; if (editId) { const t = buildingData.technicians.find(x => x.id === editId); if (t) Object.assign(t, { name, spec, phone, phone2, intercom, notes }); toast('تم التحديث', 'ok'); } else { buildingData.technicians.push({ id: 't' + Date.now(), name, spec, phone, phone2, intercom, notes }); toast('تم الإضافة', 'ok'); } saveData(); resetTechnicianForm(); renderTechnicians(); }
-        function editTechnician(id) { if (!requireAdmin()) return; const t = buildingData.technicians.find(x => x.id === id); if (!t) return; document.getElementById('tech-edit-id').value = t.id; document.getElementById('tech-name').value = t.name || ''; document.getElementById('tech-spec').value = t.spec || ''; document.getElementById('tech-phone').value = t.phone || ''; document.getElementById('tech-phone2').value = t.phone2 || ''; document.getElementById('tech-intercom').value = t.intercom || ''; document.getElementById('tech-notes').value = t.notes || ''; document.getElementById('tech-form-title').textContent = '✏️ تعديل فنّي'; document.getElementById('tech-cancel').style.display = 'inline-block'; window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function saveTechnician(){ if(!requireAdmin())return; const name=(document.getElementById('tech-name').value||'').trim(),spec=(document.getElementById('tech-spec').value||'').trim(),phone=(document.getElementById('tech-phone').value||'').trim(),phone2=(document.getElementById('tech-phone2').value||'').trim(),phone3=(document.getElementById('tech-phone3').value||'').trim(),intercom=(document.getElementById('tech-intercom').value||'').trim(),notes=(document.getElementById('tech-notes').value||'').trim(); if(!name||!spec||!phone){toast('أدخل الاسم والتخصص والهاتف','err');return;} const editId=document.getElementById('tech-edit-id').value; if(editId){ const t=buildingData.technicians.find(x=>x.id===editId); if(t)Object.assign(t,{name,spec,phone,phone2,phone3,intercom,notes}); toast('تم التحديث','ok'); } else { buildingData.technicians.push({id:'t'+Date.now(),name,spec,phone,phone2,phone3,intercom,notes}); toast('تم الإضافة','ok'); } saveData(); resetTechnicianForm(); renderTechnicians(); }
+        function editTechnician(id){ if(!requireAdmin())return; const t=buildingData.technicians.find(x=>x.id===id); if(!t)return; document.getElementById('tech-edit-id').value=t.id; document.getElementById('tech-name').value=t.name||''; document.getElementById('tech-spec').value=t.spec||''; document.getElementById('tech-phone').value=t.phone||''; document.getElementById('tech-phone2').value=t.phone2||''; document.getElementById('tech-phone3').value=t.phone3||''; document.getElementById('tech-intercom').value=t.intercom||''; document.getElementById('tech-notes').value=t.notes||''; document.getElementById('tech-form-title').textContent='✏️ تعديل فنّي'; document.getElementById('tech-cancel').style.display='inline-block'; window.scrollTo({top:0,behavior:'smooth'}); }
         function deleteTechnician(id) { if (!requireAdmin()) return; if (!confirm('حذف؟')) return; buildingData.technicians = buildingData.technicians.filter(t => t.id !== id); saveData(); renderTechnicians(); toast('تم الحذف', 'warn'); }
-        function resetTechnicianForm() { ['tech-edit-id', 'tech-name', 'tech-spec', 'tech-phone', 'tech-phone2', 'tech-intercom', 'tech-notes'].forEach(i => document.getElementById(i).value = ''); document.getElementById('tech-form-title').textContent = '➕ إضافة فنّي'; document.getElementById('tech-cancel').style.display = 'none'; }
-        function renderTechnicians() { const cont = document.getElementById('tech-list'); if (!cont) return; const list = buildingData.technicians || []; if (!list.length) { cont.innerHTML = '<div class="alert info">لا يوجد فنّيون.</div>'; return; } cont.innerHTML = list.map(t => `<div class="tcard"><span class="spec">${t.spec || '—'}</span><h3>${t.name}</h3><p>📞 <a href="tel:${t.phone}">${t.phone}</a></p>${t.phone2 ? `<p>📞 <a href="tel:${t.phone2}">${t.phone2}</a></p>` : ''}${t.intercom ? `<p>🔔 انتركم: ${t.intercom}</p>` : ''}${t.notes ? `<p style="color:var(--muted)">📝 ${t.notes}</p>` : ''}<div class="no-print admin-only" style="display:flex;gap:6px;margin-top:8px"><button class="sm" onclick="editTechnician('${t.id}')">✏️</button><button class="err sm" onclick="deleteTechnician('${t.id}')">🗑️</button></div></div>`).join(''); }
-
+        function resetTechnicianForm(){ ['tech-edit-id','tech-name','tech-spec','tech-phone','tech-phone2','tech-phone3','tech-intercom','tech-notes'].forEach(i=>document.getElementById(i).value=''); document.getElementById('tech-form-title').textContent='➕ إضافة فنّي'; document.getElementById('tech-cancel').style.display='none'; }
+        function renderTechnicians(){ const cont=document.getElementById('tech-list'); if(!cont)return; const list=buildingData.technicians||[]; if(!list.length){ cont.innerHTML='<div class="alert info">لا يوجد فنّيون.</div>'; return; } cont.innerHTML=list.map(t=>`<div class="tcard"><span class="spec">${t.spec||'—'}</span><h3>${t.name}</h3><p>📞 <a href="tel:${t.phone}">${t.phone}</a></p>${t.phone2?`<p>📞 <a href="tel:${t.phone2}">${t.phone2}</a></p>`:''}${t.phone3?`<p>📞 <a href="tel:${t.phone3}">${t.phone3}</a></p>`:''}${t.intercom?`<p>🔔 انتركم: ${t.intercom}</p>`:''}${t.notes?`<p style="color:var(--muted)">📝 ${t.notes}</p>`:''}<div class="no-print admin-only" style="display:flex;gap:6px;margin-top:8px"><button class="sm" onclick="editTechnician('${t.id}')">✏️</button><button class="err sm" onclick="deleteTechnician('${t.id}')">🗑️</button></div></div>`).join(''); }
         function showTab(name, el) { document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden')); document.querySelectorAll('.tab').forEach(t => t.classList.remove('active')); document.getElementById(name).classList.remove('hidden'); if (el) el.classList.add('active'); const showPeriod = (name === 'dashboard' || name === 'payments' || name === 'expenses'); document.getElementById('period-card').style.display = showPeriod ? 'block' : 'none'; }
         function changeDate() { currentYear = document.getElementById('year-select').value; currentMonth = document.getElementById('month-select').value; render(); }
         function buildSelectors() { const sy = new Date().getFullYear(); const ys = document.getElementById('year-select'); for (let y = sy - 1; y <= sy + 6; y++) { const o = document.createElement('option'); o.value = y; o.textContent = y; if (String(y) === currentYear) o.selected = true; ys.appendChild(o); } const ms = document.getElementById('month-select'); MONTHS_ORDER.forEach(v => { const o = document.createElement('option'); o.value = v; o.textContent = months[v]; if (v === currentMonth) o.selected = true; ms.appendChild(o); }); }
@@ -1403,6 +1456,17 @@
                 // Word files can't preview in-browser — download/open them
                 window.open(path,'_blank');
             }
+        }
+
+        function toggleOwnerFields(){
+            const v=document.querySelector('#resident-form [name=residence_type]').value;
+            document.getElementById('owner-fields').style.display = (v==='مستأجر')?'grid':'none';
+        }
+        /* who pays special collections = the owner */
+        function payerName(id){
+            const r=residentFor(id); if(!r) return '';
+            if(r.residence_type==='مستأجر' && r.owner_name) return r.owner_name;
+            return (r.title?r.title+' ':'')+r.resident_name;
         }
 
         (async function start() {
