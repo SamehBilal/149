@@ -1,5 +1,5 @@
 {
-  "balance": 17835,
+  "balance": 18735,
   "payments": {
     "2026-01": {
       "0-1": {
@@ -623,6 +623,13 @@
         "floor": "ثاني",
         "apartment": "3"
       },
+      "3-3": {
+        "paid": true,
+        "amount": 300,
+        "date": "2026-07-01",
+        "floor": "ثالث",
+        "apartment": "3"
+      },
       "4-2": {
         "paid": true,
         "amount": 300,
@@ -667,6 +674,13 @@
         "floor": "ثاني",
         "apartment": "3"
       },
+      "3-3": {
+        "paid": true,
+        "amount": 300,
+        "date": "2026-08-01",
+        "floor": "ثالث",
+        "apartment": "3"
+      },
       "4-2": {
         "paid": true,
         "amount": 300,
@@ -709,6 +723,13 @@
         "amount": 200,
         "date": "2026-09-01",
         "floor": "ثاني",
+        "apartment": "3"
+      },
+      "3-3": {
+        "paid": true,
+        "amount": 300,
+        "date": "2026-09-01",
+        "floor": "ثالث",
         "apartment": "3"
       },
       "4-2": {
@@ -1006,21 +1027,21 @@
     {
       "type": "income",
       "description": "استعادة مدفوعات يوليو 2026",
-      "amount": 1300,
+      "amount": 1600,
       "date": "2026-07-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات اغسطس 2026",
-      "amount": 1300,
+      "amount": 1600,
       "date": "2026-08-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات سبتمبر 2026",
-      "amount": 1300,
+      "amount": 1600,
       "date": "2026-09-01",
       "timestamp": 1783863338694
     },
