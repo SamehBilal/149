@@ -1434,7 +1434,9 @@
       "active": true
     }
   },
-  "apartment_accounts": {},
+  "apartment_accounts": {
+    "5-1": 40
+  },
   "residents": {
     "0-1": {
       "resident_name": "خالد عبد اللطيف",
