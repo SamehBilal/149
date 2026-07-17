@@ -613,6 +613,24 @@
 
         .filelink{color:var(--info);font-weight:700;text-decoration:none;border-bottom:1.5px dashed var(--info)}
 
+        .garage-map { display: flex; flex-direction: column; gap: 32px }
+        .garage-section-title { font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--muted); margin-bottom: 10px }
+        .garage-row { display: flex; gap: 12px; flex-wrap: wrap }
+        .garage-spot {
+            width: 66px; height: 104px;
+            border: 2px solid var(--ink); border-radius: 8px;
+            background: #fff; box-shadow: 3px 3px 0 var(--ink);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 4px; cursor: pointer; flex-shrink: 0
+        }
+        .garage-spot.horizontal { width: 104px; height: 66px }
+        .garage-spot.angle45 { margin: 14px 18px; transform: rotate(45deg) }
+        .garage-spot.angle45 .gs-inner { transform: rotate(-45deg) }
+        .garage-spot.occupied { background: #f0fdf4; border-color: var(--ok) }
+        .garage-spot .gs-car { font-size: 20px; line-height: 1 }
+        .garage-spot .gs-label { font-size: 10px; color: var(--muted); font-weight: 700; margin-top: 2px }
+        .garage-spot .gs-res { font-size: 10px; font-weight: 700; margin-top: 2px; line-height: 1.2 }
+
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -731,6 +749,7 @@
                 <div class="tab admin-only" data-tab="settings" onclick="showTab('settings',this)">⚙️ إعدادات الشقق
                 </div>
                 <div class="tab" data-tab="people" onclick="showTab('people',this)">👥 السكان</div>
+                <div class="tab" data-tab="garage" onclick="showTab('garage',this)">🚗 الجراج</div>
                 <div class="tab" data-tab="meetings" onclick="showTab('meetings',this)">📝 الاجتماعات</div>
                 <div class="tab" data-tab="technicians" onclick="showTab('technicians',this)">🔧 الفنيّون</div>
             </div>
@@ -1023,6 +1042,30 @@
                 <div id="people-container"></div>
             </div>
 
+            <div id="garage" class="tab-content hidden">
+                <div class="card">
+                    <h2>🚗 خريطة الجراج</h2>
+                    <div style="font-size:11px;color:var(--muted);margin-bottom:14px">🟩 مشغول · ⬜ شاغر — اضغط مكاناً لعرض بيانات الساكن</div>
+                    <div class="garage-map" id="garage-map"></div>
+                </div>
+                <div class="card">
+                    <h2>📋 تعيين أماكن الجراج</h2>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>المكان</th>
+                                    <th>النوع</th>
+                                    <th>الشقة / الساكن</th>
+                                    <th class="no-print admin-only">تعيين</th>
+                                </tr>
+                            </thead>
+                            <tbody id="garage-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <div id="meetings" class="tab-content hidden">
                 <div class="card no-print admin-only">
                     <h2 id="mtg-form-title">➕ إضافة اجتماع</h2>
@@ -1173,7 +1216,20 @@
         const defaultExpenseTypes = { water: '💧 مياه', electricity: '⚡ كهرباء', garage: '🧹 سلالم/جراج', elevator: '🛗 أسانسير', other: '📝 أخرى' };
         const floorMapping = { 'أرضي': 0, 'أول': 1, 'ثاني': 2, 'ثالث': 3, 'رابع': 4, 'خامس': 5 };
 
-        function getDefaultData() { const ap = {}; floors.forEach((fl, fi) => apartments.forEach(a => { ap[`${fi}-${a}`] = { monthly_payment: 300, active: true }; })); ap["0-1"] = { monthly_payment: 150, active: true, rate_schedule: [{ from: "2020-01", amount: 100 }, { from: "2026-07", amount: 150 }] }; ap["0-2"] = { monthly_payment: 0, active: false }; return { balance: 0, payments: {}, expenses: {}, history: [], meetings: [], technicians: [], special_collections: [], rate_schedule: [{ from: "2020-01", amount: 200 }, { from: "2026-07", amount: 300 }], opening_debt: {}, expense_type_defs: { ...defaultExpenseTypes }, apartments: ap, apartment_accounts: {}, residents: {} }; }
+        function defaultGarageSpots() {
+            return [
+                { id: 'g1', label: '1', section: 'front', type: 'vertical', apartment_id: null },
+                { id: 'g2', label: '2', section: 'front', type: 'vertical', apartment_id: null },
+                { id: 'g3', label: '3', section: 'front', type: 'vertical', apartment_id: null },
+                { id: 'g4', label: '4', section: 'front', type: 'vertical', apartment_id: null },
+                { id: 'g5', label: '5', section: 'front', type: 'vertical', apartment_id: null },
+                { id: 'g6', label: '6', section: 'back', type: 'vertical', apartment_id: null },
+                { id: 'g7', label: '7', section: 'back', type: 'vertical', apartment_id: null },
+                { id: 'g8', label: '8', section: 'back', type: 'angle45', apartment_id: null },
+                { id: 'g9', label: '9', section: 'back', type: 'horizontal', apartment_id: null },
+            ];
+        }
+        function getDefaultData() { const ap = {}; floors.forEach((fl, fi) => apartments.forEach(a => { ap[`${fi}-${a}`] = { monthly_payment: 300, active: true }; })); ap["0-1"] = { monthly_payment: 150, active: true, rate_schedule: [{ from: "2020-01", amount: 100 }, { from: "2026-07", amount: 150 }] }; ap["0-2"] = { monthly_payment: 0, active: false }; return { balance: 0, payments: {}, expenses: {}, history: [], meetings: [], technicians: [], special_collections: [], garage_spots: defaultGarageSpots(), rate_schedule: [{ from: "2020-01", amount: 200 }, { from: "2026-07", amount: 300 }], opening_debt: {}, expense_type_defs: { ...defaultExpenseTypes }, apartments: ap, apartment_accounts: {}, residents: {} }; }
 
         let buildingData = getDefaultData();
         let currentYear = String(new Date().getFullYear());
@@ -1207,6 +1263,7 @@
             if (!Array.isArray(buildingData.meetings)) buildingData.meetings = [];
             if (!Array.isArray(buildingData.technicians)) buildingData.technicians = [];
             if (!Array.isArray(buildingData.special_collections)) buildingData.special_collections = [];
+            if (!Array.isArray(buildingData.garage_spots) || !buildingData.garage_spots.length) buildingData.garage_spots = defaultGarageSpots();
             if (!Array.isArray(buildingData.rate_schedule) || !buildingData.rate_schedule.length) buildingData.rate_schedule = [{ from: "2020-01", amount: 200 }, { from: "2026-07", amount: 300 }];
             buildingData.opening_debt = buildingData.opening_debt || {};
             if (!buildingData.expense_type_defs || !Object.keys(buildingData.expense_type_defs).length) buildingData.expense_type_defs = { ...defaultExpenseTypes };
@@ -1358,7 +1415,37 @@
         function unpaidCollectionsTotal(id) { return unpaidCollections(id).reduce((s, c) => s + c.per_apartment, 0); }
         function paymentHistory(id) { const rows = []; Object.keys(buildingData.payments).sort().forEach(key => { const pay = buildingData.payments[key][id]; if (pay && pay.paid) { const [yy, mm] = key.split('-'); rows.push({ label: `${months[mm]} ${yy}`, amount: pay.amount, date: pay.date }); } }); return rows.reverse(); }
 
-        function render() { document.getElementById('hdr-balance').textContent = nf(buildingData.balance) + ' ج'; document.getElementById('gen-time').textContent = buildingData.last_updated ? ('آخر تحديث للبيانات: '+buildingData.last_updated) : 'لا يوجد تحديث مسجل'; document.getElementById('period-title').textContent = `${months[currentMonth]} ${currentYear}`; renderExpenseTypes(); renderDashboard(); renderPayments(); renderPaymentsYear(); renderCollections(); renderExpenses(); renderAccounts(); renderSettings(); renderPeople(); renderMeetings(); renderTechnicians(); }
+        function render() { document.getElementById('hdr-balance').textContent = nf(buildingData.balance) + ' ج'; document.getElementById('gen-time').textContent = buildingData.last_updated ? ('آخر تحديث للبيانات: '+buildingData.last_updated) : 'لا يوجد تحديث مسجل'; document.getElementById('period-title').textContent = `${months[currentMonth]} ${currentYear}`; renderExpenseTypes(); renderDashboard(); renderPayments(); renderPaymentsYear(); renderCollections(); renderExpenses(); renderAccounts(); renderSettings(); renderPeople(); renderGarage(); renderMeetings(); renderTechnicians(); }
+
+        function garageSpotTypeLabel(t) { return t === 'vertical' ? 'رأسي' : (t === 'horizontal' ? 'أفقي' : 'بزاوية 45°'); }
+        function garageSpotOccupantLabel(s) { if (!s.apartment_id) return 'شاغر'; const [fl, apt] = s.apartment_id.split('-'); const nm = ownerName(s.apartment_id); return nm || `${floors[fl]} - ${apt}`; }
+        function renderGarage() {
+            const map = document.getElementById('garage-map'), body = document.getElementById('garage-body');
+            if (!map || !body) return;
+            const spots = buildingData.garage_spots || [];
+            const byId = id => spots.find(s => s.id === id) || { id, label: '?', type: 'vertical', apartment_id: null };
+            const spotBox = s => {
+                const cls = 'garage-spot' + (s.type === 'horizontal' ? ' horizontal' : '') + (s.type === 'angle45' ? ' angle45' : '') + (s.apartment_id ? ' occupied' : '');
+                const occ = garageSpotOccupantLabel(s);
+                const inner = `<div class="gs-car">🚗</div><div class="gs-label">#${s.label}</div><div class="gs-res">${occ}</div>`;
+                return `<div class="${cls}" title="مكان ${s.label} — ${occ}" onclick="${s.apartment_id ? `openResident('${s.apartment_id}')` : ''}">${s.type === 'angle45' ? `<div class="gs-inner">${inner}</div>` : inner}</div>`;
+            };
+            map.innerHTML = `
+                <div>
+                    <div class="garage-section-title">🅿️ المنطقة الأمامية</div>
+                    <div class="garage-row" style="margin-inline-start:78px">${['g4', 'g5'].map(id => spotBox(byId(id))).join('')}</div>
+                    <div class="garage-row" style="margin-top:12px">${['g1', 'g2', 'g3'].map(id => spotBox(byId(id))).join('')}</div>
+                </div>
+                <div>
+                    <div class="garage-section-title">🅿️ المنطقة الخلفية</div>
+                    <div class="garage-row">${['g6', 'g7', 'g8', 'g9'].map(id => spotBox(byId(id))).join('')}</div>
+                </div>`;
+
+            const apartmentOptions = allApartmentUnits().filter(u => (buildingData.apartments[u.id] || { active: true }).active).map(u => `<option value="${u.id}">${u.fl} - ${u.apt}${ownerName(u.id) ? (' · ' + ownerName(u.id)) : ''}</option>`).join('');
+            body.innerHTML = spots.map(s => `<tr><td>${s.label}</td><td>${garageSpotTypeLabel(s.type)}</td><td>${s.apartment_id ? `${garageSpotOccupantLabel(s)} (${s.apartment_id})` : '<span style="color:var(--muted)">شاغر</span>'}</td><td class="no-print admin-only"><div style="display:flex;gap:4px"><select id="garage-sel-${s.id}"><option value="">— شاغر —</option>${apartmentOptions}</select><button class="sm" onclick="saveGarageSpot('${s.id}')">حفظ</button></div></td></tr>`).join('');
+            spots.forEach(s => { const sel = document.getElementById('garage-sel-' + s.id); if (sel) sel.value = s.apartment_id || ''; });
+        }
+        function saveGarageSpot(id) { if (!requireAdmin()) return; const sel = document.getElementById('garage-sel-' + id); const s = (buildingData.garage_spots || []).find(x => x.id === id); if (!s) return; s.apartment_id = sel.value || null; saveData(); renderGarage(); toast('تم تحديث مكان الجراج', 'ok'); }
 
         /* ===== dashboard helpers ===== */
         function allApartmentUnits() { const list = []; floors.forEach((fl, fi) => apartments.forEach(apt => list.push({ id: `${fi}-${apt}`, fl, apt, fi }))); return list; }
