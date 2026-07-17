@@ -731,6 +731,7 @@
                         <a onclick="window.print()">🖨️ طباعة</a>
                         <a onclick="reloadSeed()">🔄 إعادة التحميل من الملف</a>
                         <a onclick="forceRefreshApp()">🧹 مسح الذاكرة المؤقتة وتحديث</a>
+                        <a onclick="changeAdminPassword()">🔑 تغيير كلمة مرور الأدمن</a>
                     </div>
                 </div>
                 <input type="file" id="import-file" accept=".json,application/json" class="hidden"
@@ -1202,11 +1203,11 @@
             } catch (e) { }
             location.reload();
         }
-        const ADMIN_PASSWORD = '149admin';
         let isAdmin = false;
-        function toggleAdmin() { if (isAdmin) { isAdmin = false; document.body.classList.remove('admin-mode'); updateLockBtn(); render(); toast('تم قفل وضع التعديل', 'info'); return; } const p = prompt('أدخل كلمة المرور:'); if (p === null) return; if (p === ADMIN_PASSWORD) { isAdmin = true; document.body.classList.add('admin-mode'); updateLockBtn(); render(); toast('تم فتح وضع التعديل', 'ok'); } else toast('كلمة المرور غير صحيحة', 'err'); }
+        function toggleAdmin() { if (isAdmin) { isAdmin = false; document.body.classList.remove('admin-mode'); updateLockBtn(); render(); toast('تم قفل وضع التعديل', 'info'); return; } const p = prompt('أدخل كلمة المرور:'); if (p === null) return; if (p === buildingData.admin_password) { isAdmin = true; document.body.classList.add('admin-mode'); updateLockBtn(); render(); toast('تم فتح وضع التعديل', 'ok'); } else toast('كلمة المرور غير صحيحة', 'err'); }
         function updateLockBtn() { const b = document.getElementById('lock-btn'); if (b) b.textContent = isAdmin ? '🔓 وضع التعديل (اضغط للقفل)' : '🔒 دخول الأدمن'; }
         function requireAdmin() { if (!isAdmin) { toast('هذا الإجراء يتطلب الدخول كمشرف', 'warn'); return false; } return true; }
+        function changeAdminPassword() { if (!requireAdmin()) return; const cur = prompt('كلمة المرور الحالية:'); if (cur === null) return; if (cur !== buildingData.admin_password) { toast('كلمة المرور الحالية غير صحيحة', 'err'); return; } const next = prompt('كلمة المرور الجديدة:'); if (next === null) return; if (!next.trim()) { toast('أدخل كلمة مرور صحيحة', 'err'); return; } buildingData.admin_password = next.trim(); saveData(); toast('تم تغيير كلمة المرور', 'ok'); }
 
         const STORAGE_KEY = 'building149_data';
         const floors = ['أرضي', 'أول', 'ثاني', 'ثالث', 'رابع', 'خامس'];
@@ -1229,7 +1230,7 @@
                 { id: 'g9', label: '9', section: 'back', type: 'horizontal', apartment_id: null },
             ];
         }
-        function getDefaultData() { const ap = {}; floors.forEach((fl, fi) => apartments.forEach(a => { ap[`${fi}-${a}`] = { monthly_payment: 300, active: true }; })); ap["0-1"] = { monthly_payment: 150, active: true, rate_schedule: [{ from: "2020-01", amount: 100 }, { from: "2026-07", amount: 150 }] }; ap["0-2"] = { monthly_payment: 0, active: false }; return { balance: 0, payments: {}, expenses: {}, history: [], meetings: [], technicians: [], special_collections: [], garage_spots: defaultGarageSpots(), rate_schedule: [{ from: "2020-01", amount: 200 }, { from: "2026-07", amount: 300 }], opening_debt: {}, expense_type_defs: { ...defaultExpenseTypes }, apartments: ap, apartment_accounts: {}, residents: {} }; }
+        function getDefaultData() { const ap = {}; floors.forEach((fl, fi) => apartments.forEach(a => { ap[`${fi}-${a}`] = { monthly_payment: 300, active: true }; })); ap["0-1"] = { monthly_payment: 150, active: true, rate_schedule: [{ from: "2020-01", amount: 100 }, { from: "2026-07", amount: 150 }] }; ap["0-2"] = { monthly_payment: 0, active: false }; return { balance: 0, admin_password: '149admin', payments: {}, expenses: {}, history: [], meetings: [], technicians: [], special_collections: [], garage_spots: defaultGarageSpots(), rate_schedule: [{ from: "2020-01", amount: 200 }, { from: "2026-07", amount: 300 }], opening_debt: {}, expense_type_defs: { ...defaultExpenseTypes }, apartments: ap, apartment_accounts: {}, residents: {} }; }
 
         let buildingData = getDefaultData();
         let currentYear = String(new Date().getFullYear());
@@ -1244,6 +1245,7 @@
         function ensureShape() {
             buildingData.last_updated=buildingData.last_updated||'';
             buildingData.balance = buildingData.balance || 0;
+            buildingData.admin_password = buildingData.admin_password || '149admin';
             if (Array.isArray(buildingData.payments) || !buildingData.payments) buildingData.payments = {};
             if (Array.isArray(buildingData.expenses) || !buildingData.expenses) buildingData.expenses = {};
             { // migrate any expense filed under the wrong month bucket back to its actual date
