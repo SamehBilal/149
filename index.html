@@ -613,23 +613,30 @@
 
         .filelink{color:var(--info);font-weight:700;text-decoration:none;border-bottom:1.5px dashed var(--info)}
 
-        .garage-map { display: flex; flex-direction: column; gap: 32px }
-        .garage-section-title { font-size: 12px; font-weight: 800; text-transform: uppercase; color: var(--muted); margin-bottom: 10px }
-        .garage-row { display: flex; gap: 12px; flex-wrap: wrap }
         .garage-spot {
-            width: 66px; height: 104px;
+            width: 62px; height: 100px;
             border: 2px solid var(--ink); border-radius: 8px;
             background: #fff; box-shadow: 3px 3px 0 var(--ink);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-align: center; padding: 4px; cursor: pointer; flex-shrink: 0
         }
-        .garage-spot.horizontal { width: 104px; height: 66px }
-        .garage-spot.angle45 { margin: 14px 18px; transform: rotate(45deg) }
+        .garage-spot.horizontal { width: 100px; height: 62px }
+        .garage-spot.angle45 { margin: 12px 16px; transform: rotate(45deg) }
         .garage-spot.angle45 .gs-inner { transform: rotate(-45deg) }
         .garage-spot.occupied { background: #f0fdf4; border-color: var(--ok) }
-        .garage-spot .gs-car { font-size: 20px; line-height: 1 }
+        .garage-spot .gs-car { font-size: 18px; line-height: 1 }
         .garage-spot .gs-label { font-size: 10px; color: var(--muted); font-weight: 700; margin-top: 2px }
         .garage-spot .gs-res { font-size: 10px; font-weight: 700; margin-top: 2px; line-height: 1.2 }
+
+        .garage-diagram { display: inline-flex; flex-direction: column; gap: 10px; min-width: 100%; direction: ltr; }
+        .garage-outside-top { display: flex; gap: 10px; margin-inline-start: 88px }
+        .garage-main-row { display: flex; gap: 12px; align-items: flex-start }
+        .garage-outside-left { display: flex; flex-direction: column; gap: 50px }
+        .garage-building { border: 3px solid var(--ink); border-radius: 6px; background: #eef0f2; padding: 14px; display: flex; flex-direction: column; gap: 14px }
+        .garage-top-row { display: flex; gap: 10px; align-items: flex-end }
+        .garage-lower-grid { display: grid; grid-template-columns: 62px 62px 62px 62px 62px; grid-auto-rows: auto; gap: 10px; align-items: end }
+        .garage-stairs-block { grid-column: 1; grid-row: 1 / span 2; border: 2px dashed var(--ink); border-radius: 6px; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; font-size: 11px; font-weight: 800; color: var(--muted); background: #fff; min-height: 100%; }
+        .garage-exit-strip { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; writing-mode: vertical-rl; font-size: 11px; font-weight: 800; color: var(--muted); padding: 0 8px; border-inline-start: 2px dashed var(--line); align-self: stretch }
 
         .modal-overlay {
             position: fixed;
@@ -1056,6 +1063,7 @@
                             <thead>
                                 <tr>
                                     <th>المكان</th>
+                                    <th>الموقع</th>
                                     <th>النوع</th>
                                     <th>الشقة / الساكن</th>
                                     <th class="no-print admin-only">تعيين</th>
@@ -1219,15 +1227,19 @@
 
         function defaultGarageSpots() {
             return [
-                { id: 'g1', label: '1', section: 'front', type: 'vertical', apartment_id: null },
-                { id: 'g2', label: '2', section: 'front', type: 'vertical', apartment_id: null },
-                { id: 'g3', label: '3', section: 'front', type: 'vertical', apartment_id: null },
-                { id: 'g4', label: '4', section: 'front', type: 'vertical', apartment_id: null },
-                { id: 'g5', label: '5', section: 'front', type: 'vertical', apartment_id: null },
-                { id: 'g6', label: '6', section: 'back', type: 'vertical', apartment_id: null },
-                { id: 'g7', label: '7', section: 'back', type: 'vertical', apartment_id: null },
-                { id: 'g8', label: '8', section: 'back', type: 'angle45', apartment_id: null },
-                { id: 'g9', label: '9', section: 'back', type: 'horizontal', apartment_id: null },
+                { id: 'g1', label: '1', zone: 'inside', type: 'vertical', dir: 'down', apartment_id: null },
+                { id: 'g2', label: '2', zone: 'inside', type: 'vertical', dir: 'down', apartment_id: null },
+                { id: 'g3', label: '3', zone: 'inside', type: 'vertical', dir: 'down', apartment_id: null },
+                { id: 'g4', label: '4', zone: 'inside', type: 'vertical', dir: 'down', apartment_id: null },
+                { id: 'g5', label: '5', zone: 'inside', type: 'vertical', dir: 'left', apartment_id: null },
+                { id: 'g6', label: '6', zone: 'inside', type: 'angle45', dir: 'left', apartment_id: null },
+                { id: 'g7', label: '7', zone: 'inside', type: 'horizontal', dir: 'left', apartment_id: null },
+                { id: 'g8', label: '8', zone: 'inside', type: 'vertical', dir: 'right', apartment_id: null },
+                { id: 'g9', label: '9', zone: 'inside', type: 'vertical', dir: 'right', apartment_id: null },
+                { id: 'g10', label: '10', zone: 'outside', type: 'vertical', dir: 'left', apartment_id: null },
+                { id: 'g11', label: '11', zone: 'outside', type: 'vertical', dir: 'up', apartment_id: null },
+                { id: 'g12', label: '12', zone: 'outside', type: 'vertical', dir: 'right', apartment_id: null },
+                { id: 'g13', label: '13', zone: 'outside', type: 'vertical', dir: 'right', apartment_id: null },
             ];
         }
         function getDefaultData() { const ap = {}; floors.forEach((fl, fi) => apartments.forEach(a => { ap[`${fi}-${a}`] = { monthly_payment: 300, active: true }; })); ap["0-1"] = { monthly_payment: 150, active: true, rate_schedule: [{ from: "2020-01", amount: 100 }, { from: "2026-07", amount: 150 }] }; ap["0-2"] = { monthly_payment: 0, active: false }; return { balance: 0, admin_password: '149admin', payments: {}, expenses: {}, history: [], meetings: [], technicians: [], special_collections: [], garage_spots: defaultGarageSpots(), rate_schedule: [{ from: "2020-01", amount: 200 }, { from: "2026-07", amount: 300 }], opening_debt: {}, expense_type_defs: { ...defaultExpenseTypes }, apartments: ap, apartment_accounts: {}, residents: {} }; }
@@ -1265,7 +1277,7 @@
             if (!Array.isArray(buildingData.meetings)) buildingData.meetings = [];
             if (!Array.isArray(buildingData.technicians)) buildingData.technicians = [];
             if (!Array.isArray(buildingData.special_collections)) buildingData.special_collections = [];
-            if (!Array.isArray(buildingData.garage_spots) || !buildingData.garage_spots.length) buildingData.garage_spots = defaultGarageSpots();
+            if (!Array.isArray(buildingData.garage_spots) || buildingData.garage_spots.length !== 13) buildingData.garage_spots = defaultGarageSpots();
             if (!Array.isArray(buildingData.rate_schedule) || !buildingData.rate_schedule.length) buildingData.rate_schedule = [{ from: "2020-01", amount: 200 }, { from: "2026-07", amount: 300 }];
             buildingData.opening_debt = buildingData.opening_debt || {};
             if (!buildingData.expense_type_defs || !Object.keys(buildingData.expense_type_defs).length) buildingData.expense_type_defs = { ...defaultExpenseTypes };
@@ -1421,30 +1433,52 @@
 
         function garageSpotTypeLabel(t) { return t === 'vertical' ? 'رأسي' : (t === 'horizontal' ? 'أفقي' : 'بزاوية 45°'); }
         function garageSpotOccupantLabel(s) { if (!s.apartment_id) return 'شاغر'; const [fl, apt] = s.apartment_id.split('-'); const nm = ownerName(s.apartment_id); return nm || `${floors[fl]} - ${apt}`; }
+        const GARAGE_DIR_ARROW = { down: '⬇️', left: '⬅️', right: '➡️', up: '⬆️' };
         function renderGarage() {
             const map = document.getElementById('garage-map'), body = document.getElementById('garage-body');
             if (!map || !body) return;
             const spots = buildingData.garage_spots || [];
-            const byId = id => spots.find(s => s.id === id) || { id, label: '?', type: 'vertical', apartment_id: null };
-            const spotBox = s => {
+            const byId = id => spots.find(s => s.id === id) || { id, label: '?', type: 'vertical', dir: '', apartment_id: null };
+            const spotBox = (s, gridStyle) => {
                 const cls = 'garage-spot' + (s.type === 'horizontal' ? ' horizontal' : '') + (s.type === 'angle45' ? ' angle45' : '') + (s.apartment_id ? ' occupied' : '');
                 const occ = garageSpotOccupantLabel(s);
-                const inner = `<div class="gs-car">🚗</div><div class="gs-label">#${s.label}</div><div class="gs-res">${occ}</div>`;
-                return `<div class="${cls}" title="مكان ${s.label} — ${occ}" onclick="${s.apartment_id ? `openResident('${s.apartment_id}')` : ''}">${s.type === 'angle45' ? `<div class="gs-inner">${inner}</div>` : inner}</div>`;
+                const inner = `<div class="gs-car">🚗</div><div class="gs-label">#${s.label} ${GARAGE_DIR_ARROW[s.dir] || ''}</div><div class="gs-res">${occ}</div>`;
+                return `<div class="${cls}" style="${gridStyle || ''}" title="مكان ${s.label} — ${occ}" onclick="${s.apartment_id ? `openResident('${s.apartment_id}')` : ''}">${s.type === 'angle45' ? `<div class="gs-inner">${inner}</div>` : inner}</div>`;
             };
             map.innerHTML = `
-                <div>
-                    <div class="garage-section-title">🅿️ المنطقة الأمامية</div>
-                    <div class="garage-row" style="margin-inline-start:78px">${['g4', 'g5'].map(id => spotBox(byId(id))).join('')}</div>
-                    <div class="garage-row" style="margin-top:12px">${['g1', 'g2', 'g3'].map(id => spotBox(byId(id))).join('')}</div>
-                </div>
-                <div>
-                    <div class="garage-section-title">🅿️ المنطقة الخلفية</div>
-                    <div class="garage-row">${['g6', 'g7', 'g8', 'g9'].map(id => spotBox(byId(id))).join('')}</div>
+                <div class="garage-diagram">
+                    <div class="garage-outside-top">
+                        ${spotBox(byId('g12'))}
+                        ${spotBox(byId('g13'))}
+                    </div>
+                    <div class="garage-main-row">
+                        <div class="garage-outside-left">
+                            ${spotBox(byId('g11'))}
+                            ${spotBox(byId('g10'))}
+                        </div>
+                        <div class="garage-building">
+                            <div class="garage-top-row">
+                                ${spotBox(byId('g4'))}
+                                ${spotBox(byId('g5'))}
+                                ${spotBox(byId('g6'))}
+                            </div>
+                            <div class="garage-lower-grid">
+                                <div class="garage-stairs-block">🚶 سلالم</div>
+                                ${spotBox(byId('g7'), 'grid-column:2;grid-row:1')}
+                                ${spotBox(byId('g3'), 'grid-column:3;grid-row:2')}
+                                ${spotBox(byId('g9'), 'grid-column:4;grid-row:1')}
+                                ${spotBox(byId('g2'), 'grid-column:4;grid-row:2')}
+                                ${spotBox(byId('g8'), 'grid-column:5;grid-row:1')}
+                                ${spotBox(byId('g1'), 'grid-column:5;grid-row:2')}
+                            </div>
+                        </div>
+                        <div class="garage-exit-strip">↕️ خروج / دخول</div>
+                    </div>
                 </div>`;
 
             const apartmentOptions = allApartmentUnits().filter(u => (buildingData.apartments[u.id] || { active: true }).active).map(u => `<option value="${u.id}">${u.fl} - ${u.apt}${ownerName(u.id) ? (' · ' + ownerName(u.id)) : ''}</option>`).join('');
-            body.innerHTML = spots.map(s => `<tr><td>${s.label}</td><td>${garageSpotTypeLabel(s.type)}</td><td>${s.apartment_id ? `${garageSpotOccupantLabel(s)} (${s.apartment_id})` : '<span style="color:var(--muted)">شاغر</span>'}</td><td class="no-print admin-only"><div style="display:flex;gap:4px"><select id="garage-sel-${s.id}"><option value="">— شاغر —</option>${apartmentOptions}</select><button class="sm" onclick="saveGarageSpot('${s.id}')">حفظ</button></div></td></tr>`).join('');
+            const ORDER = ['g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7', 'g8', 'g9', 'g10', 'g11', 'g12', 'g13'];
+            body.innerHTML = ORDER.map(byId).map(s => `<tr><td>${s.label}</td><td>${s.zone === 'outside' ? 'خارج المبنى' : 'داخل الجراج'}</td><td>${garageSpotTypeLabel(s.type)}</td><td>${s.apartment_id ? `${garageSpotOccupantLabel(s)} (${s.apartment_id})` : '<span style="color:var(--muted)">شاغر</span>'}</td><td class="no-print admin-only"><div style="display:flex;gap:4px"><select id="garage-sel-${s.id}"><option value="">— شاغر —</option>${apartmentOptions}</select><button class="sm" onclick="saveGarageSpot('${s.id}')">حفظ</button></div></td></tr>`).join('');
             spots.forEach(s => { const sel = document.getElementById('garage-sel-' + s.id); if (sel) sel.value = s.apartment_id || ''; });
         }
         function saveGarageSpot(id) { if (!requireAdmin()) return; const sel = document.getElementById('garage-sel-' + id); const s = (buildingData.garage_spots || []).find(x => x.id === id); if (!s) return; s.apartment_id = sel.value || null; saveData(); renderGarage(); toast('تم تحديث مكان الجراج', 'ok'); }
