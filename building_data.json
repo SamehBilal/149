@@ -1,5 +1,5 @@
 {
-  "balance": 23035,
+  "balance": 25035,
   "admin_password": "149admin",
   "payments": {
     "2026-01": {
@@ -608,6 +608,13 @@
         "floor": "ثالث",
         "apartment": "3"
       },
+      "4-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-07-17",
+        "floor": "رابع",
+        "apartment": "1"
+      },
       "4-2": {
         "paid": true,
         "amount": 200,
@@ -647,7 +654,7 @@
       },
       "1-3": {
         "paid": true,
-        "amount": 200,
+        "amount": 300,
         "date": "2026-07-01",
         "floor": "أول",
         "apartment": "3"
@@ -687,6 +694,13 @@
         "floor": "ثالث",
         "apartment": "3"
       },
+      "4-1": {
+        "paid": true,
+        "amount": 300,
+        "date": "2026-07-17",
+        "floor": "رابع",
+        "apartment": "1"
+      },
       "4-2": {
         "paid": true,
         "amount": 300,
@@ -712,7 +726,7 @@
       },
       "1-3": {
         "paid": true,
-        "amount": 200,
+        "amount": 300,
         "date": "2026-08-01",
         "floor": "أول",
         "apartment": "3"
@@ -777,7 +791,7 @@
       },
       "1-3": {
         "paid": true,
-        "amount": 200,
+        "amount": 300,
         "date": "2026-09-01",
         "floor": "أول",
         "apartment": "3"
@@ -842,7 +856,7 @@
       },
       "1-3": {
         "paid": true,
-        "amount": 200,
+        "amount": 300,
         "date": "2026-01-01",
         "floor": "أول",
         "apartment": "3"
@@ -893,7 +907,7 @@
       },
       "1-3": {
         "paid": true,
-        "amount": 200,
+        "amount": 300,
         "date": "2026-01-01",
         "floor": "أول",
         "apartment": "3"
@@ -930,7 +944,7 @@
       },
       "1-3": {
         "paid": true,
-        "amount": 200,
+        "amount": 300,
         "date": "2026-01-01",
         "floor": "أول",
         "apartment": "3"
@@ -969,7 +983,7 @@
     }
   ],
   "opening_debt": {
-    "5-3": 1600,
+    "5-3": 600,
     "3-2": 180
   },
   "special_collections": [
@@ -1009,7 +1023,8 @@
         "2-1",
         "1-3",
         "5-1",
-        "3-1"
+        "3-1",
+        "4-1"
       ]
     }
   ],
@@ -1032,9 +1047,16 @@
       {
         "id": "17842114902486663",
         "type": "other",
-        "amount": 22310,
+        "amount": 21710,
         "description": "كل المصروفات القديمة",
         "date": "2026-07-12"
+      },
+      {
+        "id": "17842114902484066",
+        "type": "electricity",
+        "amount": 1200,
+        "description": "صيانة الكهرباء",
+        "date": "2026-07-01"
       }
     ],
     "2026-06": [
@@ -1128,42 +1150,42 @@
     {
       "type": "income",
       "description": "استعادة مدفوعات يوليو 2026",
-      "amount": 2300,
+      "amount": 2400,
       "date": "2026-07-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات اغسطس 2026",
-      "amount": 2300,
+      "amount": 2400,
       "date": "2026-08-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات سبتمبر 2026",
-      "amount": 2300,
+      "amount": 2400,
       "date": "2026-09-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات اكتوبر 2026",
-      "amount": 1600,
+      "amount": 1700,
       "date": "2026-10-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات نوفمبر 2026",
-      "amount": 1200,
+      "amount": 1300,
       "date": "2026-11-01",
       "timestamp": 1783863338694
     },
     {
       "type": "income",
       "description": "استعادة مدفوعات ديسمبر 2026",
-      "amount": 1200,
+      "amount": 1300,
       "date": "2026-12-01",
       "timestamp": 1783863338694
     },
@@ -1275,15 +1297,43 @@
     {
       "type": "expense",
       "description": "كل المصروفات القديمة",
-      "amount": 22310,
+      "amount": 21710,
       "date": "2026-07-16",
       "timestamp": 1784211490248
+    },
+    {
+      "type": "expense",
+      "description": "صيانة الكهرباء",
+      "amount": 1200,
+      "date": "2026-07-01",
+      "timestamp": 1783863338694
+    },
+    {
+      "type": "income",
+      "description": "صيانة المصعد - شقة 4-1",
+      "amount": 1500,
+      "date": "2026-07-17",
+      "timestamp": 1784281940251
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - رابع",
+      "amount": 300,
+      "date": "2026-07-17",
+      "timestamp": 1784282217270
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - رابع",
+      "amount": 200,
+      "date": "2026-07-17",
+      "timestamp": 1784282230466
     }
   ],
   "meetings": [
     {
       "id": "m1783862757820",
-      "title": "اجتماع يوليو",
+      "title": "اجتماع يوليو 2026",
       "date": "2026-07-10",
       "attendees": [
         "1-1",
@@ -1313,8 +1363,8 @@
     },
     {
       "id": "m1784206019096",
-      "title": "اجتماع ديسمبر 2025",
-      "date": "2025-12-01",
+      "title": "اجتماع نوفمبر 2025",
+      "date": "2025-11-16",
       "attendees": [
         "1-2",
         "3-3",
@@ -1323,7 +1373,7 @@
       ],
       "points": [],
       "notes": "",
-      "file": ""
+      "file": "https://samehbilal.github.io/149/16-11-2025 محضر اجتماع اتحاد الملاك.pdf"
     }
   ],
   "technicians": [
@@ -1512,7 +1562,7 @@
       "family_members": 3,
       "children_count": 1,
       "move_in_date": "2021-06-04",
-      "emergency_contact_name": "اسراء السيد زيدان",
+      "emergency_contact_name": "اسراء زيدان",
       "emergency_contact_phone": "01098363863",
       "notes": "لاتوجد"
     },
@@ -1738,5 +1788,5 @@
       "notes": ""
     }
   },
-  "last_updated": "2026-07-16 17:18:12"
+  "last_updated": "2026-07-17 12:57:10"
 }
