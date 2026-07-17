@@ -617,7 +617,7 @@
 
         .garage-canvas-wrap { overflow-x: auto; padding-bottom: 4px }
         .garage-canvas { position: relative; width: 100%; min-width: 640px; max-width: 820px; aspect-ratio: 1205 / 1060; margin: 0 auto; direction: ltr }
-        .garage-building-outline { position: absolute; left: 22.4%; top: 13.2%; width: 57.3%; height: 85.8%; background: #eef0f2; clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 5.8% 100%, 5.8% 68%, 0% 68%) }
+        .garage-building-outline { position: absolute; left: 22.4%; top: 13.2%; width: 57.3%; height: 85.8%; background: #eef0f2 }
         .garage-walls { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none }
         .garage-stairs-block {
             position: absolute; left: 40.7%; top: 48.6%; width: 15.8%; height: 24.1%;
@@ -1447,10 +1447,10 @@
         /* percentage box (relative to a 1205x1060 canvas) matching the reference garage diagram.
            rot is relative to car-top.png's native orientation (long axis horizontal, nose pointing left). */
         const GARAGE_LAYOUT = {
-            g12: { left: 24.1, top: 0.8, width: 24.9, height: 11.5, rot: 90 },
-            g13: { left: 51.9, top: 0.8, width: 24.9, height: 11.5, rot: 90 },
+            g12: { left: 24.1, top: 0.8, width: 24.9, height: 11.5, rot: 0 },
+            g13: { left: 51.9, top: 0.8, width: 24.9, height: 11.5, rot: 0 },
             g11: { left: 12.4, top: 16.0, width: 9.1, height: 33.0, rot: 90 },
-            g10: { left: 12.4, top: 65.1, width: 9.1, height: 34.0, rot: 90 },
+            g10: { left: 12.4, top: 53.0, width: 9.1, height: 34.0, rot: 90 },
             g4: { left: 25.3, top: 18.4, width: 10.8, height: 25.0, rot: 90 },
             g5: { left: 36.5, top: 18.4, width: 10.4, height: 25.0, rot: 90 },
             g6: { left: 46.9, top: 18.4, width: 18.7, height: 22.2, rot: 135 },
@@ -1486,7 +1486,7 @@
                     <div class="garage-canvas">
                         <div class="garage-building-outline"></div>
                         <svg class="garage-walls" viewBox="0 0 1205 1060" preserveAspectRatio="none">
-                            <polyline points="960,560 960,140 270,140 270,759 310,759 310,1050 600,1050"
+                            <polyline points="960,560 960,140 270,140 270,520"
                                 fill="none" style="stroke:var(--ink)" stroke-width="7" stroke-linejoin="round"/>
                         </svg>
                         <div class="garage-stairs-block">سلالم</div>
