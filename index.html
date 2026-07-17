@@ -620,7 +620,7 @@
         .garage-building-outline { position: absolute; left: 22.4%; top: 13.2%; width: 57.3%; height: 85.8%; background: #eef0f2 }
         .garage-walls { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none }
         .garage-stairs-block {
-            position: absolute; left: 40.7%; top: 48.6%; width: 15.8%; height: 24.1%;
+            position: absolute; left: 40.7%; top: 50%; width: 15.8%; height: 24.1%;
             border: 2px solid var(--ink); border-radius: 4px;
             background: repeating-linear-gradient(0deg, #fff, #fff 7px, #dde0e4 7px, #dde0e4 9px);
             display: flex; align-items: center; justify-content: center;
@@ -642,8 +642,8 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-align: center; cursor: pointer
         }
-        .gs-car-wrap { width: 92px; height: 92px; flex-shrink: 0; display: flex; align-items: center; justify-content: center }
-        .gs-car-icon { width: 84px; height: 56px; object-fit: contain; filter: drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
+        .gs-car-wrap { width: 125px; height: 98px; flex-shrink: 0; display: flex; align-items: center; justify-content: center }
+        .gs-car-icon { width: 106px; height: 95px; object-fit: contain; filter: drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
         .gs-label { font-size: 10px; font-weight: 800; color: var(--ink); white-space: nowrap; display: flex; align-items: center; gap: 3px; background: rgba(255,255,255,.85); border-radius: 4px; padding: 0 3px }
         .gs-res { font-size: 8.5px; font-weight: 700; color: var(--muted); line-height: 1.15; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: rgba(255,255,255,.85); border-radius: 4px; padding: 0 3px }
         .garage-spot.occupied .gs-res { color: var(--ok) }
@@ -1447,19 +1447,19 @@
         /* percentage box (relative to a 1205x1060 canvas) matching the reference garage diagram.
            rot is relative to car-top.png's native orientation (long axis horizontal, nose pointing left). */
         const GARAGE_LAYOUT = {
-            g12: { left: 24.1, top: 0.8, width: 24.9, height: 11.5, rot: 0 },
-            g13: { left: 51.9, top: 0.8, width: 24.9, height: 11.5, rot: 0 },
+            g12: { left: 24.1, top: 0.8, width: 24.9, height: 11.5, rot: 180 },
+            g13: { left: 51.9, top: 0.8, width: 24.9, height: 11.5, rot: 180 },
             g11: { left: 12.4, top: 16.0, width: 9.1, height: 33.0, rot: 90 },
             g10: { left: 12.4, top: 53.0, width: 9.1, height: 34.0, rot: 90 },
             g4: { left: 25.3, top: 18.4, width: 10.8, height: 25.0, rot: 90 },
-            g5: { left: 36.5, top: 18.4, width: 10.4, height: 25.0, rot: 90 },
-            g6: { left: 58.0, top: 18.4, width: 18.7, height: 22.2, rot: 135 },
+            g5: { left: 42, top: 18.4, width: 10.4, height: 25.0, rot: 90 },
+            g6: { left: 58.0, top: 18.4, width: 18.7, height: 22.2, rot: 315 },
             g7: { left: 58.1, top: 41.0, width: 17.4, height: 12.3, rot: 0 },
-            g9: { left: 60.2, top: 55.7, width: 6.6, height: 17.0, rot: 90 },
-            g8: { left: 70.1, top: 55.7, width: 6.6, height: 17.0, rot: 90 },
-            g3: { left: 49.8, top: 73.1, width: 6.6, height: 22.2, rot: 90 },
-            g2: { left: 60.2, top: 73.1, width: 6.6, height: 22.2, rot: 90 },
-            g1: { left: 70.1, top: 73.1, width: 6.6, height: 22.2, rot: 90 },
+            g9: { left: 58.2, top: 55.7, width: 6.6, height: 17.0, rot: 270 },
+            g8: { left: 70.1, top: 55.7, width: 6.6, height: 17.0, rot: 270 },
+            g3: { left: 45.8, top: 75.1, width: 6.6, height: 22.2, rot: 270 },
+            g2: { left: 58.2, top: 75.1, width: 6.6, height: 22.2, rot: 270 },
+            g1: { left: 70.1, top: 75.1, width: 6.6, height: 22.2, rot: 270 },
         };
         function garageCarImg(rot) {
             return `<img src="car-top.png" class="gs-car-icon" style="transform:rotate(${rot}deg)" alt="">`;
@@ -1486,7 +1486,7 @@
                     <div class="garage-canvas">
                         <div class="garage-building-outline"></div>
                         <svg class="garage-walls" viewBox="0 0 1205 1060" preserveAspectRatio="none">
-                            <polyline points="960,560 960,140 270,140 270,520"
+                            <polyline points="960,560 960,140 270,140 270,920"
                                 fill="none" style="stroke:var(--ink)" stroke-width="7" stroke-linejoin="round"/>
                         </svg>
                         <div class="garage-stairs-block">سلالم</div>
