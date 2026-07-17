@@ -615,30 +615,39 @@
 
         .filelink{color:var(--info);font-weight:700;text-decoration:none;border-bottom:1.5px dashed var(--info)}
 
-        .garage-spot {
-            width: 62px; height: 100px;
-            border: 2px solid var(--ink); border-radius: 8px;
-            background: #fff; box-shadow: 3px 3px 0 var(--ink);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            text-align: center; padding: 4px; cursor: pointer; flex-shrink: 0
+        .garage-canvas-wrap { overflow-x: auto; padding-bottom: 4px }
+        .garage-canvas { position: relative; width: 100%; min-width: 640px; max-width: 820px; aspect-ratio: 1205 / 1060; margin: 0 auto; direction: ltr }
+        .garage-building-outline { position: absolute; left: 22.4%; top: 13.2%; width: 57.3%; height: 85.8%; border: 4px solid var(--ink); border-radius: 4px; background: #eef0f2; clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 5.8% 100%, 5.8% 68%, 0% 68%) }
+        .garage-stairs-block {
+            position: absolute; left: 40.7%; top: 48.6%; width: 15.8%; height: 24.1%;
+            border: 2px solid var(--ink); border-radius: 4px;
+            background: repeating-linear-gradient(0deg, #fff, #fff 7px, #dde0e4 7px, #dde0e4 9px);
+            display: flex; align-items: center; justify-content: center;
+            writing-mode: vertical-rl; font-size: 11px; font-weight: 800; color: var(--muted)
         }
-        .garage-spot.horizontal { width: 100px; height: 62px }
-        .garage-spot.angle45 { margin: 12px 16px; transform: rotate(45deg) }
-        .garage-spot.angle45 .gs-inner { transform: rotate(-45deg) }
+        .garage-center-label {
+            position: absolute; left: 24.9%; top: 51.9%; width: 3.7%; height: 33%;
+            writing-mode: vertical-rl; font-size: 10px; font-weight: 800; color: var(--muted);
+            display: flex; align-items: center; justify-content: center; text-align: center
+        }
+        .garage-exit-strip {
+            position: absolute; left: 84.2%; top: 15.6%; width: 2.9%; height: 79.7%;
+            writing-mode: vertical-rl; font-size: 10px; font-weight: 800; color: var(--muted);
+            display: flex; align-items: center; justify-content: center; gap: 6px; text-align: center;
+            border-inline-start: 2px dashed var(--line)
+        }
+        .garage-spot {
+            position: absolute;
+            border: 2px solid var(--ink); border-radius: 6px;
+            background: #fff; box-shadow: 2px 2px 0 var(--ink);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 2px; cursor: pointer; overflow: hidden
+        }
         .garage-spot.occupied { background: #f0fdf4; border-color: var(--ok) }
-        .garage-spot .gs-car { font-size: 18px; line-height: 1 }
-        .garage-spot .gs-label { font-size: 10px; color: var(--muted); font-weight: 700; margin-top: 2px }
-        .garage-spot .gs-res { font-size: 10px; font-weight: 700; margin-top: 2px; line-height: 1.2 }
-
-        .garage-diagram { display: inline-flex; flex-direction: column; gap: 10px; min-width: 100%; direction: ltr; }
-        .garage-outside-top { display: flex; gap: 10px; margin-inline-start: 88px }
-        .garage-main-row { display: flex; gap: 12px; align-items: flex-start }
-        .garage-outside-left { display: flex; flex-direction: column; gap: 50px }
-        .garage-building { border: 3px solid var(--ink); border-radius: 6px; background: #eef0f2; padding: 14px; display: flex; flex-direction: column; gap: 14px }
-        .garage-top-row { display: flex; gap: 10px; align-items: flex-end }
-        .garage-lower-grid { display: grid; grid-template-columns: 62px 62px 62px 62px 62px; grid-auto-rows: auto; gap: 10px; align-items: end }
-        .garage-stairs-block { grid-column: 1; grid-row: 1 / span 2; border: 2px dashed var(--ink); border-radius: 6px; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; font-size: 11px; font-weight: 800; color: var(--muted); background: #fff; min-height: 100%; }
-        .garage-exit-strip { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; writing-mode: vertical-rl; font-size: 11px; font-weight: 800; color: var(--muted); padding: 0 8px; border-inline-start: 2px dashed var(--line); align-self: stretch }
+        .gs-car-wrap { flex: 1; width: 68%; min-height: 0; display: flex; align-items: center; justify-content: center }
+        .gs-car-icon { width: 100%; height: 100%; max-height: 100%; filter: drop-shadow(0 1px 0 rgba(0,0,0,.15)) }
+        .gs-label { font-size: 10px; font-weight: 800; color: var(--ink); white-space: nowrap; display: flex; align-items: center; gap: 3px }
+        .gs-res { font-size: 8.5px; font-weight: 700; color: var(--muted); line-height: 1.15; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
 
         .modal-overlay {
             position: fixed;
@@ -1435,46 +1444,59 @@
 
         function garageSpotTypeLabel(t) { return t === 'vertical' ? 'رأسي' : (t === 'horizontal' ? 'أفقي' : 'بزاوية 45°'); }
         function garageSpotOccupantLabel(s) { if (!s.apartment_id) return 'شاغر'; const [fl, apt] = s.apartment_id.split('-'); const nm = ownerName(s.apartment_id); return nm || `${floors[fl]} - ${apt}`; }
-        const GARAGE_DIR_ARROW = { down: '⬇️', left: '⬅️', right: '➡️', up: '⬆️' };
+        const GARAGE_DIR_ARROW = { down: '↓', left: '←', right: '→', up: '↑' };
+        const GARAGE_CAR_COLOR = { red: '#c0392b', white: '#eef1f4', tan: '#d9c8a9', lightblue: '#a9c9e0', dark: '#33383d', green: '#33613a', blue: '#2f5aa8', yellow: '#e8c547' };
+        /* percentage box (relative to a 1205x1060 canvas) matching the reference garage diagram, plus rotation + tint per spot */
+        const GARAGE_LAYOUT = {
+            g12: { left: 24.1, top: 0.8, width: 24.9, height: 11.5, rot: 0, color: 'dark' },
+            g13: { left: 51.9, top: 0.8, width: 24.9, height: 11.5, rot: 0, color: 'dark' },
+            g11: { left: 12.4, top: 16.0, width: 9.1, height: 33.0, rot: 0, color: 'yellow' },
+            g10: { left: 12.4, top: 65.1, width: 9.1, height: 34.0, rot: 0, color: 'blue' },
+            g4: { left: 25.3, top: 18.4, width: 10.8, height: 25.0, rot: 0, color: 'red' },
+            g5: { left: 36.5, top: 18.4, width: 10.4, height: 25.0, rot: 0, color: 'white' },
+            g6: { left: 46.9, top: 18.4, width: 18.7, height: 22.2, rot: 45, color: 'tan' },
+            g7: { left: 58.1, top: 41.0, width: 17.4, height: 12.3, rot: 90, color: 'lightblue' },
+            g9: { left: 60.2, top: 55.7, width: 6.6, height: 17.0, rot: 0, color: 'dark' },
+            g8: { left: 70.1, top: 55.7, width: 6.6, height: 17.0, rot: 0, color: 'white' },
+            g3: { left: 49.8, top: 73.1, width: 6.6, height: 22.2, rot: 0, color: 'green' },
+            g2: { left: 60.2, top: 73.1, width: 6.6, height: 22.2, rot: 0, color: 'white' },
+            g1: { left: 70.1, top: 73.1, width: 6.6, height: 22.2, rot: 0, color: 'dark' },
+        };
+        function garageCarSvg(color, rot) {
+            const fill = GARAGE_CAR_COLOR[color] || '#cbd5e1';
+            return `<svg viewBox="0 0 100 180" class="gs-car-icon" style="transform:rotate(${rot}deg)">
+                <rect x="14" y="6" width="72" height="168" rx="26" fill="${fill}" stroke="#1a1a1a" stroke-width="4"/>
+                <rect x="24" y="24" width="52" height="34" rx="6" fill="#1a1a1a" opacity=".8"/>
+                <rect x="24" y="122" width="52" height="34" rx="6" fill="#1a1a1a" opacity=".8"/>
+                <rect x="4" y="52" width="12" height="22" rx="3" fill="${fill}" stroke="#1a1a1a" stroke-width="2.5"/>
+                <rect x="84" y="52" width="12" height="22" rx="3" fill="${fill}" stroke="#1a1a1a" stroke-width="2.5"/>
+            </svg>`;
+        }
         function renderGarage() {
             const map = document.getElementById('garage-map'), body = document.getElementById('garage-body');
             if (!map || !body) return;
             const spots = buildingData.garage_spots || [];
             const byId = id => spots.find(s => s.id === id) || { id, label: '?', type: 'vertical', dir: '', apartment_id: null };
-            const spotBox = (s, gridStyle) => {
-                const cls = 'garage-spot' + (s.type === 'horizontal' ? ' horizontal' : '') + (s.type === 'angle45' ? ' angle45' : '') + (s.apartment_id ? ' occupied' : '');
+            const spotBox = id => {
+                const s = byId(id), L = GARAGE_LAYOUT[id];
+                const cls = 'garage-spot' + (s.apartment_id ? ' occupied' : '');
                 const occ = garageSpotOccupantLabel(s);
-                const inner = `<div class="gs-car">🚗</div><div class="gs-label">#${s.label} ${GARAGE_DIR_ARROW[s.dir] || ''}</div><div class="gs-res">${occ}</div>`;
-                return `<div class="${cls}" style="${gridStyle || ''}" title="مكان ${s.label} — ${occ}" onclick="${s.apartment_id ? `openResident('${s.apartment_id}')` : ''}">${s.type === 'angle45' ? `<div class="gs-inner">${inner}</div>` : inner}</div>`;
+                const style = `left:${L.left}%;top:${L.top}%;width:${L.width}%;height:${L.height}%`;
+                return `<div class="${cls}" style="${style}" title="مكان ${s.label} — ${occ}" onclick="${s.apartment_id ? `openResident('${s.apartment_id}')` : ''}">
+                    <div class="gs-car-wrap">${garageCarSvg(L.color, L.rot)}</div>
+                    <div class="gs-label">#${s.label} ${GARAGE_DIR_ARROW[s.dir] || ''}</div>
+                    <div class="gs-res">${occ}</div>
+                </div>`;
             };
+            const ALL_IDS = Object.keys(GARAGE_LAYOUT);
             map.innerHTML = `
-                <div class="garage-diagram">
-                    <div class="garage-outside-top">
-                        ${spotBox(byId('g12'))}
-                        ${spotBox(byId('g13'))}
-                    </div>
-                    <div class="garage-main-row">
-                        <div class="garage-outside-left">
-                            ${spotBox(byId('g11'))}
-                            ${spotBox(byId('g10'))}
-                        </div>
-                        <div class="garage-building">
-                            <div class="garage-top-row">
-                                ${spotBox(byId('g4'))}
-                                ${spotBox(byId('g5'))}
-                                ${spotBox(byId('g6'))}
-                            </div>
-                            <div class="garage-lower-grid">
-                                <div class="garage-stairs-block">🚶 سلالم</div>
-                                ${spotBox(byId('g7'), 'grid-column:2;grid-row:1')}
-                                ${spotBox(byId('g3'), 'grid-column:3;grid-row:2')}
-                                ${spotBox(byId('g9'), 'grid-column:4;grid-row:1')}
-                                ${spotBox(byId('g2'), 'grid-column:4;grid-row:2')}
-                                ${spotBox(byId('g8'), 'grid-column:5;grid-row:1')}
-                                ${spotBox(byId('g1'), 'grid-column:5;grid-row:2')}
-                            </div>
-                        </div>
-                        <div class="garage-exit-strip">↕️ خروج / دخول</div>
+                <div class="garage-canvas-wrap">
+                    <div class="garage-canvas">
+                        <div class="garage-building-outline"></div>
+                        <div class="garage-stairs-block">سلالم</div>
+                        <div class="garage-center-label">الممر</div>
+                        <div class="garage-exit-strip">↕ خروج / دخول</div>
+                        ${ALL_IDS.map(spotBox).join('')}
                     </div>
                 </div>`;
 
