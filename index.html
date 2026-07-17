@@ -641,8 +641,8 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             text-align: center; cursor: pointer
         }
-        .gs-car-wrap { width: 34px; height: 62px; flex-shrink: 0; display: flex; align-items: center; justify-content: center }
-        .gs-car-icon { width: 34px; height: 62px; filter: drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
+        .gs-car-wrap { width: 62px; height: 62px; flex-shrink: 0; display: flex; align-items: center; justify-content: center }
+        .gs-car-icon { width: 54px; height: 36px; object-fit: contain; filter: drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
         .gs-label { font-size: 10px; font-weight: 800; color: var(--ink); white-space: nowrap; display: flex; align-items: center; gap: 3px; background: rgba(255,255,255,.85); border-radius: 4px; padding: 0 3px }
         .gs-res { font-size: 8.5px; font-weight: 700; color: var(--muted); line-height: 1.15; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: rgba(255,255,255,.85); border-radius: 4px; padding: 0 3px }
         .garage-spot.occupied .gs-res { color: var(--ok) }
@@ -1443,32 +1443,25 @@
         function garageSpotTypeLabel(t) { return t === 'vertical' ? 'رأسي' : (t === 'horizontal' ? 'أفقي' : 'بزاوية 45°'); }
         function garageSpotOccupantLabel(s) { if (!s.apartment_id) return 'شاغر'; const [fl, apt] = s.apartment_id.split('-'); const nm = ownerName(s.apartment_id); return nm || `${floors[fl]} - ${apt}`; }
         const GARAGE_DIR_ARROW = { down: '↓', left: '←', right: '→', up: '↑' };
-        const GARAGE_CAR_COLOR = { red: '#c0392b', white: '#eef1f4', tan: '#d9c8a9', lightblue: '#a9c9e0', dark: '#33383d', green: '#33613a', blue: '#2f5aa8', yellow: '#e8c547' };
-        /* percentage box (relative to a 1205x1060 canvas) matching the reference garage diagram, plus rotation + tint per spot */
+        /* percentage box (relative to a 1205x1060 canvas) matching the reference garage diagram.
+           rot is relative to car-top.png's native orientation (long axis horizontal, nose pointing left). */
         const GARAGE_LAYOUT = {
-            g12: { left: 24.1, top: 0.8, width: 24.9, height: 11.5, rot: 0, color: 'dark' },
-            g13: { left: 51.9, top: 0.8, width: 24.9, height: 11.5, rot: 0, color: 'dark' },
-            g11: { left: 12.4, top: 16.0, width: 9.1, height: 33.0, rot: 0, color: 'yellow' },
-            g10: { left: 12.4, top: 65.1, width: 9.1, height: 34.0, rot: 0, color: 'blue' },
-            g4: { left: 25.3, top: 18.4, width: 10.8, height: 25.0, rot: 0, color: 'red' },
-            g5: { left: 36.5, top: 18.4, width: 10.4, height: 25.0, rot: 0, color: 'white' },
-            g6: { left: 46.9, top: 18.4, width: 18.7, height: 22.2, rot: 45, color: 'tan' },
-            g7: { left: 58.1, top: 41.0, width: 17.4, height: 12.3, rot: 90, color: 'lightblue' },
-            g9: { left: 60.2, top: 55.7, width: 6.6, height: 17.0, rot: 0, color: 'dark' },
-            g8: { left: 70.1, top: 55.7, width: 6.6, height: 17.0, rot: 0, color: 'white' },
-            g3: { left: 49.8, top: 73.1, width: 6.6, height: 22.2, rot: 0, color: 'green' },
-            g2: { left: 60.2, top: 73.1, width: 6.6, height: 22.2, rot: 0, color: 'white' },
-            g1: { left: 70.1, top: 73.1, width: 6.6, height: 22.2, rot: 0, color: 'dark' },
+            g12: { left: 24.1, top: 0.8, width: 24.9, height: 11.5, rot: 90 },
+            g13: { left: 51.9, top: 0.8, width: 24.9, height: 11.5, rot: 90 },
+            g11: { left: 12.4, top: 16.0, width: 9.1, height: 33.0, rot: 90 },
+            g10: { left: 12.4, top: 65.1, width: 9.1, height: 34.0, rot: 90 },
+            g4: { left: 25.3, top: 18.4, width: 10.8, height: 25.0, rot: 90 },
+            g5: { left: 36.5, top: 18.4, width: 10.4, height: 25.0, rot: 90 },
+            g6: { left: 46.9, top: 18.4, width: 18.7, height: 22.2, rot: 135 },
+            g7: { left: 58.1, top: 41.0, width: 17.4, height: 12.3, rot: 0 },
+            g9: { left: 60.2, top: 55.7, width: 6.6, height: 17.0, rot: 90 },
+            g8: { left: 70.1, top: 55.7, width: 6.6, height: 17.0, rot: 90 },
+            g3: { left: 49.8, top: 73.1, width: 6.6, height: 22.2, rot: 90 },
+            g2: { left: 60.2, top: 73.1, width: 6.6, height: 22.2, rot: 90 },
+            g1: { left: 70.1, top: 73.1, width: 6.6, height: 22.2, rot: 90 },
         };
-        function garageCarSvg(color, rot) {
-            const fill = GARAGE_CAR_COLOR[color] || '#cbd5e1';
-            return `<svg viewBox="0 0 100 180" class="gs-car-icon" style="transform:rotate(${rot}deg)">
-                <rect x="14" y="6" width="72" height="168" rx="26" fill="${fill}" stroke="#1a1a1a" stroke-width="4"/>
-                <rect x="24" y="24" width="52" height="34" rx="6" fill="#1a1a1a" opacity=".8"/>
-                <rect x="24" y="122" width="52" height="34" rx="6" fill="#1a1a1a" opacity=".8"/>
-                <rect x="4" y="52" width="12" height="22" rx="3" fill="${fill}" stroke="#1a1a1a" stroke-width="2.5"/>
-                <rect x="84" y="52" width="12" height="22" rx="3" fill="${fill}" stroke="#1a1a1a" stroke-width="2.5"/>
-            </svg>`;
+        function garageCarImg(rot) {
+            return `<img src="car-top.png" class="gs-car-icon" style="transform:rotate(${rot}deg)" alt="">`;
         }
         function renderGarage() {
             const map = document.getElementById('garage-map'), body = document.getElementById('garage-body');
@@ -1481,7 +1474,7 @@
                 const occ = garageSpotOccupantLabel(s);
                 const style = `left:${L.left}%;top:${L.top}%;width:${L.width}%;height:${L.height}%`;
                 return `<div class="${cls}" style="${style}" title="مكان ${s.label} — ${occ}" onclick="${s.apartment_id ? `openResident('${s.apartment_id}')` : ''}">
-                    <div class="gs-car-wrap">${garageCarSvg(L.color, L.rot)}</div>
+                    <div class="gs-car-wrap">${garageCarImg(L.rot)}</div>
                     <div class="gs-label">#${s.label} ${GARAGE_DIR_ARROW[s.dir] || ''}</div>
                     <div class="gs-res">${occ}</div>
                 </div>`;
