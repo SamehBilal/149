@@ -643,7 +643,17 @@
             text-align: center; cursor: pointer
         }
         .gs-car-wrap { width: 125px; height: 98px; flex-shrink: 0; display: flex; align-items: center; justify-content: center }
-        .gs-car-icon { width: 106px; height: 95px; object-fit: contain; filter: drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
+        .gs-car-icon { width: 106px; height: 95px; object-fit: contain }
+        .gs-car-icon.car-white { filter: grayscale(1) brightness(1.05) drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
+        .gs-car-icon.car-black { filter: grayscale(1) brightness(.28) drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
+        .gs-car-icon.car-gray { filter: grayscale(1) brightness(.62) drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
+        .gs-car-icon.car-blue { filter: grayscale(1) sepia(1) saturate(1.6) hue-rotate(180deg) brightness(.9) drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
+        .gs-car-icon.car-red { filter: grayscale(1) sepia(1) saturate(2) hue-rotate(-50deg) brightness(.95) drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
+        .gs-car-icon.car-yellow { filter: grayscale(1) sepia(1) saturate(2) hue-rotate(-20deg) brightness(1.1) drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
+        .gs-car-icon.car-green { filter: grayscale(1) sepia(1) saturate(1.6) hue-rotate(60deg) brightness(.85) drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
+        .gs-car-icon.car-navy { filter: grayscale(1) sepia(1) saturate(1.6) hue-rotate(190deg) brightness(.5) drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
+        .gs-car-icon.car-orange { filter: grayscale(1) sepia(1) saturate(2) hue-rotate(-30deg) brightness(1.05) drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
+        .gs-car-icon.car-purple { filter: grayscale(1) sepia(1) saturate(1.6) hue-rotate(230deg) brightness(.8) drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
         .gs-label { font-size: 10px; font-weight: 800; color: var(--ink); white-space: nowrap; display: flex; align-items: center; gap: 3px; background: rgba(255,255,255,.85); border-radius: 4px; padding: 0 3px }
         .gs-res { font-size: 8.5px; font-weight: 700; color: var(--muted); line-height: 1.15; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; background: rgba(255,255,255,.85); border-radius: 4px; padding: 0 3px }
         .garage-spot.occupied .gs-res { color: var(--ok) }
@@ -1447,22 +1457,22 @@
         /* percentage box (relative to a 1205x1060 canvas) matching the reference garage diagram.
            rot is relative to car-top.png's native orientation (long axis horizontal, nose pointing left). */
         const GARAGE_LAYOUT = {
-            g12: { left: 24.1, top: 0.8, width: 24.9, height: 11.5, rot: 180 },
-            g13: { left: 51.9, top: 0.8, width: 24.9, height: 11.5, rot: 180 },
-            g11: { left: 12.4, top: 16.0, width: 9.1, height: 33.0, rot: 90 },
-            g10: { left: 12.4, top: 53.0, width: 9.1, height: 34.0, rot: 90 },
-            g4: { left: 25.3, top: 18.4, width: 10.8, height: 25.0, rot: 90 },
-            g5: { left: 42, top: 18.4, width: 10.4, height: 25.0, rot: 90 },
-            g6: { left: 58.0, top: 18.4, width: 18.7, height: 22.2, rot: 315 },
-            g7: { left: 58.1, top: 41.0, width: 17.4, height: 12.3, rot: 0 },
-            g9: { left: 58.2, top: 55.7, width: 6.6, height: 17.0, rot: 270 },
-            g8: { left: 70.1, top: 55.7, width: 6.6, height: 17.0, rot: 270 },
-            g3: { left: 45.8, top: 75.1, width: 6.6, height: 22.2, rot: 270 },
-            g2: { left: 58.2, top: 75.1, width: 6.6, height: 22.2, rot: 270 },
-            g1: { left: 70.1, top: 75.1, width: 6.6, height: 22.2, rot: 270 },
+            g12: { left: 24.1, top: 0.8, width: 24.9, height: 11.5, rot: 180, color: 'black' },
+            g13: { left: 51.9, top: 0.8, width: 24.9, height: 11.5, rot: 180, color: 'gray' },
+            g11: { left: 12.4, top: 16.0, width: 9.1, height: 33.0, rot: 90, color: 'yellow' },
+            g10: { left: 12.4, top: 53.0, width: 9.1, height: 34.0, rot: 90, color: 'blue' },
+            g4: { left: 25.3, top: 18.4, width: 10.8, height: 25.0, rot: 90, color: 'red' },
+            g5: { left: 42, top: 18.4, width: 10.4, height: 25.0, rot: 90, color: 'white' },
+            g6: { left: 58.0, top: 18.4, width: 18.7, height: 22.2, rot: 315, color: 'orange' },
+            g7: { left: 58.1, top: 41.0, width: 17.4, height: 12.3, rot: 0, color: 'green' },
+            g9: { left: 58.2, top: 55.7, width: 6.6, height: 17.0, rot: 270, color: 'navy' },
+            g8: { left: 70.1, top: 55.7, width: 6.6, height: 17.0, rot: 270, color: 'white' },
+            g3: { left: 45.8, top: 75.1, width: 6.6, height: 22.2, rot: 270, color: 'purple' },
+            g2: { left: 58.2, top: 75.1, width: 6.6, height: 22.2, rot: 270, color: 'gray' },
+            g1: { left: 70.1, top: 75.1, width: 6.6, height: 22.2, rot: 270, color: 'black' },
         };
-        function garageCarImg(rot) {
-            return `<img src="car-top.png" class="gs-car-icon" style="transform:rotate(${rot}deg)" alt="">`;
+        function garageCarImg(rot, color) {
+            return `<img src="car-top.png" class="gs-car-icon car-${color || 'white'}" style="transform:rotate(${rot}deg)" alt="">`;
         }
         function renderGarage() {
             const map = document.getElementById('garage-map'), body = document.getElementById('garage-body');
@@ -1475,7 +1485,7 @@
                 const occ = garageSpotOccupantLabel(s);
                 const style = `left:${L.left}%;top:${L.top}%;width:${L.width}%;height:${L.height}%`;
                 return `<div class="${cls}" style="${style}" title="مكان ${s.label} — ${occ}" onclick="${s.apartment_id ? `openResident('${s.apartment_id}')` : ''}">
-                    <div class="gs-car-wrap">${garageCarImg(L.rot)}</div>
+                    <div class="gs-car-wrap">${garageCarImg(L.rot, L.color)}</div>
                     <div class="gs-label">#${s.label} ${GARAGE_DIR_ARROW[s.dir] || ''}</div>
                     <div class="gs-res">${occ}</div>
                 </div>`;
@@ -1488,6 +1498,11 @@
                         <svg class="garage-walls" viewBox="0 0 1205 1060" preserveAspectRatio="none">
                             <polyline points="960,560 960,140 270,140 270,920"
                                 fill="none" style="stroke:var(--ink)" stroke-width="7" stroke-linejoin="round"/>
+                            <line x1="470" y1="195" x2="470" y2="460" style="stroke:#fff" stroke-width="3"/>
+                            <line x1="665" y1="195" x2="665" y2="460" style="stroke:#fff" stroke-width="3"/>
+                            <line x1="813" y1="590" x2="813" y2="771" style="stroke:#fff" stroke-width="3"/>
+                            <line x1="666" y1="796" x2="666" y2="1031" style="stroke:#fff" stroke-width="3"/>
+                            <line x1="813" y1="796" x2="813" y2="1031" style="stroke:#fff" stroke-width="3"/>
                         </svg>
                         <div class="garage-stairs-block">سلالم</div>
                         <div class="garage-center-label">الممر</div>
