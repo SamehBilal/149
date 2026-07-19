@@ -1262,6 +1262,7 @@
                 { id: 'g11', label: '11', zone: 'outside', type: 'vertical', dir: 'up', apartment_id: null },
                 { id: 'g12', label: '12', zone: 'outside', type: 'vertical', dir: 'right', apartment_id: null },
                 { id: 'g13', label: '13', zone: 'outside', type: 'vertical', dir: 'right', apartment_id: null },
+                { id: 'g14', label: '14', zone: 'outside', type: 'horizontal', dir: 'right', apartment_id: null },
             ];
         }
         function getDefaultData() { const ap = {}; floors.forEach((fl, fi) => apartments.forEach(a => { ap[`${fi}-${a}`] = { monthly_payment: 300, active: true }; })); ap["0-1"] = { monthly_payment: 150, active: true, rate_schedule: [{ from: "2020-01", amount: 100 }, { from: "2026-07", amount: 150 }] }; ap["0-2"] = { monthly_payment: 0, active: false }; return { balance: 0, admin_password: '149admin', payments: {}, expenses: {}, history: [], meetings: [], technicians: [], special_collections: [], garage_spots: defaultGarageSpots(), rate_schedule: [{ from: "2020-01", amount: 200 }, { from: "2026-07", amount: 300 }], opening_debt: {}, expense_type_defs: { ...defaultExpenseTypes }, apartments: ap, apartment_accounts: {}, residents: {} }; }
@@ -1299,7 +1300,7 @@
             if (!Array.isArray(buildingData.meetings)) buildingData.meetings = [];
             if (!Array.isArray(buildingData.technicians)) buildingData.technicians = [];
             if (!Array.isArray(buildingData.special_collections)) buildingData.special_collections = [];
-            if (!Array.isArray(buildingData.garage_spots) || buildingData.garage_spots.length !== 13) buildingData.garage_spots = defaultGarageSpots();
+            if (!Array.isArray(buildingData.garage_spots) || buildingData.garage_spots.length !== 14) buildingData.garage_spots = defaultGarageSpots();
             if (!Array.isArray(buildingData.rate_schedule) || !buildingData.rate_schedule.length) buildingData.rate_schedule = [{ from: "2020-01", amount: 200 }, { from: "2026-07", amount: 300 }];
             buildingData.opening_debt = buildingData.opening_debt || {};
             if (!buildingData.expense_type_defs || !Object.keys(buildingData.expense_type_defs).length) buildingData.expense_type_defs = { ...defaultExpenseTypes };
@@ -1459,8 +1460,9 @@
         /* percentage box (relative to a 1205x1060 canvas) matching the reference garage diagram.
            rot is relative to car-top.png's native orientation (long axis horizontal, nose pointing left). */
         const GARAGE_LAYOUT = {
-            g12: { left: 24.1, top: 0.8, width: 24.9, height: 11.5, rot: 180, color: 'black' },
-            g13: { left: 51.9, top: 0.8, width: 24.9, height: 11.5, rot: 180, color: 'gray' },
+            g12: { left: 19.4, top: 0.8, width: 23, height: 11.5, rot: 180, color: 'black' },
+            g13: { left: 36.4, top: 0.8, width: 23, height: 11.5, rot: 180, color: 'gray' },
+            g14: { left: 56.4, top: 0.8, width: 23, height: 11.5, rot: 180, color: 'blue' },
             g11: { left: 12.4, top: 16.0, width: 9.1, height: 33.0, rot: 90, color: 'yellow' },
             g10: { left: 12.4, top: 53.0, width: 9.1, height: 34.0, rot: 270, color: 'blue' },
             g4: { left: 25.3, top: 18.4, width: 10.8, height: 25.0, rot: 90, color: 'red' },
@@ -1518,7 +1520,7 @@
                 </div>`;
 
             const apartmentOptions = allApartmentUnits().filter(u => (buildingData.apartments[u.id] || { active: true }).active).map(u => `<option value="${u.id}">${u.fl} - ${u.apt}${ownerName(u.id) ? (' · ' + ownerName(u.id)) : ''}</option>`).join('');
-            const ORDER = ['g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7', 'g8', 'g9', 'g10', 'g11', 'g12', 'g13'];
+            const ORDER = ['g1', 'g2', 'g3', 'g4', 'g5', 'g6', 'g7', 'g8', 'g9', 'g10', 'g11', 'g12', 'g13', 'g14'];
             body.innerHTML = ORDER.map(byId).map(s => `<tr><td>${s.label}</td><td>${s.zone === 'outside' ? 'خارج المبنى' : 'داخل الجراج'}</td><td>${garageSpotTypeLabel(s.type)}</td><td>${s.apartment_id ? `${garageSpotOccupantLabel(s)} (${s.apartment_id})` : '<span style="color:var(--muted)">شاغر</span>'}</td><td class="no-print admin-only"><div style="display:flex;gap:4px"><select id="garage-sel-${s.id}"><option value="">— شاغر —</option>${apartmentOptions}</select><button class="sm" onclick="saveGarageSpot('${s.id}')">حفظ</button></div></td></tr>`).join('');
             spots.forEach(s => { const sel = document.getElementById('garage-sel-' + s.id); if (sel) sel.value = s.apartment_id || ''; });
         }
