@@ -1,4 +1,4 @@
-const CACHE = 'building149-v4.4';
+const CACHE = 'building149-v4.5';
 const ASSETS = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', e => {
