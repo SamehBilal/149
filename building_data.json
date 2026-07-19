@@ -1,5 +1,5 @@
 {
-  "balance": 26835,
+  "balance": 28835,
   "admin_password": "149admin",
   "payments": {
     "2026-01": {
@@ -675,7 +675,7 @@
       },
       "2-3": {
         "paid": true,
-        "amount": 200,
+        "amount": 300,
         "date": "2026-07-01",
         "floor": "ثاني",
         "apartment": "3"
@@ -754,7 +754,7 @@
       },
       "2-3": {
         "paid": true,
-        "amount": 200,
+        "amount": 300,
         "date": "2026-08-01",
         "floor": "ثاني",
         "apartment": "3"
@@ -819,7 +819,7 @@
       },
       "2-3": {
         "paid": true,
-        "amount": 200,
+        "amount": 300,
         "date": "2026-09-01",
         "floor": "ثاني",
         "apartment": "3"
@@ -884,7 +884,7 @@
       },
       "2-3": {
         "paid": true,
-        "amount": 100,
+        "amount": 300,
         "date": "2026-10-01",
         "floor": "ثاني",
         "apartment": "3"
@@ -1026,6 +1026,7 @@
       "paid": [
         "4-2",
         "2-2",
+        "2-3",
         "3-3",
         "2-1",
         "1-3",
@@ -1350,6 +1351,41 @@
       "amount": 300,
       "date": "2026-07-17",
       "timestamp": 1784282230466
+    },
+    {
+      "type": "income",
+      "description": "صيانة المصعد - شقة 2-3",
+      "amount": 1500,
+      "date": "2026-07-19",
+      "timestamp": 1784462086190
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثاني",
+      "amount": 300,
+      "date": "2026-07-19",
+      "timestamp": 1784462183215
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثاني",
+      "amount": 300,
+      "date": "2026-07-19",
+      "timestamp": 1784462200441
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثاني",
+      "amount": 300,
+      "date": "2026-07-19",
+      "timestamp": 1784462212949
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 3 - ثاني",
+      "amount": 300,
+      "date": "2026-07-19",
+      "timestamp": 1784462227621
     }
   ],
   "meetings": [
@@ -1810,5 +1846,111 @@
       "notes": ""
     }
   },
-  "last_updated": "2026-07-17 12:57:10"
+  "last_updated": "2026-07-19 14:57:07",
+  "garage_spots": [
+    {
+      "id": "g1",
+      "label": "1",
+      "zone": "inside",
+      "type": "vertical",
+      "dir": "down",
+      "apartment_id": null
+    },
+    {
+      "id": "g2",
+      "label": "2",
+      "zone": "inside",
+      "type": "vertical",
+      "dir": "down",
+      "apartment_id": null
+    },
+    {
+      "id": "g3",
+      "label": "3",
+      "zone": "inside",
+      "type": "vertical",
+      "dir": "down",
+      "apartment_id": null
+    },
+    {
+      "id": "g4",
+      "label": "4",
+      "zone": "inside",
+      "type": "vertical",
+      "dir": "down",
+      "apartment_id": null
+    },
+    {
+      "id": "g5",
+      "label": "5",
+      "zone": "inside",
+      "type": "vertical",
+      "dir": "left",
+      "apartment_id": null
+    },
+    {
+      "id": "g6",
+      "label": "6",
+      "zone": "inside",
+      "type": "angle45",
+      "dir": "left",
+      "apartment_id": null
+    },
+    {
+      "id": "g7",
+      "label": "7",
+      "zone": "inside",
+      "type": "horizontal",
+      "dir": "left",
+      "apartment_id": null
+    },
+    {
+      "id": "g8",
+      "label": "8",
+      "zone": "inside",
+      "type": "vertical",
+      "dir": "right",
+      "apartment_id": null
+    },
+    {
+      "id": "g9",
+      "label": "9",
+      "zone": "inside",
+      "type": "vertical",
+      "dir": "down",
+      "apartment_id": null
+    },
+    {
+      "id": "g10",
+      "label": "10",
+      "zone": "outside",
+      "type": "vertical",
+      "dir": "left",
+      "apartment_id": null
+    },
+    {
+      "id": "g11",
+      "label": "11",
+      "zone": "outside",
+      "type": "vertical",
+      "dir": "up",
+      "apartment_id": null
+    },
+    {
+      "id": "g12",
+      "label": "12",
+      "zone": "outside",
+      "type": "horizontal",
+      "dir": "right",
+      "apartment_id": null
+    },
+    {
+      "id": "g13",
+      "label": "13",
+      "zone": "outside",
+      "type": "horizontal",
+      "dir": "right",
+      "apartment_id": null
+    }
+  ]
 }
