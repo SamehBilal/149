@@ -643,6 +643,7 @@
             text-align: center; cursor: pointer
         }
         .gs-car-wrap { width: 125px; height: 98px; flex-shrink: 0; display: flex; align-items: center; justify-content: center }
+        .gs-car-wrap.horizontal { height: 55px }
         .gs-car-icon { width: 106px; height: 95px; object-fit: contain }
         .gs-car-icon.car-white { filter: grayscale(1) brightness(1.05) drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
         .gs-car-icon.car-black { filter: grayscale(1) brightness(.28) drop-shadow(0 1px 1px rgba(0,0,0,.35)) }
@@ -1484,8 +1485,9 @@
                 const cls = 'garage-spot' + (s.apartment_id ? ' occupied' : '');
                 const occ = garageSpotOccupantLabel(s);
                 const style = `left:${L.left}%;top:${L.top}%;width:${L.width}%;height:${L.height}%`;
+                const isHorizontal = L.rot % 180 === 0;
                 return `<div class="${cls}" style="${style}" title="مكان ${s.label} — ${occ}" onclick="${s.apartment_id ? `openResident('${s.apartment_id}')` : ''}">
-                    <div class="gs-car-wrap">${garageCarImg(L.rot, L.color)}</div>
+                    <div class="gs-car-wrap${isHorizontal ? ' horizontal' : ''}">${garageCarImg(L.rot, L.color)}</div>
                     <div class="gs-label">#${s.label} ${GARAGE_DIR_ARROW[s.dir] || ''}</div>
                     <div class="gs-res">${occ}</div>
                 </div>`;
