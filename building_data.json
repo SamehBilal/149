@@ -1983,6 +1983,14 @@
       "type": "horizontal",
       "dir": "right",
       "apartment_id": "0-3"
+    },
+    {
+      "id": "g14",
+      "label": "14",
+      "zone": "outside",
+      "type": "horizontal",
+      "dir": "right",
+      "apartment_id": "5-3"
     }
   ],
   "last_updated": "2026-07-19 14:57:07"
