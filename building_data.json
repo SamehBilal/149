@@ -1,5 +1,5 @@
 {
-  "balance": 28835,
+  "balance": 19835,
   "admin_password": "149admin",
   "payments": {
     "2026-01": {
@@ -1066,6 +1066,13 @@
         "amount": 1200,
         "description": "صيانة الكهرباء",
         "date": "2026-07-01"
+      },
+      {
+        "id": "17842114902482045",
+        "type": "elevator",
+        "amount": 9000,
+        "description": "صيانة الأسانسير",
+        "date": "2026-07-20"
       }
     ],
     "2026-06": [
@@ -1386,6 +1393,13 @@
       "amount": 300,
       "date": "2026-07-19",
       "timestamp": 1784462227621
+    },
+    {
+      "type": "expense",
+      "description": "صيانة الأسانسير",
+      "amount": 9000,
+      "date": "2026-07-20",
+      "timestamp": 1784462227542
     }
   ],
   "meetings": [
