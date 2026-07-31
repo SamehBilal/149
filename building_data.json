@@ -1,5 +1,5 @@
 {
-  "balance": 16935,
+  "balance": 21735,
   "admin_password": "149admin",
   "payments": {
     "2026-01": {
@@ -442,6 +442,13 @@
         "date": "2026-04-01",
         "floor": "خامس",
         "apartment": "2"
+      },
+      "1-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-07-31",
+        "floor": "أول",
+        "apartment": "1"
       }
     },
     "2026-05": {
@@ -542,6 +549,13 @@
         "date": "2026-05-01",
         "floor": "خامس",
         "apartment": "2"
+      },
+      "1-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-07-31",
+        "floor": "أول",
+        "apartment": "1"
       }
     },
     "2026-06": {
@@ -642,6 +656,13 @@
         "date": "2026-06-01",
         "floor": "خامس",
         "apartment": "2"
+      },
+      "1-1": {
+        "paid": true,
+        "amount": 200,
+        "date": "2026-07-31",
+        "floor": "أول",
+        "apartment": "1"
       }
     },
     "2026-07": {
@@ -721,6 +742,13 @@
         "date": "2026-07-17",
         "floor": "خامس",
         "apartment": "2"
+      },
+      "1-1": {
+        "paid": true,
+        "amount": 300,
+        "date": "2026-07-31",
+        "floor": "أول",
+        "apartment": "1"
       }
     },
     "2026-08": {
@@ -785,6 +813,13 @@
         "amount": 300,
         "date": "2026-08-01",
         "floor": "خامس",
+        "apartment": "1"
+      },
+      "1-1": {
+        "paid": true,
+        "amount": 300,
+        "date": "2026-07-31",
+        "floor": "أول",
         "apartment": "1"
       }
     },
@@ -851,6 +886,13 @@
         "date": "2026-09-01",
         "floor": "خامس",
         "apartment": "1"
+      },
+      "1-1": {
+        "paid": true,
+        "amount": 300,
+        "date": "2026-07-31",
+        "floor": "أول",
+        "apartment": "1"
       }
     },
     "2026-10": {
@@ -901,6 +943,13 @@
         "amount": 300,
         "date": "2026-10-01",
         "floor": "خامس",
+        "apartment": "1"
+      },
+      "1-1": {
+        "paid": true,
+        "amount": 300,
+        "date": "2026-07-31",
+        "floor": "أول",
         "apartment": "1"
       }
     },
@@ -1033,7 +1082,9 @@
         "5-1",
         "3-1",
         "4-1",
-        "5-2"
+        "5-2",
+        "1-2",
+        "1-1"
       ]
     }
   ],
@@ -1073,6 +1124,22 @@
         "amount": 11900,
         "description": "صيانة الأسانسير",
         "date": "2026-07-20"
+      },
+      {
+        "id": "17855089779993786",
+        "type": "elevator",
+        "amount": 200,
+        "description": "اكرامية الأسانسير",
+        "date": "2026-07-20",
+        "file": ""
+      },
+      {
+        "id": "17855090603356537",
+        "type": "other",
+        "amount": 50,
+        "description": "ازالة النخل في الحديقة الأمامية وفي الجراج",
+        "date": "2026-07-29",
+        "file": ""
       }
     ],
     "2026-06": [
@@ -1400,6 +1467,90 @@
       "amount": 11900,
       "date": "2026-07-20",
       "timestamp": 1784462227542
+    },
+    {
+      "type": "expense",
+      "description": "اكرامية الأسانسير",
+      "amount": 200,
+      "date": "2026-07-31",
+      "timestamp": 1785508977999
+    },
+    {
+      "type": "expense",
+      "description": "ازالة النخل في الحديقة الأمامية وفي الجراج",
+      "amount": 50,
+      "date": "2026-07-31",
+      "timestamp": 1785509060335
+    },
+    {
+      "type": "income",
+      "description": "اكراميات - حساب شقة 1-3",
+      "amount": 250,
+      "date": "2026-07-31",
+      "timestamp": 1785509129274
+    },
+    {
+      "type": "income",
+      "description": "صيانة المصعد - شقة 1-2",
+      "amount": 1500,
+      "date": "2026-07-31",
+      "timestamp": 1785509232168
+    },
+    {
+      "type": "income",
+      "description": "صيانة المصعد - شقة 1-1",
+      "amount": 1500,
+      "date": "2026-07-31",
+      "timestamp": 1785509238525
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أول",
+      "amount": 200,
+      "date": "2026-07-31",
+      "timestamp": 1785509403436
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أول",
+      "amount": 200,
+      "date": "2026-07-31",
+      "timestamp": 1785509409832
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أول",
+      "amount": 200,
+      "date": "2026-07-31",
+      "timestamp": 1785509421935
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أول",
+      "amount": 300,
+      "date": "2026-07-31",
+      "timestamp": 1785509437565
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أول",
+      "amount": 300,
+      "date": "2026-07-31",
+      "timestamp": 1785509448030
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أول",
+      "amount": 300,
+      "date": "2026-07-31",
+      "timestamp": 1785509455244
+    },
+    {
+      "type": "income",
+      "description": "دفع شقة 1 - أول",
+      "amount": 300,
+      "date": "2026-07-31",
+      "timestamp": 1785509462106
     }
   ],
   "meetings": [
@@ -1600,7 +1751,8 @@
     }
   },
   "apartment_accounts": {
-    "5-1": 40
+    "5-1": 40,
+    "1-3": 250
   },
   "residents": {
     "0-1": {
@@ -2007,5 +2159,5 @@
       "apartment_id": "5-3"
     }
   ],
-  "last_updated": "2026-07-19 14:57:07"
+  "last_updated": "2026-07-31 17:51:02"
 }
