@@ -1,5 +1,5 @@
 {
-  "balance": 19835,
+  "balance": 16935,
   "admin_password": "149admin",
   "payments": {
     "2026-01": {
@@ -1070,7 +1070,7 @@
       {
         "id": "17842114902482045",
         "type": "elevator",
-        "amount": 9000,
+        "amount": 11900,
         "description": "صيانة الأسانسير",
         "date": "2026-07-20"
       }
@@ -1397,7 +1397,7 @@
     {
       "type": "expense",
       "description": "صيانة الأسانسير",
-      "amount": 9000,
+      "amount": 11900,
       "date": "2026-07-20",
       "timestamp": 1784462227542
     }
